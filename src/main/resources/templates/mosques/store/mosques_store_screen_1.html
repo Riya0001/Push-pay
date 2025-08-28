@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:insert="~{fragments/store/header :: head}"></head>
+
+<body class="ttp-bg-white">
+
+<div id="content-wrapper" class="content-wrapper-cls">
+
+    <nav th:replace="~{fragments/store/navbar :: navbar-with-bag}"></nav>
+
+    <div id="landing-hero" class="row justify-content-around align-items-center ttp-bg-color-light-shade-grey p-5"
+         style="margin-top: 65px">
+        <div class="p-2">
+
+            <h2 class="ttp-color-purple mb-2">order in a few easy steps</h2>
+
+            <div class="ttp-body-lead">
+                tiptap makes it easier for masjids to raise funds for essential needs with a seamless tap-to-give solution.
+            </div>
+            <div>
+
+                <div style="padding-top: 50px;">
+                    <svg th:replace="~{fragments/svg_fragments :: svg-number-1-active}"></svg>
+                    <span class="ttp-color-dark-grey padding-left-30px">Select your display quantity.</span>
+                </div>
+
+                <div style="padding-top: 20px;">
+                    <svg th:replace="~{fragments/svg_fragments :: svg-number-2-active}"></svg>
+                    <span class="ttp-color-dark-grey padding-left-30px">Enter your shipping and billing information</span>
+                </div>
+
+                <div style="padding-top: 20px;">
+                    <svg th:replace="~{fragments/svg_fragments :: svg-number-3-active}"></svg>
+                    <span class="ttp-color-dark-grey padding-left-30px">Confirm & Submit</span>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="p-2">
+            <img th:src="@{'/images/floor_stand.png'}" alt="Floor Stand Image"
+                 style="width: 350px; height: 466px">
+        </div>
+    </div>
+
+    <div class="text-center" style="margin-top: -20px">
+        <svg th:insert="~{fragments/svg_fragments :: scroll-down-indicator}" height="45px" width="30px"></svg>
+    </div>
+
+    <div class="container">
+
+        <form method="POST" id="order-form" th:object="${storeShoppingBag}">
+
+            <div th:replace="~{fragments/store/stepper :: stepper}"></div>
+            <div th:replace="~{fragments/store/stepper :: stepper-sm}"></div>
+
+            <div hidden>
+                <input id="oneTimeFeeInCentsInput" th:field="*{oneTimeFeeInCents}"
+                       th:value="${storeShoppingBag.getOneTimeFeeInCents()}">
+                <input id="rentalFeeInCentsInput" th:field="*{rentalFeeInCents}"
+                       th:value="${storeShoppingBag.getRentalFeeInCents()}">
+                <input id="floorStandQtyInput" th:field="*{floorStandQty}"
+                       th:value="${storeShoppingBag.getFloorStandQty()}">
+                <input id="device5DollarQtyInput" th:field="*{device5DollarQty}"
+                       th:value="${storeShoppingBag.getDevice5DollarQty()}">
+                <input id="device10DollarQtyInput" th:field="*{device10DollarQty}"
+                       th:value="${storeShoppingBag.getDevice10DollarQty()}">
+                <input id="device20DollarQtyInput" th:field="*{device20DollarQty}"
+                       th:value="${storeShoppingBag.getDevice20DollarQty()}">
+
+                <input id="totalOneTimeFeeFormatted" th:value="${storeShoppingBag.totalOneTimeFeeFormatted()}">
+                <input id="totalRentalFeeFormatted" th:value="${storeShoppingBag.totalRentalFeeFormatted()}">
+                <input id="totalAmountFormatted" th:value="${storeShoppingBag.totalAmountFormatted()}">
+                <input id="totalProducts" type="number" th:value="${storeShoppingBag.totalNumberOfProducts()}">
+            </div>
+
+
+            <div class="row align-items-center align-content-center"
+                 style="padding-top: 50px">
+
+                <div class="col-sm mb-3">
+
+                    <div class="text-center ttp-bg-color-light-shade-grey ttp-border-radius-10px pt-2 pb-5"
+                         style="min-width: 370px; max-width: 450px">
+
+                        <div class="mt-5 mb-4">
+                            <img th:src="@{${products.get(0).getImageList().get(0)}}"
+                                 th:alt="${products.get(0).getName()}" style="width: 175px; height: 233px">
+                        </div>
+
+                        <div class="ttp-card-header ttp-color-purple mb-2"
+                             th:text="${products.get(0).getName()}">
+                        </div>
+
+                        <table class="table table-borderless p-4 text-left">
+
+                            <tr style="border: none">
+
+                                <td rowspan="4" style="vertical-align: middle;">
+                                    <label class="ttp-card-sub-header ttp-color-fuschia m-0">
+                                        3-Device Display
+                                    </label><br><br>
+                                    The 3-Device Display easily attaches to your floor stand.
+                                </td>
+
+                                <td style="vertical-align: middle;">
+                                    <p style="margin-bottom: 0 !important;" class="text-nowrap">
+                                        <label class="ttp-card-sub-header ttp-color-fuschia m-0">
+                                            Denominations
+                                        </label>
+                                </td>
+
+                            </tr>
+
+
+                            <!--                                DOLLAR 5 -->
+                            <tr style="border: none;">
+
+                                <td style="vertical-align: middle; padding: 0">
+                                    <img th:src="@{${products.get(1).getImageList().get(0)}}"
+                                         th:alt="${products.get(1).getName() + ' image'}"
+                                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;">
+                                    <span class="ttp-card-sub-header ttp-color-purple">$5</span>
+                                </td>
+
+                            </tr>
+
+                            <!--                                DOLLAR 10 -->
+                            <tr style="border: none;">
+
+
+                                <td style="vertical-align: middle; padding: 30px 0 0 0;">
+                                    <img th:src="@{${products.get(2).getImageList().get(0)}}"
+                                         th:alt="${products.get(2).getName() + ' image'}"
+                                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;">
+                                    <span class="ttp-card-sub-header ttp-color-purple">$10</span>
+                                </td>
+
+                            </tr>
+
+                            <!--                                DOLLAR 20 -->
+                            <tr style="border: none; padding-top: 20px">
+
+
+                                <td style="vertical-align: middle; padding: 30px 0 0 0;">
+                                    <img th:src="@{${products.get(3).getImageList().get(0)}}"
+                                         th:alt="${products.get(3).getName() + ' image'}"
+                                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;">
+                                    <span class="ttp-card-sub-header ttp-color-purple">$20</span>
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+                        <div class="text-left">
+
+                            <label class="ttp-card-sub-header ttp-color-fuschia pl-3">
+                                Includes
+                            </label><br>
+                            <ul>
+                                <li>3 Devices: $5, $10, $20</li>
+                                <li>Signage</li>
+                                <li>Stand</li>
+                                <li>Base</li>
+                                <li>Cables</li>
+                                <li>Wall plug</li>
+                            </ul>
+
+                        </div>
+
+
+                        <table class="table table-borderless p-4 text-left">
+
+                            <tr style="border: none">
+
+                                <td colspan="2" style="vertical-align: middle;">
+                                    <label class="ttp-card-sub-header ttp-color-fuschia m-0">
+                                        Fees breakdown
+                                    </label>
+                                </td>
+
+                            </tr>
+
+                            <tr style="border: none;">
+                                <td style="padding: 10px 10px 0 10px">3 Device (monthly rental fee)</td>
+                                <td style="padding: 10px 10px 0 10px" class="text-right">$75</td>
+                            </tr>
+
+                            <tr style="border: none; font-weight: bold">
+                                <td style="padding: 10px 10px 0 10px">*Terms of rental are 12 months. Should devices be returned prior to the end of 12 months, the monthly rental rate will be charged for any months remaining in the term.</td>
+                            </tr>
+
+                            <tr style="border: none;">
+                                <td style="padding: 10px 10px 0 10px">Floor stand (one-time fee/yours to keep)</td>
+                                <td style="padding: 10px 10px 0 10px" class="text-right">$150</td>
+                            </tr>
+
+                            <tr style="border: none;">
+                                <td style="padding: 30px 10px 0 10px">Total per display</td>
+                                <td style="padding: 30px 10px 0 10px; white-space: nowrap" class="text-right">CAD $225</td>
+                            </tr>
+
+                        </table>
+
+                        <label class="ttp-color-purple m-0">
+                            Display Quantity
+                        </label>
+
+                        <div class="mb-4 mt-1">
+                            <label>
+                                <select style="width: 170px; background-color: #E5E5E5"
+                                        class="custom-select form-item"
+                                        onchange="changeQuantity(this.getAttribute('id'))"
+                                        th:id="${products.get(0).getId()}"
+                                        th:name="${products.get(0).getId()}">
+                                    <option value="" hidden></option>
+                                    <option th:each="number : ${#numbers.sequence(0, 200)}"
+                                            th:value="${number}"
+                                            th:selected="${number == storeShoppingBag.getFloorStandQty()}"
+                                            th:text="${number}"></option>
+                                </select>
+                            </label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-sm mb-3">
+                    <div id="your-orders-section" class="" style="">
+
+                        <div id="your-orders-section-body" class="text-center mx-3"
+                             style="min-width: 230px; max-width: 230px">
+
+                            <div id="your-orders-section-content-body"
+                                 class="ttp-bg-color-light-shade-grey ttp-border-radius-10px pb-2">
+
+                                <div class="ttp-card-header ttp-color-purple pt-4">
+                                    fees & totals
+                                </div>
+
+                                <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                    Floor stand purchase<br>(one-time fee/ yours to keep)
+                                </div>
+                                <div class="ttp-card-info ttp-color-dark-grey">
+                                    (signage, stand, base, cables, wall plug)
+                                </div>
+                                <div class="ttp-color-dark-grey">
+                                    $<span class="floorStandOneTimeFeeTotal"></span>
+                                </div>
+
+                                <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                    Rental (monthly)
+                                </div>
+                                <div class="ttp-card-info ttp-color-dark-grey">
+                                    (devices)
+                                </div>
+                                <div class="ttp-color-dark-grey">
+                                    *$<span class="devicesRentalFeeTotal"></span>
+                                </div>
+
+                                <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                    Shipping
+                                </div>
+                                <div class="ttp-card-info ttp-color-dark-grey font-italic">
+                                    calculated in next step
+                                </div>
+
+                                <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                    Setup fee
+                                </div>
+                                <div class="ttp-color-dark-grey">
+                                    $<span class="taxAmountInCard"
+                                           th:text="${storeShoppingBag.serviceAmountInCentsFormatted()}"></span>
+                                </div>
+
+                                <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                    Total
+                                </div>
+                                <div class="ttp-fs-24px ttp-fw-700 ttp-color-purple">
+                                    $<span class="overallTotal"></span>
+                                </div>
+                                <div class="ttp-card-info ttp-color-dark-grey mb-3 font-italic">
+                                    updated in next step
+                                </div>
+
+                            </div>
+
+                            <div id="your-orders-section-content-footer" class="mt-4">
+                                <button type="submit" style="width: 200px;" class="ttp-button-primary">
+                                    continue
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+
+
+        <div id="ttp-toast" role="alert" aria-live="assertive" aria-atomic="true" class="toast ttp-toast">
+            <div class="toast-header">
+
+                <svg id="ttp-toast-indicator-success" style=""
+                     th:insert="~{fragments/svg_fragments :: green-checked-data-svg}" height="40px"
+                     width="40px"></svg>
+                <svg id="ttp-toast-indicator-error" style=""
+                     th:insert="~{fragments/svg_fragments :: status-failed-svg}" height="40px" width="40px"></svg>
+                &nbsp;&nbsp;
+
+                <strong class="mr-auto"><span id="ttp-toast-title"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                <button type="button" onclick="toastSwitcher('ttp-toast', false, 0)" class="ml-2 mb-1 close"
+                        data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="ttp-toast-message" class="toast-body"></div>
+        </div>
+
+
+        <div class="text-center pt-5" style="margin-top: 250px">
+            <div
+                    style="font-family: Mulish, sans-serif; opacity: 1; color: #901F7A; font-size: 12px; font-weight: 400; padding: 0 0 25px 0;">
+                order&nbsp;&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;&nbsp;contact &
+                shipping&nbsp;&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;&nbsp;review&nbsp;&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;&nbsp;payment
+            </div>
+        </div>
+        <hr class="custom-hr-grey">
+
+        <div th:insert="~{fragments/store/footer :: footer}"></div>
+
+    </div>
+
+
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+    const bagBadge = document.getElementById('shopping-bag-device-number');
+    const totalOneTimeFeeFormatted = document.getElementById('totalOneTimeFeeFormatted');
+    const totalRentalFeeFormatted = document.getElementById('totalRentalFeeFormatted');
+    const totalAmountFormatted = document.getElementById('totalAmountFormatted');
+    const totalProducts = document.getElementById('totalProducts');
+
+    const elementsFloorStandOneTimeFeeTotal = document.querySelectorAll('.floorStandOneTimeFeeTotal');
+    const elementsDevicesRentalFeeTotal = document.querySelectorAll('.devicesRentalFeeTotal');
+    const elementsOverallTotal = document.querySelectorAll('.overallTotal');
+
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+
+    document.addEventListener('DOMContentLoaded', function () {
+        updateCardTexts(totalOneTimeFeeFormatted.value, totalRentalFeeFormatted.value, totalAmountFormatted.value);
+
+        updateBagBadgeNumber(totalProducts.value << 0);
+    });
+
+    function updateCardTexts(oneTimeFeeAmount, rentalFeeAmount, totalAmount) {
+        elementsFloorStandOneTimeFeeTotal.forEach(function (element) {
+            element.textContent = oneTimeFeeAmount;
+        });
+
+        elementsDevicesRentalFeeTotal.forEach(function (element) {
+            element.textContent = rentalFeeAmount;
+        });
+
+        elementsOverallTotal.forEach(function (element) {
+            element.textContent = totalAmount;
+        });
+    }
+
+    function updateCardOptions( id, floorStandQty, device5DollarQty, device10DollarQty, device20DollarQty) {
+        const elem = document.getElementById(id);
+        switch (id){
+            case 'floorStand':
+                elem.value = floorStandQty
+                return;
+            case 'device5Dollar':
+                elem.value = device5DollarQty
+                return;
+            case 'device10Dollar':
+                elem.value = device10DollarQty
+                return;
+            case 'device20Dollar':
+                elem.value = device20DollarQty
+                return;
+        }
+    }
+
+    function updateBagBadgeNumber(num) {
+        if (num === 0) {
+            bagBadge.textContent = '';
+        } else {
+            bagBadge.textContent = num;
+        }
+    }
+
+    async function updateBag(formData, itemId) {
+        let response;
+        try {
+            response = await fetch('/mosques/shopping-bag/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+        } catch (error) {
+            showToastWithMessage('ttp-toast', 'Error', error.message, 'error', 2000);
+        }
+
+        if (!response.ok) {
+            showToastWithMessage('ttp-toast', 'Network Issue', 'Please try again later', 'error', 2000);
+        }
+
+        const responseData = await response.json();
+
+        if (responseData.success) {
+            const {
+                floorStandQty,
+                device5DollarQty,
+                device10DollarQty,
+                device20DollarQty,
+                batteryForFloorStandQty,
+                totalProducts,
+                totalOneTimeFeeAmount,
+                totalRentalFeeAmount,
+                totalAmount
+            } = responseData;
+
+            updateBagBadgeNumber(totalProducts);
+            updateCardTexts(totalOneTimeFeeAmount, totalRentalFeeAmount, totalAmount);
+            updateCardOptions(itemId, floorStandQty, device5DollarQty, device10DollarQty, device20DollarQty);
+            showToastWithMessage('ttp-toast', 'Bag Updated', 'Successfully updated', 'success', 1000);
+        }
+    }
+
+    function toastSwitcher(toastId, isShow, howLong) {
+        const toastElement = document.getElementById(toastId);
+        if (isShow) {
+            toastElement.classList.add('show');
+            setTimeout(function () {
+                toastElement.classList.remove('show');
+            }, (howLong << 0));
+        } else {
+            toastElement.classList.remove('show');
+        }
+    }
+
+    function showToastWithMessage(toastId, title, message, type, duration) {
+        const messageElement = document.getElementById(toastId + '-message');
+        const indicatorElementIdInitial = toastId + '-indicator-'
+        const titleElement = document.getElementById(toastId + '-title');
+
+        if (type === 'success') {
+            changeVisibility(indicatorElementIdInitial + "success", true);
+            changeVisibility(indicatorElementIdInitial + "error", false);
+        }
+
+        if (type === 'error') {
+            changeVisibility(indicatorElementIdInitial + "success", false);
+            changeVisibility(indicatorElementIdInitial + "error", true);
+        }
+
+        titleElement.textContent = title;
+        messageElement.textContent = message;
+
+        toastSwitcher(toastId, true, (duration << 0));
+    }
+
+    function changeVisibility(elementId, isVisible) {
+        const element = document.getElementById(elementId);
+        if (isVisible) {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+    }
+
+    function changeQuantity(itemId) {
+        const qty = document.getElementById(itemId).value;
+
+        const formData = [
+            {
+                id: itemId,
+                quantity: (qty << 0)
+            }
+        ];
+
+        updateBag(formData, itemId);
+    }
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <!-- Include fragment content inside head -->
+    <div th:replace="~{fragments/bundles/header :: head-page-2}"></div>
+
+    <title>.</title>
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "qtfyso1mfx");
+    </script>
+
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FDJL41MRCT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-FDJL41MRCT');
+    </script>
+</head>
+<body>
+
+<div hidden>
+    <label for="srInput"></label>
+    <input th:value="${salesRepId}" id="srInput">
+</div>
+
+
+<nav th:replace="~{fragments/benevity/fb/navbar :: navbar}"></nav>
+
+<div class="container" id="main-container">
+
+    <div th:replace="~{fragments/benevity/fb/landing-hero :: slider}"></div>
+
+    <div class="row g-5 mt-2">
+
+        <!-- Left Column -->
+        <div class="col-sm-8" style="padding-bottom: 100px">
+
+            <div id="bundle-card-container"></div>
+
+            <div class="" id="add-new-bundle-div">
+                <button type="button"
+                        id="add-new-bundle-button"
+                        class="btn ttp-btn-secondary btn-sm w-100 p-2 mb-2 d-flex align-items-center justify-content-center"
+                        onclick="addNewBundleAction()"
+                        style="border-radius: 10px">
+                    <span class="d-flex align-items-center">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="4" y="4" width="16" height="16" rx="8" stroke="#9E007E" stroke-width="2"/>
+                            <path d="M9 12L15 12" stroke="#9E007E" stroke-width="2" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                            <path d="M12 9L12 15" stroke="#9E007E" stroke-width="2" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                    &nbsp; &nbsp;
+                    <span class="d-flex align-items-center">
+                        Add a New Bundle
+                    </span>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-sm-4 accordion">
+
+            <div class="card card-body" id="accordionExampleOuter" style="background-color: white; padding-top: 0">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="summary-bar"
+                        style="background-color: #9E007E; border-radius: 5px 5px 0 0;">
+                        <span class="accordion-button d-block text-center" style="color: white">
+                            Order Summary
+                        </span>
+                    </h2>
+
+                    <div id="summary-bar-container"></div>
+
+                    <!-- Shipping & Tax -->
+                    <div class="accordion-body" style="background-color: #FBFBFB;">
+
+                        <div class="ttp-text-gray mb-1">
+                            Shipping
+                        </div>
+
+                        <div class="mb-2">
+                            To Be Determined
+                        </div>
+
+                        <div class="ttp-text-gray mb-1">
+                            Tax
+                        </div>
+
+                        <div class="">
+                            To Be Determined
+                        </div>
+
+                    </div>
+
+                    <hr style="margin: 0;">
+
+                    <!-- Total -->
+                    <div class="accordion-body" style="background-color: #FBFBFB;">
+
+                        <div class="mb-1 text-black fw-bold" style="font-size: 14px">
+                            TOTAL
+                        </div>
+
+                        <div class="mb-1 text-black fw-bold" id="summary-bar-total" style="font-size: 20px">
+                            --
+                        </div>
+
+                    </div>
+
+                    <hr style="margin: 0;">
+
+                    <!-- Buttons -->
+                    <div class="accordion-body" style="background-color: #FBFBFB;">
+
+                        <div class="mb-2 mt-1">
+                            <button type="button" class="btn ttp-btn-primary btn-sm w-100 p-2" onclick="onNextNext()"
+                                    style="border-radius: 10px">Buy Now
+                            </button>
+                        </div>
+
+                        <div class="">
+                            <button type="button" class="btn ttp-btn-secondary btn-sm w-100 p-2 mb-2"
+                                    onclick="addToCart()"
+                                    style="border-radius: 10px">Add to Cart
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center">
+                        <div class="spinner-grow" role="status"></div>
+                        <div class="mt-2">
+                            <div class="ttp-color-fuchsia fw-bold h5">Customization Incomplete</div>
+                            <div class="ttp-text-gray fw-bold small">
+                                Please ensure that all required fields are filled out for each bundle you’ve added.
+                                Complete your customization to proceed.
+                            </div>
+
+                            <div id="validation-results" class="mt-4" hidden></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn ttp-btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Server Error Modal -->
+    <div class="modal fade" id="serverErrorModal" tabindex="-1" aria-labelledby="serverErrorModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center">
+                        <div class="spinner-grow" role="status"></div>
+                        <div class="mt-2">
+                            <div class="ttp-color-fuchsia fw-bold h5">Oops!</div>
+                            <div class="ttp-text-gray fw-bold small" id="error-modal-text">Server Error</div>
+                            <div id="error-code" class="ttp-text-gray fw-bold small mt-3" style="font-size: 11px">ERROR
+                                103
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn ttp-btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tooltip Like Modal -->
+    <div id="tooltipLikeModal" class="tooltip-like-modal visually-hidden">
+        <div class="tooltip-like-modal-content">
+            <div class="text-center">
+                <svg th:replace="~{fragments/bundles/svg_fragments_2 :: tooltip-devices}"></svg>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 200px">
+        <div th:replace="~{fragments/bundles/footer :: footer}"></div>
+    </div>
+
+</div>
+
+
+<div class="container" id="customization-incomplete-container" style="display: none">
+    <div class="text-center mt-5">
+        <div class="spinner-grow" role="status"></div>
+        <div class="mt-2">
+            <div class="ttp-color-fuchsia fw-bold h5">Customization Incomplete</div>
+            <div class="ttp-text-gray fw-bold small">
+                Please ensure that all required fields are filled out for each bundle you’ve added.
+                Complete your customization to proceed.
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <button type="button" class="btn ttp-btn-primary" onclick="switchContainers(true, false, false)">OK</button>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="server-error-container" style="display: none">
+    <div class="text-center mt-5">
+        <div class="spinner-grow" role="status"></div>
+        <div class="mt-2">
+            <div class="ttp-color-fuchsia fw-bold h5">Oops!</div>
+            <div class="ttp-text-gray fw-bold small" id="error-modal-text-sm-2">Server Error</div>
+            <div id="error-code-sm-2" class="ttp-text-gray fw-bold small mt-3" style="font-size: 11px">ERROR 103</div>
+        </div>
+
+        <div class="mt-5">
+            <button type="button" class="btn ttp-btn-primary" onclick="switchContainers(true, false, false)">OK</button>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/bundles/js/bootstrap.bundle.min.js}"></script>
+
+<script>
+    const STORE_ENDPOINT = '/benevity/faith';
+    const URL_NEXT =  `${STORE_ENDPOINT}/order/checkout/organization-details`;
+    const URL_CART = `${STORE_ENDPOINT}/order/cart`;
+    const URL_ORDER = `${STORE_ENDPOINT}/order`;
+    const STORE_INITIAL = '_fbb';
+    const SOLUTION_SELECTION = "Premium Benevity Bundle - Faith";
+</script>
+
+<script th:src="@{/js/common/email.js}"></script>
+<script th:src="@{/js/benevity/fb/js/custom/page2.js}"></script>
+</body>
+</html>

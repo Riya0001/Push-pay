@@ -1,0 +1,134 @@
+.card {
+    padding: 14px;
+    border: none;
+}
+
+.card h5 {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card h6 {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-bottom: 15px;
+}
+
+.card-body {
+    padding: 0;
+}
+
+.accordion-item {
+    border: none;
+}
+
+.accordion-button {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 20px;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.accordion-body {
+    border-top: none;
+    padding: 20px;
+}
+
+.accordion-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.left-align-center {
+    text-align: left;
+    vertical-align: middle;
+}
+
+.form-check-input:checked {
+    background-color: black;
+    border-color: black;
+}
+
+.form-check-input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.form-select {
+    border: 1px solid #DEDEDE;
+    border-radius: 12px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.form-control {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#summary-bar .accordion-button::after {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+}
+
+.spinner-grow {
+    --bs-spinner-width: 1rem;
+    --bs-spinner-height: 1rem;
+    --bs-spinner-vertical-align: -0.125em;
+    --bs-spinner-animation-speed: 2s;
+    --bs-spinner-animation-name: spinner-grow;
+    background-color: #9E007E;
+    opacity: 0;
+}
+
+/*Override for page 2*/
+.form-control:focus {
+    border-color: #222222;
+    box-shadow: 0 0 0 0.1rem rgb(40, 40, 40);
+    outline: none;
+}
+
+/*Override for page 2*/
+.form-select:focus {
+    border-color: #222222;
+    box-shadow: 0 0 0 0.1rem rgb(40, 40, 40);
+    outline: none;
+}
+
+.custom-select-with-icon {
+    position: relative;
+    padding-right: 2rem; /* Make space for the checkmark */
+}
+
+/* Styling the checkmark icon */
+.check-icon {
+    position: absolute;
+    right: 7rem;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: green;
+}
+
+/* Show the checkmark icon when an option is selected */
+.selected .check-icon {
+    display: inline-block;
+}
+
+.tooltip-like-modal {
+    position: absolute;
+    z-index: 1050; /* Higher than other content */
+    background-color: rgba(0, 0, 0, 0.3); /* Transparent background */
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.tooltip-like-modal-content {
+    background-color: white;
+    padding: 0;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}

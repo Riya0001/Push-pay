@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Include fragment content inside head -->
+    <div th:replace="~{fragments/bundles/header :: head-page-2}"></div>
+
+    <title>.</title>
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "qtfyso1mfx");
+    </script>
+
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FDJL41MRCT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-FDJL41MRCT');
+    </script>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <!-- Logo at the top -->
+    <div class="logo"><img src="/images/assets/logo-white.svg" alt="logo"></div>
+
+    <!-- Image centered vertically -->
+    <div class="centered"><img src="/images/assets/hand-card-tap.svg" alt="tap"></div>
+
+    <!-- Text at the bottom -->
+    <div class="bottom-text">
+        <a href="https://tiptappay.com/connect-with-us/" class="text-white">Need Help?</a>
+    </div>
+
+</div>
+
+<div class="content">
+
+    <div class="text-center mb-4">
+        <div style="font-weight: bold; font-size: 36px; padding-top: 70px; padding-bottom: 10px;">My Account Setup</div>
+    </div>
+
+    <div class="mb-4">
+
+        <div class="form-content row justify-content-center">
+
+            <div style="max-width: 700px">
+
+                <div class="mb-5">
+                    <p>You’re almost done! We’ve received your details and are finalizing your account setup.</p>
+                </div>
+
+                <div style="font-weight: bold; font-size: 14px; padding-bottom: 10px; color: #422055">
+                    Your Account Password
+                </div>
+
+                <form action="#" th:action="@{'/benevity/my-account-setup'}" th:object="${myAccountDTO}" method="post">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" th:field="*{email}" th:value="${myAccountDTO.getEmail()}" required>
+                        <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red;"></small>
+                        <small id="invalidInputMessage" style="color: red; display: none;"></small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="position-relative">
+                            <input type="password" class="form-control" id="password" th:field="*{password}" required style="padding-right: 60px;">
+                            <button class="btn position-absolute top-50 end-0 translate-middle-y" type="button"
+                                    id="togglePassword"
+                                    style="background-color: white; border: none; z-index: 999; font-size: 1.25rem; margin-right: 5px;">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        <small id="passwordError" style="color: red;"></small>
+
+                        <ul id="passwordRules" class="mt-2">
+                            <li class="text-danger" id="ruleLength">At least 8 characters</li>
+                            <li class="text-danger" id="ruleUpper">At least one uppercase letter</li>
+                            <li class="text-danger" id="ruleLower">At least one lowercase letter</li>
+                            <li class="text-danger" id="ruleNumber">At least one number</li>
+                            <li class="text-danger" id="ruleSpecial">At least one special character (!@#$%^&*)</li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-3" id="passwordConfirmGroup">
+                        <label for="passwordConfirm" class="form-label">Password Confirmation</label>
+                        <input type="password" class="form-control" id="passwordConfirm" th:field="*{passwordConfirm}" required>
+                        <small id="passwordConfirmError" style="color: red;"></small>
+                    </div>
+
+                    <div class="text-center mb-3 pt-3">
+                        <button type="submit" class="btn ttp-btn-primary p-2 mb-2">Create My Password</button>
+                    </div>
+                </form>
+
+
+
+
+                <div class="pt-2">
+                    <a href="https://tiptappay.com/connect-with-us/"
+                       style="color: #422055; font-weight: bold; text-decoration: none">Need Help?</a>
+                    <span> If you have any questions, our support team is here to assist you every step of the way.</span>
+                </div>
+
+                <div class="pt-2 mb-5">
+                    <span style="color: #422055; font-weight: bold;">Thank you for choosing tiptap!</span><br>
+                    <span>We look forward to supporting your business!</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script th:src="@{/js/common/email.js}"></script>
+
+<script>
+    document.getElementById("togglePassword").addEventListener("click", function () {
+        let passwordField = document.getElementById("password");
+        let passwordConfirmField = document.getElementById("passwordConfirm");
+        let confirmPasswordGroup = document.getElementById("passwordConfirmGroup");
+        let icon = this.querySelector("i");
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            confirmPasswordGroup.style.display = "none";
+            passwordConfirmField.value = "";
+            passwordConfirmField.required = false;
+            icon.classList.replace("bi-eye", "bi-eye-slash");
+        } else {
+            passwordField.type = "password";
+            confirmPasswordGroup.style.display = "block";
+            passwordConfirmField.required = true;
+            icon.classList.replace("bi-eye-slash", "bi-eye");
+        }
+    });
+
+    document.getElementById("password").addEventListener("input", function () {
+        let value = this.value;
+        document.getElementById("ruleLength").classList.toggle("text-success", value.length >= 8);
+        document.getElementById("ruleLength").classList.toggle("text-danger", value.length < 8);
+        document.getElementById("ruleUpper").classList.toggle("text-success", /[A-Z]/.test(value));
+        document.getElementById("ruleUpper").classList.toggle("text-danger", !/[A-Z]/.test(value));
+        document.getElementById("ruleLower").classList.toggle("text-success", /[a-z]/.test(value));
+        document.getElementById("ruleLower").classList.toggle("text-danger", !/[a-z]/.test(value));
+        document.getElementById("ruleNumber").classList.toggle("text-success", /[0-9]/.test(value));
+        document.getElementById("ruleNumber").classList.toggle("text-danger", !/[0-9]/.test(value));
+        document.getElementById("ruleSpecial").classList.toggle("text-success", /[!@#$%^&*]/.test(value));
+        document.getElementById("ruleSpecial").classList.toggle("text-danger", !/[!@#$%^&*]/.test(value));
+    });
+
+    function isPasswordValid() {
+        return (
+            document.getElementById("ruleLength").classList.contains("text-success") &&
+            document.getElementById("ruleUpper").classList.contains("text-success") &&
+            document.getElementById("ruleLower").classList.contains("text-success") &&
+            document.getElementById("ruleNumber").classList.contains("text-success") &&
+            document.getElementById("ruleSpecial").classList.contains("text-success")
+        );
+    }
+
+    document.querySelector('form').addEventListener('submit', function (event) {
+        if (!validateFormEmailEntry("email", "invalidInputMessage")) {
+            event.preventDefault();
+            return;
+        }
+
+        let passwordField = document.getElementById("password");
+        let passwordConfirmField = document.getElementById("passwordConfirm");
+        let passwordError = document.getElementById("passwordError");
+        let passwordConfirmError = document.getElementById("passwordConfirmError");
+
+        if (!isPasswordValid()) {
+            event.preventDefault();
+            passwordError.textContent = "Password does not meet all the requirements.";
+        }
+
+        if(passwordField.type === "password") {
+            if (passwordField.value !== passwordConfirmField.value) {
+                event.preventDefault();
+                passwordConfirmError.textContent = "Passwords do not match. Please confirm your password.";
+                passwordConfirmField.focus();
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

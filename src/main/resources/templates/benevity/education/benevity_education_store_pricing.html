@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <!-- Include fragment content inside head -->
+    <div th:replace="~{fragments/bundles/header :: head-page-2}"></div>
+
+    <title>.</title>
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "qtfyso1mfx");
+    </script>
+
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FDJL41MRCT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-FDJL41MRCT');
+    </script>
+</head>
+<body>
+
+<div hidden>
+    <label for="srInput"></label>
+    <input th:value="${salesRepId}" id="srInput">
+</div>
+
+<nav th:replace="~{fragments/benevity/education/navbar :: navbar}"></nav>
+
+<div class="container">
+
+    <div th:replace="~{fragments/benevity/education/landing-hero :: slider}"></div>
+
+    <!-- Header Section -->
+    <div class="text-black p-0 text-center mb-5">
+        <div style="font-size: 26px; font-weight: 700;">Choose from 6 Month and 1 Year Options</div>
+        <p>No Merchant Account Needed - Activate with Your Benevity ID and Start Collecting Today!</p>
+    </div>
+
+
+    <div style="text-align: right;" class="pb-3">
+    <span class="ttp-color-fuchsia" style="font-size: 13px; padding-top: 10px; display: inline-block;">
+        <span class="fw-bold">Save 5%</span> with one-time payment!
+    </span>&nbsp;&nbsp;
+
+        <span class="pay-plan-switcher"
+              style="border: 1px solid lightgrey; border-radius: 20px; padding: 3px; float: right; text-align: right;">
+        <label class="pay-plan-switcher-light" style="display: block;">
+            <input id="toggle" type="checkbox" style="float: right; margin-right: 10px;">
+            <span style="display: block;">
+                <span class="fw-bold text-transition" id="toggle-monthly" style="font-size: 11px; float: left;">Monthly Payment</span>
+                <span class="fw-bold text-transition" id="toggle-yearly" style="font-size: 11px; float: right;">One Time Payment Upfront</span>
+            </span>
+            <a class="btn ttp-btn-fuchsia" style="border-radius: 30px; float: right;"></a>
+        </label>
+    </span>
+    </div>
+
+
+    <!-- Pricing Cards Section -->
+    <div class="mt-5 mb-5">
+        <div class="row justify-content-between g-3" id="pricing-plans">
+            <!-- Dynamic content here -->
+        </div>
+
+        <div style="text-align: right; padding-top: 25px; font-size: 11px; color: #18181B">
+            *Discount applies only at the time of your original purchase
+        </div>
+    </div>
+
+
+    <div style="margin-top: 200px">
+        <div th:replace="~{fragments/bundles/footer :: footer}"></div>
+    </div>
+
+</div>
+
+<script th:src="@{/js/bundles/js/bootstrap.bundle.min.js}"></script>
+
+<script>
+    const URL_NEXT = '/benevity/education/order/customize';
+    const STORE_INITIAL = '_edu';
+    const SOLUTION_SELECTION = "Premium Benevity Bundle - Education";
+</script>
+<script th:src="@{/js/common/email.js}"></script>
+<script th:src="@{/js/benevity/education/js/custom/page1.js}"></script>
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- Most Devices -->
+    <link rel="icon" type="image/png" href="/images/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/images/favicon/favicon-32x32.png" sizes="32x32">
+
+    <!-- Android -->
+    <link rel="icon" type="image/png" href="/images/favicon/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/images/favicon/android-chrome-512x512.png" sizes="512x512">
+
+    <!-- IOS -->
+    <link rel="apple-touch-icon" type="image/png" href="/images/favicon/apple-touch-icon.png">
+
+    <!-- IE -->
+    <link rel="shortcut icon" type="image/png" href="/images/favicon/favicon.ico">
+
+    <!-- Web Manifest -->
+    <link rel="manifest" type="image/png" href="/images/favicon/site.webmanifest">
+
+    <title>tiptap | Support</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+          rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --ink:#1f2430; --muted:#6b7280; --bg:#f5f6fa; --page:#fff;
+            --grad-top:#2B0C4A; --grad-mid:#3A0D5B; --grad-bot:#7A0C7A;
+            --btn:#3b2453; --btn-hover:#2f1c43; --ring:#ece8fb; --field:#fff;
+            --shadow:rgba(20,20,40,.08);
+            --fs-base:14px; --fs-label:12.5px;
+            --fs-h1:clamp(22px,1.6vw + 4px,26px);
+            --radius:10px; --pad:10px 12px;
+            --right-pad:36px; --form-max:880px;
+            --brand-max:560px; --logo-h:72px; --hero-maxvh:38vh;
+            --why-h:clamp(20px,2.2vw,28px); --res-h:clamp(18px,2vw,24px);
+        }
+        *{box-sizing:border-box}
+        html,body{height:100%}
+        body{
+            margin:0; background:var(--bg); color:var(--ink);
+            font:400 var(--fs-base)/1.45 Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+        }
+        @media (min-width:1024px){ html,body{overflow:hidden} }
+
+        .page{display:grid; grid-template-columns:.82fr 1.18fr; height:100vh; background:var(--page);}
+        @media (max-width:1024px){ .page{grid-template-columns:1fr; height:auto} }
+
+        /* LEFT */
+        .left{
+            color:#fff;
+            background:linear-gradient(180deg,var(--grad-top) 0%, var(--grad-mid) 45%, var(--grad-bot) 100%);
+            padding:24px; display:flex; align-items:center; justify-content:center;
+        }
+        .brand{
+            width:100%; max-width:var(--brand-max); text-align:center;
+            display:flex; flex-direction:column; gap:16px; align-items:center;
+        }
+        .logo img{height:var(--logo-h); display:block}
+        .hero{width:100%; max-width:calc(var(--brand-max) + 80px); max-height:var(--hero-maxvh); object-fit:contain; opacity:.95;}
+        .why{width:100%}
+        .why .title{font-weight:800; font-size:var(--why-h); margin:18px 0 8px}
+        .points{display:grid; gap:12px; text-align:left}
+        .point{display:grid; grid-template-columns:28px 1fr; gap:10px}
+        .point svg{width:18px; height:18px; margin-top:2px}
+        .point p{margin:0}
+        .resources{margin-top:14px}
+        .resources .hd{font-weight:700; font-size:var(--res-h); margin:0 0 8px}
+        .resources a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,255,.6)}
+        .resources a:hover{border-bottom-color:#fff}
+
+        /* RIGHT */
+        .right{position:relative; padding:26px var(--right-pad)}
+        @media (max-width:1024px){ .right{padding:22px 18px} }
+        .topbar{position:absolute; right:var(--right-pad); top:16px}
+        @media (max-width:1024px){ .topbar{position:static; text-align:right; margin-bottom:8px} }
+        .login-btn{
+            display:inline-flex; align-items:center; gap:8px; padding:7px 14px; border-radius:999px;
+            background:#f0eafe; border:1px solid #e2d8ff; color:#3a2f72; text-decoration:none; font-weight:700;
+            box-shadow:0 6px 16px var(--shadow); font-size:12.5px;
+        }
+        h1{margin:8px 0 4px; font-size:var(--fs-h1); line-height:1.2; letter-spacing:-.01em; font-weight:800}
+        .sub{color:var(--muted); max-width:620px; margin:0 0 12px; font-size:13.5px; line-height:1.5}
+
+        .form-card{
+            background:#fff; border-radius:12px; padding:14px;
+            box-shadow:0 10px 22px var(--shadow), inset 0 0 0 1px var(--ring);
+            width:100%; max-width:var(--form-max);
+        }
+        form{display:grid; gap:10px}
+        .row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+        .full{grid-column:1 / -1}
+        @media (max-width:720px){ .row{grid-template-columns:1fr} .full{grid-column:auto} }
+
+        label{display:block; font-weight:600; font-size:var(--fs-label); margin:0 0 4px}
+        .req::after{content:" *"; color:#d00; font-weight:800}
+
+        input,select,textarea{
+            width:100%; background:var(--field); border:1px solid #e6e3f2; border-radius:var(--radius);
+            padding:var(--pad); font:500 13.5px/1.35 Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+            color:inherit; outline:none; box-shadow:0 1px 6px rgba(20,20,40,.04) inset;
+            transition:border-color .2s, box-shadow .2s;
+        }
+        input:focus,select:focus,textarea:focus{border-color:#c9c2ef; box-shadow:0 0 0 3px rgba(124,58,237,.12)}
+        textarea{min-height:110px; resize:vertical}
+        .phone{display:grid; grid-template-columns:100px 1fr; gap:8px}
+
+        /* Validation styles */
+        .was-validated input:invalid,
+        .was-validated select:invalid,
+        .was-validated textarea:invalid,
+        input.touched:invalid,
+        select.touched:invalid,
+        textarea.touched:invalid{
+            border-color:#ef4444;
+            box-shadow:0 0 0 3px rgba(239,68,68,.15);
+        }
+        .was-validated input:valid,
+        .was-validated select:valid,
+        .was-validated textarea:valid,
+        input.touched:valid,
+        select.touched:valid,
+        textarea.touched:valid{
+            border-color:#10b981;
+            box-shadow:0 0 0 3px rgba(16,185,129,.12);
+        }
+
+        .submit{display:flex; justify-content:flex-end; margin-top:4px}
+        .btn{
+            display:inline-flex; align-items:center; justify-content:center; gap:8px;
+            padding:8px 14px; border-radius:var(--radius); background:var(--btn); color:#fff; border:none;
+            font-weight:700; font-size:13px; cursor:pointer;
+            box-shadow:0 8px 18px rgba(59,36,83,.28);
+            transition:transform .06s, background .2s, box-shadow .2s;
+        }
+        .btn:hover{background:var(--btn-hover)}
+        .btn[disabled]{opacity:.6; cursor:not-allowed; pointer-events:none; box-shadow:none}
+        .error {
+            border: 2px solid red;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 4px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <!-- LEFT -->
+    <section class="left" aria-label="Brand">
+        <div class="brand">
+            <div class="logo">
+                <img src="/images/tiptap_Logo_WhiteText_RGB.png" style="margin-bottom: 300px;" alt="tiptap">
+            </div>
+            <img class="hero" src="/images/Seepay%201.png" alt="Payment illustration"/>
+<!--            <div class="why">-->
+<!--                <div class="title">Why Contact Us?</div>-->
+<!--                <div class="points">-->
+<!--                    <div class="point">-->
+<!--                        <svg viewBox="0 0 24 24" fill="#FF8A00" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3 7h7l-5.5 4.1L18 21l-6-4-6 4 1.5-7.9L2 9h7z"/></svg>-->
+<!--                        <p><strong>Expert Assistance:</strong> Our support team is knowledgeable and ready to help with any issues or questions you may have.</p>-->
+<!--                    </div>-->
+<!--                    <div class="point">-->
+<!--                        <svg viewBox="0 0 24 24" fill="#FF8A00" xmlns="http://www.w3.org/2000/svg"><path d="M12 8V4m0 0l-2 2m2-2l2 2M6 12H4m0 0l2-2m-2 2l2 2m14 0h-2m0 0l2-2m-2 2l2 2M12 20v-4m0 0l2 2m-2-2l-2 2"/></svg>-->
+<!--                        <p><strong>Fast Response:</strong> We strive to respond to all inquiries within 24 hours.</p>-->
+<!--                    </div>-->
+<!--                    <div class="point">-->
+<!--                        <svg viewBox="0 0 24 24" fill="#FF8A00" xmlns="http://www.w3.org/2000/svg"><path d="M4 7h16v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7zm3-4h10v4H7V3z"/></svg>-->
+<!--                        <p><strong>Comprehensive Solutions:</strong> We aim to resolve your issues thoroughly and efficiently.</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="resources">-->
+<!--                <div class="hd">Additional Resources</div>-->
+<!--                <a href="#">Visit resource center</a>-->
+<!--            </div>-->
+        </div>
+    </section>
+
+    <!-- RIGHT -->
+    <section class="right" aria-label="Create ticket">
+
+        <h1>We’re Here to Help!</h1>
+        <p class="sub">
+            Fill out the form below and our support team will get back to you promptly.
+            For faster, personalized support, please
+            <a href="https://app.tiptappay.ca/login" target="_blank">log in</a>
+            and use the support section in your account.
+        </p>
+        <div class="form-card">
+            <!-- Keep browser validation enabled (no 'novalidate') -->
+            <form id="publicSupportForm" method="post" action="/support/new">
+                <!-- Hidden fields for Spring binding -->
+                <input type="hidden" name="ticketName" id="ticketName">
+                <input type="hidden" name="manualOrderNumbersEntryEnabled" value="true">
+                <input type="hidden" name="manualDeviceEntryEnabled" value="true">
+                <input type="hidden" name="orderNumbersManualEntry" id="orderNumbersManualEntry">
+
+                <input type="hidden" name="contactFirstName" id="contactFirstName">
+                <input type="hidden" name="contactLastName"  id="contactLastName">
+                <input type="hidden" name="contactEmail"     id="contactEmailHidden">
+                <input type="hidden" name="contactPhoneCountryCode" id="contactPhoneCountryCodeHidden">
+                <input type="hidden" name="contactPhone" id="contactPhoneHidden">
+
+                <div class="row">
+                    <div>
+                        <label for="fullName" class="req">Full Name</label>
+                        <input id="fullName"
+                               type="text"
+                               placeholder="Jane Doe"
+                               autocomplete="name"
+                               required
+                               pattern="^\s*\S+\s+\S+.*$"
+                               title="Please enter your full name (first and last).">
+                        <div id="nameError" class="error-message">Please enter your full name (first and last).</div>
+                    </div>
+                    <div>
+                        <label for="email" class="req">Email</label>
+                        <input id="email" type="email" placeholder="you@company.com" autocomplete="email" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <label for="phone">Phone</label>
+                        <div class="phone">
+                            <!-- Required + simple pattern & title -->
+                            <input id="countryCode" type="text"
+                                   value="+1"
+                                   autocomplete="tel-country-code" inputmode="tel"
+                                   required pattern="^\+\d{1,4}$"
+                                   title="Use + followed by 1–4 digits (e.g., +1, +44, +971)">
+
+                            <input id="phone" type="tel" placeholder="(555) 555-5555"
+                                   autocomplete="tel" inputmode="tel"
+                                   required
+                                   title="Enter a valid phone number with at least 7 digits">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="subject" class="req">Subject</label>
+                        <select id="subject" name="subjectLabel" required title="Please select a subject">
+                            <option value="" disabled selected>Select a subject</option>
+                            <option data-ticket="General Inquiry">I have a general inquiry</option>
+                            <option data-ticket="Existing Order Inquiry">I need help with an existing order</option>
+                            <option data-ticket="General Inquiry">I need help with placing an order</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="full" id="rowSalesOrder" style="display:none">
+                    <label for="salesOrder" class="req">Sales Order Number</label>
+                    <input id="salesOrder" type="text" placeholder="e.g., SO-123456" autocomplete="off">
+                </div>
+
+                <div class="full">
+                    <label for="message" class="req">Your Message</label>
+                    <textarea id="message" name="message" placeholder="Tell us a bit about what you need help with..." required></textarea>
+                </div>
+
+                <div class="submit">
+                    <button class="btn" id="submitBtn" type="submit" data-default-text="Submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Elements
+        const form           = document.getElementById('publicSupportForm');
+        const subjectEl      = document.getElementById('subject');
+        const rowSO          = document.getElementById('rowSalesOrder');
+        const salesOrderEl   = document.getElementById('salesOrder');
+
+        const fullNameInput  = document.getElementById('fullName');
+        const nameError      = document.getElementById('nameError');
+
+        const emailEl        = document.getElementById('email');
+        const countryCodeEl  = document.getElementById('countryCode');
+        const phoneEl        = document.getElementById('phone');
+        const messageEl      = document.getElementById('message');
+
+        const submitBtn      = document.getElementById('submitBtn');
+
+        // Hidden fields (existing in DOM)
+        const ticketNameHidden   = document.getElementById('ticketName');
+        const orderManualHidden  = document.getElementById('orderNumbersManualEntry');
+
+        const firstNameHidden    = document.getElementById('contactFirstName');
+        const lastNameHidden     = document.getElementById('contactLastName');
+        const emailHidden        = document.getElementById('contactEmailHidden');
+        const phoneCcHidden      = document.getElementById('contactPhoneCountryCodeHidden');
+        const phoneHidden        = document.getElementById('contactPhoneHidden');
+
+        // Create hidden companyName => always "Anonymous"
+        const companyHidden = document.createElement('input');
+        companyHidden.type = 'hidden';
+        companyHidden.name = 'companyName';
+        companyHidden.id   = 'companyName';
+        companyHidden.value = 'Anonymous';
+        form.appendChild(companyHidden);
+
+        let isSubmitting = false;
+
+        /* ---------------------------
+           Validation helpers
+        ----------------------------*/
+
+        function validateFullName() {
+            const value = (fullNameInput.value || '').trim();
+            // At least two "words" separated by whitespace, allowing middle names
+            const parts = value.split(/\s+/).filter(Boolean);
+            const ok = parts.length >= 2;
+
+            if (!ok) {
+                fullNameInput.setCustomValidity('Please enter your full name (first and last).');
+                fullNameInput.classList.add('error');
+                nameError.style.display = 'block';
+            } else {
+                fullNameInput.setCustomValidity('');
+                fullNameInput.classList.remove('error');
+                nameError.style.display = 'none';
+            }
+            return ok;
+        }
+
+        function validateCountryCode() {
+            const v = (countryCodeEl.value || '').trim();
+            const ok = /^\+\d{1,4}$/.test(v);
+            if (!ok) {
+                countryCodeEl.setCustomValidity('Use + followed by 1–4 digits (e.g., +1, +44).');
+            } else {
+                countryCodeEl.setCustomValidity('');
+            }
+            return ok;
+        }
+
+        function validatePhone() {
+            const v = (phoneEl.value || '').trim();
+            const digits = v.replace(/\D/g, '');
+            const ok = digits.length >= 7;
+            if (!ok) {
+                phoneEl.setCustomValidity('Enter a valid phone with at least 7 digits.');
+            } else {
+                phoneEl.setCustomValidity('');
+            }
+            return ok;
+        }
+
+        function markTouched(el) {
+            if (!el.classList.contains('touched')) el.classList.add('touched');
+        }
+
+        function scrollToFirstInvalid() {
+            const firstInvalid = form.querySelector(':invalid');
+            if (!firstInvalid) return;
+            firstInvalid.classList.add('touched');
+            firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            setTimeout(() => {
+                firstInvalid.focus({ preventScroll: true });
+                firstInvalid.reportValidity();
+            }, 200);
+        }
+
+        /* ---------------------------
+           Subject rules (Sales Order)
+        ----------------------------*/
+        function applySubjectRules() {
+            const opt = subjectEl.options[subjectEl.selectedIndex];
+            const ticket = opt?.dataset?.ticket || '';
+            const isExisting = ticket === 'Existing Order Inquiry';
+
+            rowSO.style.display = isExisting ? '' : 'none';
+            salesOrderEl.required = isExisting;
+
+            if (!isExisting) {
+                salesOrderEl.value = '';
+                salesOrderEl.classList.remove('touched');
+                salesOrderEl.setCustomValidity('');
+            }
+        }
+
+        /* ---------------------------
+           Event wiring
+        ----------------------------*/
+        // Full name realtime validation & blur
+        fullNameInput.addEventListener('input', () => {
+            markTouched(fullNameInput);
+            validateFullName();
+        });
+        fullNameInput.addEventListener('blur', () => {
+            markTouched(fullNameInput);
+            validateFullName();
+        });
+
+        // Phone fields
+        [countryCodeEl, phoneEl].forEach(el => {
+            el.addEventListener('input', () => {
+                markTouched(el);
+                validateCountryCode();
+                validatePhone();
+            });
+            el.addEventListener('blur', () => {
+                markTouched(el);
+                validateCountryCode();
+                validatePhone();
+            });
+        });
+
+        // Basic touched handling for other fields
+        [emailEl, subjectEl, messageEl, salesOrderEl].forEach(el => {
+            if (!el) return;
+            el.addEventListener('blur', () => markTouched(el));
+            el.addEventListener('change', () => markTouched(el));
+            el.addEventListener('input', () => markTouched(el));
+        });
+
+        subjectEl.addEventListener('change', applySubjectRules);
+        applySubjectRules(); // initialize on load
+
+        /* ---------------------------
+           Submit handler
+        ----------------------------*/
+        form.addEventListener('submit', (e) => {
+            if (isSubmitting) { e.preventDefault(); return; }
+
+            // Turn on validation styles
+            form.classList.add('was-validated');
+
+            // Run validators that use customValidity
+            validateFullName();
+            validateCountryCode();
+            validatePhone();
+
+            // Ensure required textareas/inputs aren't just whitespace
+            [messageEl, salesOrderEl].forEach(el => {
+                if (!el) return;
+                if (el.required && (el.value || '').trim() === '') {
+                    el.setCustomValidity('Required');
+                } else if (el !== fullNameInput) {
+                    // Avoid overwriting name's custom message here
+                    if (el.checkValidity()) el.setCustomValidity('');
+                }
+            });
+
+            // Halt if invalid
+            if (!form.checkValidity()) {
+                e.preventDefault();
+                scrollToFirstInvalid();
+                return;
+            }
+
+            // ------ If valid, prepare payload mappings ------
+
+            // companyName => Anonymous (always)
+            companyHidden.value = 'Anonymous';
+
+            // subject => ticketName
+            const opt = subjectEl.options[subjectEl.selectedIndex];
+            const ticket = opt?.dataset?.ticket || 'General Inquiry';
+            ticketNameHidden.value = ticket;
+
+            // sales order only for "Existing Order Inquiry"
+            orderManualHidden.value =
+                ticket === 'Existing Order Inquiry' ? (salesOrderEl.value || '').trim() : '';
+
+            // Split full name
+            const full = (fullNameInput.value || '').trim();
+            const parts = full.split(/\s+/);
+            firstNameHidden.value = parts.shift() || '';
+            lastNameHidden.value  = parts.join(' ') || '';
+
+            // Copy contact channels
+            emailHidden.value   = (emailEl.value || '').trim();
+            phoneCcHidden.value = (countryCodeEl.value || '').trim();
+            phoneHidden.value   = (phoneEl.value || '').trim();
+
+            // Prevent double submit
+            isSubmitting = true;
+            submitBtn.disabled = true;
+            submitBtn.setAttribute('aria-busy', 'true');
+            submitBtn.textContent = 'Submitting…';
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+body {
+    background-image: url('/images/athenajava/forms/requestfortaxreceipt/form-bg.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Mulish';
+    font-size: 20px;
+}
+
+label {
+    font-weight: 600;
+    color: #2A1636;
+}
+
+footer p {
+    font-size: 16px;
+    margin-bottom: 0.25rem !important;
+    font-weight: 200;
+}
+
+footer p b {
+    font-weight: 600;
+}
+
+footer p a {
+    text-decoration: none;
+    color: #6c757d;
+}
+
+footer p a:hover {
+    font-size: 16px;
+    color: #9E007E;
+}
+
+.ttp-a {
+    text-decoration: none;
+    color: #6c757d;
+}
+
+.ttp-a:hover {
+    text-decoration: none;
+    color: #9E007E;
+}
+
+.ttp-purple {
+    color: #402253;
+}
+
+.ttp-fuschia {
+    color: #901F7A
+}
+
+.ttp-gray {
+    color: #474747f0;
+}
+
+.ttp-max-bold {
+    font-weight: 900 !important;
+}
+
+.form-control {
+    font-size: 1.25rem !important;
+}
+
+.form-select {
+    font-size: 1.25rem !important;
+}
+
+.ttp-bg-purple {
+    background: #402253;
+}
+
+.ttp-btn-primary {
+    color: #FFFFFF;
+    background-color: #9E007E;
+    border-color: #9E007E;
+    font-size: 20px;
+}
+
+.ttp-btn-primary:hover {
+    color: #FFFFFF;
+    background-color: #402253;
+    border-color: #9E007E;
+    font-size: 20px;
+}
+
+.ttp-btn-outline-primary {
+    color: #9E007E;
+    background-color: #FFFFFF;
+    border-color: #9E007E;
+    font-size: 20px;
+}
+
+.ttp-btn-outline-primary:hover {
+    color: #FFFFFF;
+    background-color: #9E007E;
+    border-color: #FFFFFF;
+    font-size: 20px;
+}
+
+.required:after {
+    content: " *";
+    color: #402253;
+}
+
+.item-image-align {
+    align-items: flex-end;
+    display: flex;
+}
+
+.ttp-border-primary {
+    border-color: #402253 !important;
+}
+
+.image-zoom {
+    transition: transform 0.2s ease;
+}
+
+.image-zoom:hover {
+    transform: scale(1.1);
+}
+
+.label-hover-fuschia:hover {
+    color: #9E007E;
+}
+
+.ttp-bg-footer {
+    background-color: #f7f7f7;
+}
+
+.ps-4-half {
+    padding-left: 2.5rem !important;
+}
+
+p a:hover {
+    color: #9E007E;
+}

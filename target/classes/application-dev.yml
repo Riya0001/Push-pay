@@ -1,0 +1,57 @@
+server:
+  port: 8090
+
+spring:
+  mail:
+    protocol: smtp
+    test-connection: false
+    host: "smtp.gmail.com"
+    port: 587
+    username: " "
+    password: " "
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        smtp:
+          auth: true
+          connectiontimeout: 30000
+          timeout: 30000
+          starttls:
+            enable: true
+        debug: "false"
+    default-from-address: " "
+    enable-sending-email: true
+
+netsuite:
+  environment: SB
+  restlet:
+    consumer-key: "d67f9c5879a046c9c9c0cdbf6b8467e86e62e651b046ad1a8e0b49aca88f117c"
+    consumer-secret: "d9bc7838608181b54492a065c6f6bc09b66e02df2507d862f87ef81a58e09fe2"
+    token: "dc78a9e7494044d017e7320917fb3d7261faf80dff26b14ddd844738418183bf"
+    token-secret: "f3b822574695057a283442559a9e80e1697f43b24059a09b59482a69433c6556"
+    signature-method: "HMAC-SHA256"
+    version: "1.0"
+    account-id: "7157121_SB1"
+    base-url: "https://7157121-sb1.restlets.api.netsuite.com/app/site/hosting/restlet.nl"
+    http-method: "POST"
+    script: "customscript_bf_integrationendpoint_rl"
+    deployment-id: "1"
+
+app:
+  environment: dev
+  developer:
+    insights:
+      enabled: true
+    debug:
+      enabled: true
+  cookie:
+    encryption-key: "(6eRx$PqMXdGhQ(rKnTax-zRl*Jimr#w"
+    path: /
+    exp: 3600
+    http-only: false
+    secure: false
+athena:
+  api:
+    prefix: api/athena/v1
+    key: ygBkA8DPyCsjplfITI1ApB9qSn2a3SGuggdk0wAxTlnv0bsoRwyIQlU5KDDnGa+L

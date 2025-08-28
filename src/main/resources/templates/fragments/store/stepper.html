@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+
+<div th:fragment="stepper" id="stepper-section" class="mt-5 mx-3">
+    <div class="row justify-content-center align-items-center text-center ttp-bg-color-light-shade-grey ttp-border-radius-20px p-4 mt-5">
+        <div class="col-sm">
+            <div th:if="${stepper.getStep1() == 'completed'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-completed-step}"></svg>
+                <div class="ttp-card-sub-header-xs ttp-color-fuschia">Select Your Solution</div>
+            </div>
+
+            <div th:if="${stepper.getStep1() == 'active'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-active-step}"></svg>
+                <div class="ttp-card-sub-header-xs ttp-color-fuschia">Select Your Solution</div>
+            </div>
+
+            <div th:if="${stepper.getStep1() == 'inactive'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-inactive-step}"></svg>
+                <div class="ttp-card-sub-header-xs ttp-color-medium-grey">Select Your Solution</div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <hr th:class="${stepper.getStep1processing() == 'active' ? 'stepper-hr-fuchsia' : 'stepper-hr-grey'}">
+        </div>
+        <div class="col-sm">
+            <div th:if="${stepper.getStep2() == 'completed'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-completed-step}"></svg>
+                <div class="ttp-card-sub-header-xs ttp-color-fuschia">Contact & Shipping Info</div>
+            </div>
+
+            <div th:if="${stepper.getStep2() == 'active'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-active-step}"></svg>
+                <div class="ttp-card-sub-header-xs ttp-color-fuschia">Contact & Shipping Info</div>
+            </div>
+
+            <div th:if="${stepper.getStep2() == 'inactive'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-inactive-step}"></svg>
+                <div class="ttp-card-sub-header-xs ttp-color-medium-grey">Contact & Shipping Info</div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <hr th:class="${stepper.getStep2processing() == 'active' ? 'stepper-hr-fuchsia' : 'stepper-hr-grey'}">
+        </div>
+        <div class="col-sm">
+            <div th:if="${stepper.getStep3() == 'completed'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-completed-step}"></svg>
+                <div class="ttp-card-sub-header-xs ttp-color-fuschia">Confirm & Submit</div>
+            </div>
+
+            <div th:if="${stepper.getStep3() == 'active'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-active-step}"></svg>
+                <div class="ttp-card-sub-header-xs ttp-color-fuschia">Confirm & Submit</div>
+            </div>
+
+            <div th:if="${stepper.getStep3() == 'inactive'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-inactive-step}"></svg>
+                <div class="ttp-card-sub-header-xs ttp-color-medium-grey">Confirm & Submit</div>
+            </div>
+
+            <div th:if="${stepper.getStep3() == 'error'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-error-step}"></svg>
+                <div class="ttp-card-sub-header-xs ttp-color-error">Confirm & Submit</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="stepper-sm" id="stepper-sm" class="mt-5 mx-3">
+    <div class="ttp-bg-color-light-shade-grey ttp-border-radius-20px p-4 mt-5">
+    <div class="row justify-content-center align-items-center text-center" style="flex-wrap: nowrap;">
+        <div class="col-sm">
+            <div th:if="${stepper.getStep1() == 'completed'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-completed-step}"></svg>
+            </div>
+
+            <div th:if="${stepper.getStep1() == 'active'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-active-step}"></svg>
+            </div>
+
+            <div th:if="${stepper.getStep1() == 'inactive'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-inactive-step}"></svg>
+            </div>
+        </div>
+        <div class="col-sm">
+            <hr th:class="${stepper.getStep1processing() == 'active' ? 'stepper-hr-fuchsia' : 'stepper-hr-grey'}">
+        </div>
+        <div class="col-sm">
+            <div th:if="${stepper.getStep2() == 'completed'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-completed-step}"></svg>
+            </div>
+
+            <div th:if="${stepper.getStep2() == 'active'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-active-step}"></svg>
+            </div>
+
+            <div th:if="${stepper.getStep2() == 'inactive'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-inactive-step}"></svg>
+            </div>
+        </div>
+        <div class="col-sm">
+            <hr th:class="${stepper.getStep2processing() == 'active' ? 'stepper-hr-fuchsia' : 'stepper-hr-grey'}">
+        </div>
+        <div class="col-sm">
+            <div th:if="${stepper.getStep3() == 'completed'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-completed-step}"></svg>
+            </div>
+
+            <div th:if="${stepper.getStep3() == 'active'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-active-step}"></svg>
+            </div>
+
+            <div th:if="${stepper.getStep3() == 'inactive'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-inactive-step}"></svg>
+            </div>
+
+            <div th:if="${stepper.getStep3() == 'error'}">
+                <svg th:replace="~{fragments/svg_fragments :: svg-stepper-error-step}"></svg>
+            </div>
+        </div>
+    </div>
+
+        <div class="text-center">
+            <div th:if="${stepper.getStep1() == 'active'}">
+                <div class="ttp-card-sub-header-xs ttp-color-fuschia">Step 1 of 3 : Select Your Solution</div>
+            </div>
+            <div th:if="${stepper.getStep2() == 'active'}">
+                <div class="ttp-card-sub-header-xs ttp-color-fuschia">Step 2 of 3 : Contact & Shipping Info</div>
+            </div>
+            <div th:if="${stepper.getStep3() == 'active' || stepper.getStep3() == 'completed'}">
+                <div class="ttp-card-sub-header-xs ttp-color-fuschia">Step 3 of 3 : Confirm & Submit</div>
+            </div>
+            <div th:if="${stepper.getStep3() == 'error'}">
+                <div class="ttp-card-sub-header-xs ttp-color-error">Step 3 of 3 : Confirm & Submit</div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+</html>

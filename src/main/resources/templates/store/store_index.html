@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en"
+>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.css">
+    <link rel="icon" type="image/x" href="/favicon.ico">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <title>tiptap</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/app.css"/>
+
+    <meta charset="UTF-8" content="MBoyQBsQODEBNHceP31SFiBYDEkgOgcdGyaryiAu6VAXi5kLp3yxUXKn" csrf-param="_csrf_token"
+          method-param="_method" name="csrf-token">
+
+    <style>
+        /*.inner-border-hover:hover {*/
+        /*    box-shadow: inset 0 0 0 2px;*/
+        /*}*/
+
+        .card:hover {
+            box-shadow: 7px 6px 14px 4px rgba(0, 0, 0, 0.09);
+        }
+
+        .custom-outline-container {
+            height: 150px;
+            width: 150px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body style="background-color: #fcfcfc">
+
+<div id="content-wrapper" class="">
+
+    <nav th:replace="~{fragments/navbar :: navbar}"></nav>
+
+    <div class="container d-flex mt-5">
+
+        <main
+                id=""
+                class="bg-lightgrey flex-grow-6 flex-shrink-1 px-4 py-5 w-100"
+                role="main"
+        >
+
+            <form method="POST" th:object="${bag}" id="order-form">
+
+                <div class="d-flex justify-content-between align-items-center mt-3 mb-3">
+
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <a class="btn btn-outline-primary btn-small position-relative d-flex align-items-center"
+                           href="/store/bag">
+                            <svg th:replace="~{fragments/svg_fragments :: fuschia-filled-bag-v2-svg}"></svg>&nbsp;View Bag
+                        </a>
+
+<!--                        <a class="btn btn-outline-primary btn-small position-relative d-flex align-items-center"-->
+<!--                           href="/store">-->
+<!--                            <svg th:replace="~{fragments/svg_fragments :: svg-store-home}"></svg>-->
+<!--                        </a>-->
+
+                    </div>
+
+                    <button class="btn btn-outline-primary btn-small position-relative d-flex align-items-center"
+                            value="/store" type="submit">
+                        Checkout&nbsp;<svg th:replace="~{fragments/svg_fragments :: svg-right-arrow}"></svg>
+                    </button>
+
+                </div>
+
+                <section class="mb-3">
+                    <div class="mb-4">
+                        <header>
+                            <h1>Select Your Solution</h1>
+                        </header>
+
+                        <p class="">
+                            A giving solution for every situation.
+                        </p>
+                    </div>
+                </section>
+
+                <!--   SUMMARY : START   -->
+
+
+                <span th:if="${bagEmpty}" th:text="${bagEmpty}" style="color: red;"></span>
+
+                <div class="d-flex justify-content-start flex-wrap">
+
+                    <div th:replace="~{fragments/index_fragments :: solution-card-1}"></div>
+                    <div th:replace="~{fragments/index_fragments :: solution-card-2}"></div>
+                    <div th:replace="~{fragments/index_fragments :: solution-card-3}"></div>
+                    <div th:replace="~{fragments/index_fragments :: solution-card-4}"></div>
+                    <div th:replace="~{fragments/index_fragments :: solution-card-5}"></div>
+                    <div th:replace="~{fragments/index_fragments :: solution-card-6}"></div>
+                    <div th:replace="~{fragments/index_fragments :: solution-card-7}"></div>
+
+                </div>
+
+            </form>
+
+            <!--       Display Detail Modal         -->
+            <div class="modal fade" id="mini-clip-device-details-modal" tabindex="-1" role="dialog"
+                 aria-labelledby="mini-clip-device-details-modal-label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 960px !important;">
+                    <div class="modal-content border-radius-16 pr-1">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                    id="mini-clip-device-details-modal-close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col mb-4">
+                                <h4 class="modal-title mb-0" id="mini-clip-device-details-modal-label">
+                                    Parts List
+                                    <br>
+                                </h4>
+                                <img th:src="@{'/images/parts.jpg'}"
+                                     alt="Mini Clip Parts Image" class="w-100"
+                                >
+                            </div>
+                            <div class="col">
+                                <h4>Dimensions:</h4>
+                                <span>Display with sign 4-½”h x 3”w x 4”D</span><br>
+                                <span>Display 4”h x 3”w x 4”D</span><br>
+                            </div>
+                            <div class="mt-3 col">
+                                <h4>Assembly and Setup</h4>
+                                <span>1. Take the device supplied and insert it into the I-offering clip.</span><br>
+                                <span>2. Before you begin collecting, make sure the battery is charged.</span><br>
+                                <span>3. To charge the battery, plug the <span
+                                        class="font-weight-bold">USB-C Cable</span> into the battery and the <span
+                                        class="font-weight-bold">USB-A Cable</span> into the wall plug.</span><br>
+                                <span>4. Plug into a standard wall outlet for 3-4 hours for a full charge.</span><br>
+                                <span>5. Remove the cable from the battery and clip the unit onto the offering basket to start collecting.</span><br>
+                                <span>6. The battery run time is approximately 6-7 hours.</span><br>
+                            </div>
+                            <div class="col text-center">
+                                <button type="button" class="btn btn-primary btn-small w-25 mt-4" data-dismiss="modal"
+                                        aria-label="Close" id="mini-clip-device-details-modal-close-button">
+                                    OK
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--   SUMMARY : END   -->
+
+        </main>
+
+    </div>
+</div>
+
+<!--<script type="text/javascript" src="/js/app.js"></script>-->
+
+<script>
+
+    document.getElementById('order-form').addEventListener('submit', function (event) {
+        const action = event.submitter.getAttribute('value');
+        const form = event.target;
+        form.action = action;
+    });
+
+    // ********************* CARD INPUTS *************
+
+    const smallCounterCard2DollarInput = document.getElementById('smallCounterCard2DollarInput');
+    const smallCounterCard5DollarInput = document.getElementById('smallCounterCard5DollarInput');
+    const smallCounterCard10DollarInput = document.getElementById('smallCounterCard10DollarInput');
+    const smallCounterCard20DollarInput = document.getElementById('smallCounterCard20DollarInput');
+
+    const mediumCounterCard2DollarInput = document.getElementById('mediumCounterCard2DollarInput');
+    const mediumCounterCard5DollarInput = document.getElementById('mediumCounterCard5DollarInput');
+    const mediumCounterCard10DollarInput = document.getElementById('mediumCounterCard10DollarInput');
+    const mediumCounterCard20DollarInput = document.getElementById('mediumCounterCard20DollarInput');
+
+    const largeCounterCard2510DollarInput = document.getElementById('largeCounterCard2510DollarInput');
+    const largeCounterCard51020DollarInput = document.getElementById('largeCounterCard51020DollarInput');
+
+    const floorStandCard2510DollarInput = document.getElementById('floorStandCard2510DollarInput');
+    const floorStandCard51020DollarInput = document.getElementById('floorStandCard51020DollarInput');
+
+    const lanyardCard2DollarInput = document.getElementById('lanyardCard2DollarInput');
+    const lanyardCard5DollarInput = document.getElementById('lanyardCard5DollarInput');
+    const lanyardCard10DollarInput = document.getElementById('lanyardCard10DollarInput');
+    const lanyardCard20DollarInput = document.getElementById('lanyardCard20DollarInput');
+
+    const selfieStickCard2DollarInput = document.getElementById('selfieStickCard2DollarInput');
+    const selfieStickCard5DollarInput = document.getElementById('selfieStickCard5DollarInput');
+    const selfieStickCard10DollarInput = document.getElementById('selfieStickCard10DollarInput');
+    const selfieStickCard20DollarInput = document.getElementById('selfieStickCard20DollarInput');
+
+    const miniClipCard2DollarInput = document.getElementById('miniClipCard2DollarInput');
+    const miniClipCard5DollarInput = document.getElementById('miniClipCard5DollarInput');
+    const miniClipCard10DollarInput = document.getElementById('miniClipCard10DollarInput');
+    const miniClipCard20DollarInput = document.getElementById('miniClipCard20DollarInput');
+
+    // ********************* CARD BUTTONS *************
+
+    const smallCounterCardAddToBagButton = document.getElementById('smallCounterCardAddToBagButton');
+    const mediumCounterCardAddToBagButton = document.getElementById('mediumCounterCardAddToBagButton');
+    const largeCounterCardAddToBagButton = document.getElementById('largeCounterCardAddToBagButton');
+    const floorStandCardAddToBagButton = document.getElementById('floorStandCardAddToBagButton');
+    const lanyardCardAddToBagButton = document.getElementById('lanyardCardAddToBagButton');
+    const selfieStickCardAddToBagButton = document.getElementById('selfieStickCardAddToBagButton');
+    const miniClipCardAddToBagButton = document.getElementById('miniClipCardAddToBagButton');
+
+    const bagBadge = document.getElementById('shopping-bag-device-number');
+
+    // ********************* EVENT LISTENERS *************
+
+    // Small Counter
+    smallCounterCardAddToBagButton.addEventListener('click', function () {
+        log("smallCounterCardAddToBagButton clicked")
+
+        const formData = {
+            smallCounter2Dollar: (smallCounterCard2DollarInput.value << 0),
+            smallCounter5Dollar: (smallCounterCard5DollarInput.value << 0),
+            smallCounter10Dollar: (smallCounterCard10DollarInput.value << 0),
+            smallCounter20Dollar: (smallCounterCard20DollarInput.value << 0)
+        };
+        addToBag(formData);
+        cleanSmallCounterCardInputs();
+    });
+
+    function cleanSmallCounterCardInputs() {
+        smallCounterCard2DollarInput.value = "";
+        smallCounterCard5DollarInput.value = "";
+        smallCounterCard10DollarInput.value = "";
+        smallCounterCard20DollarInput.value = "";
+    }
+
+    // Medium Counter
+    mediumCounterCardAddToBagButton.addEventListener('click', function () {
+        log("mediumCounterCardAddToBagButton clicked")
+
+        const formData = {
+            mediumCounter2Dollar: (mediumCounterCard2DollarInput.value << 0),
+            mediumCounter5Dollar: (mediumCounterCard5DollarInput.value << 0),
+            mediumCounter10Dollar: (mediumCounterCard10DollarInput.value << 0),
+            mediumCounter20Dollar: (mediumCounterCard20DollarInput.value << 0)
+        };
+        addToBag(formData);
+        cleanMediumCounterCardInputs();
+    });
+
+    function cleanMediumCounterCardInputs() {
+        mediumCounterCard2DollarInput.value = "";
+        mediumCounterCard5DollarInput.value = "";
+        mediumCounterCard10DollarInput.value = "";
+        mediumCounterCard20DollarInput.value = "";
+    }
+
+    // Large Counter
+    largeCounterCardAddToBagButton.addEventListener('click', function () {
+        log("largeCounterCardAddToBagButton clicked")
+
+        const formData = {
+            largeCounter2510Dollar: (largeCounterCard2510DollarInput.value << 0),
+            largeCounter51020Dollar: (largeCounterCard51020DollarInput.value << 0)
+        };
+        addToBag(formData);
+        cleanLargeCounterCardInputs();
+    });
+
+    function cleanLargeCounterCardInputs() {
+        largeCounterCard2510DollarInput.value = "";
+        largeCounterCard51020DollarInput.value = "";
+    }
+
+    //  Floor Stand
+    floorStandCardAddToBagButton.addEventListener('click', function () {
+        log("floorStandCardAddToBagButton clicked")
+
+        const formData = {
+            floorStand2510Dollar: (floorStandCard2510DollarInput.value << 0),
+            floorStand51020Dollar: (floorStandCard51020DollarInput.value << 0)
+        };
+        addToBag(formData);
+        cleanFloorStandCardInputs();
+    });
+
+    function cleanFloorStandCardInputs() {
+        floorStandCard2510DollarInput.value = "";
+        floorStandCard51020DollarInput.value = "";
+    }
+
+    // Lanyard
+    lanyardCardAddToBagButton.addEventListener('click', function () {
+        log("lanyardCardAddToBagButton clicked")
+
+        const formData = {
+            lanyard2Dollar: (lanyardCard2DollarInput.value << 0),
+            lanyard5Dollar: (lanyardCard5DollarInput.value << 0),
+            lanyard10Dollar: (lanyardCard10DollarInput.value << 0),
+            lanyard20Dollar: (lanyardCard20DollarInput.value << 0)
+        };
+        addToBag(formData);
+        cleanLanyardCardInputs();
+    });
+
+    function cleanLanyardCardInputs() {
+        lanyardCard2DollarInput.value = "";
+        lanyardCard5DollarInput.value = "";
+        lanyardCard10DollarInput.value = "";
+        lanyardCard20DollarInput.value = "";
+    }
+
+    // Selfie Stick
+    selfieStickCardAddToBagButton.addEventListener('click', function () {
+        log("selfieStickCardAddToBagButton clicked")
+
+        const formData = {
+            selfieStick2Dollar: (selfieStickCard2DollarInput.value << 0),
+            selfieStick5Dollar: (selfieStickCard5DollarInput.value << 0),
+            selfieStick10Dollar: (selfieStickCard10DollarInput.value << 0),
+            selfieStick20Dollar: (selfieStickCard20DollarInput.value << 0)
+        };
+        addToBag(formData);
+        cleanSelfieStickCardInputs();
+    });
+
+    function cleanSelfieStickCardInputs() {
+        selfieStickCard2DollarInput.value = "";
+        selfieStickCard5DollarInput.value = "";
+        selfieStickCard10DollarInput.value = "";
+        selfieStickCard20DollarInput.value = "";
+    }
+
+    // Mini Clip
+    miniClipCardAddToBagButton.addEventListener('click', function () {
+        log("miniClipCardAddToBagButton clicked")
+
+        const formData = {
+            miniClip2Dollar: (miniClipCard2DollarInput.value << 0),
+            miniClip5Dollar: (miniClipCard5DollarInput.value << 0),
+            miniClip10Dollar: (miniClipCard10DollarInput.value << 0),
+            miniClip20Dollar: (miniClipCard20DollarInput.value << 0)
+        };
+        addToBag(formData);
+        cleanMiniClipCardInputs();
+    });
+
+    function cleanMiniClipCardInputs() {
+        miniClipCard2DollarInput.value = "";
+        miniClipCard5DollarInput.value = "";
+        miniClipCard10DollarInput.value = "";
+        miniClipCard20DollarInput.value = "";
+    }
+
+    function log(value) {
+        console.log(value)
+    }
+
+    function updateBagBadgeNumber(num) {
+        if (num === 0) {
+            bagBadge.textContent = '';
+        } else {
+            bagBadge.textContent = num;
+        }
+    }
+
+    function addToBag(formData) {
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'store/bag/add');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    console.log(xhr.responsePayment);
+                    if(JSON.parse(xhr.responsePayment).added){
+                        let totalDevices = JSON.parse(xhr.responsePayment).totalDevices;
+                        updateBagBadgeNumber(totalDevices);
+                    }
+                } else {
+                    // Error handling
+                    console.error('Error:', xhr.statusText);
+                }
+            }
+        };
+
+        log(JSON.stringify(formData))
+
+        xhr.send(JSON.stringify(formData));
+    }
+
+
+</script>
+
+</body>
+</html>

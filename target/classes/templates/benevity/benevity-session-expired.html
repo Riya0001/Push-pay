@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Include fragment content inside head -->
+    <div th:replace="~{fragments/bundles/header :: head-page-2}"></div>
+
+    <title>.</title>
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "qtfyso1mfx");
+    </script>
+
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FDJL41MRCT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-FDJL41MRCT');
+    </script>
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <!-- Logo at the top -->
+    <div class="logo"><img src="/images/assets/logo-white.svg" alt="logo"></div>
+
+    <!-- Image centered vertically -->
+    <div class="centered"><img src="/images/assets/hand-card-tap.svg" alt="tap"></div>
+
+    <!-- Text at the bottom -->
+    <div class="bottom-text">
+        <a href="https://tiptappay.com/connect-with-us/" class="text-white">Need Help?</a>
+    </div>
+
+</div>
+
+<div class="content">
+
+    <div class="text-center mb-4">
+        <div style="font-weight: bold; font-size: 36px; padding-top: 70px;">Oops!</div>
+        <div style="font-weight: bold; font-size: 36px;">This Link Has Expired</div>
+    </div>
+
+    <div class="mb-4">
+
+        <div class="form-content row justify-content-center">
+
+            <div style="max-width: 700px">
+
+                <div class="mb-3 text-center">
+                    <p>For security reasons, this link is no longer valid.</p>
+                    <p>You’re welcome to start a new order or leave the page if you prefer.</p>
+                </div>
+
+                <form action="#" th:action="@{'/' + ${actionEndpoint}}" method="get">
+                    <div class="text-center mb-3 pt-3">
+                        <button type="submit" class="btn ttp-btn-primary p-2 mb-2"
+                                style="border-radius: 10px; width: 218px">
+                            Start New Order
+                        </button>
+                    </div>
+                </form>
+
+                <div class="pt-2">
+                    <a href="https://tiptappay.com/connect-with-us/"
+                       style="color: #422055; font-weight: bold; text-decoration: none">Need Help?</a>
+                    <span> If you have any questions, our support team is here to assist you every step of the way.</span>
+                </div>
+
+                <div class="pt-2 mb-5">
+                    <span style="color: #422055; font-weight: bold;">Thank you for choosing tiptap!</span><br>
+                    <span>We look forward to supporting your business!</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:insert="~{fragments/store/header :: head}"></head>
+
+<body class="ttp-bg-white">
+
+<div id="content-wrapper" class="content-wrapper-cls">
+
+    <nav th:replace="~{fragments/store/navbar :: navbar-with-bag}"></nav>
+
+    <div id="landing-hero" class="row justify-content-around align-items-center ttp-bg-color-light-shade-grey p-5"
+         style="margin-top: 65px">
+        <div class="p-2">
+
+            <h2 class="ttp-color-purple mb-2">order in a few easy steps</h2>
+
+            <div class="ttp-body-lead">
+                The
+                i-offering solution makes it easier for parishioners to make their<br>offering digitally using their
+                contactless card or mobile wallet.
+            </div>
+            <div>
+
+                <div style="padding-top: 50px;">
+                    <svg th:replace="~{fragments/svg_fragments :: svg-number-1-active}"></svg>
+                    <span class="ttp-color-dark-grey padding-left-30px">Select display kit quantity.</span>
+                </div>
+
+                <div style="padding-top: 20px;">
+                    <svg th:replace="~{fragments/svg_fragments :: svg-number-2-active}"></svg>
+                    <span class="ttp-color-dark-grey padding-left-30px">Choose the device denomination amounts that
+                            work for your parish.</span>
+                </div>
+
+                <div style="padding-top: 20px;">
+                    <svg th:replace="~{fragments/svg_fragments :: svg-number-3-active}"></svg>
+                    <span class="ttp-color-dark-grey padding-left-30px">Enter your shipping and billing information,
+                            and start collecting more.</span>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="p-2">
+            <img th:src="@{'/images/mini-clip-basket.png'}" alt="Mini Clip Basket Image"
+                 style="width: 350px; height: 466px">
+        </div>
+    </div>
+
+    <div class="text-center" style="margin-top: -20px">
+        <svg th:insert="~{fragments/svg_fragments :: scroll-down-indicator}" height="45px" width="30px"></svg>
+    </div>
+
+    <div class="container">
+
+        <form method="POST" id="order-form" th:object="${storeShoppingBag}">
+
+            <div th:replace="~{fragments/store/stepper :: stepper}"></div>
+            <div th:replace="~{fragments/store/stepper :: stepper-sm}"></div>
+
+            <div hidden>
+                <input id="oneTimeFeeInCentsInput" th:field="*{oneTimeFeeInCents}"
+                       th:value="${storeShoppingBag.getOneTimeFeeInCents()}">
+                <input id="rentalFeeInCentsInput" th:field="*{rentalFeeInCents}"
+                       th:value="${storeShoppingBag.getRentalFeeInCents()}">
+                <input id="miniClipKitQtyInput" th:field="*{miniClipKitQty}"
+                       th:value="${storeShoppingBag.getMiniClipKitQty()}">
+                <input id="device5DollarQtyInput" th:field="*{device5DollarQty}"
+                       th:value="${storeShoppingBag.getDevice5DollarQty()}">
+                <input id="device10DollarQtyInput" th:field="*{device10DollarQty}"
+                       th:value="${storeShoppingBag.getDevice10DollarQty()}">
+                <input id="device20DollarQtyInput" th:field="*{device20DollarQty}"
+                       th:value="${storeShoppingBag.getDevice20DollarQty()}">
+
+                <input id="totalOneTimeFeeFormatted" th:value="${storeShoppingBag.totalOneTimeFeeFormatted()}">
+                <input id="totalRentalFeeFormatted" th:value="${storeShoppingBag.totalRentalFeeFormatted()}">
+                <input id="totalAmountFormatted" th:value="${storeShoppingBag.totalAmountFormatted()}">
+                <input id="totalProducts" type="number" th:value="${storeShoppingBag.totalNumberOfProducts()}">
+            </div>
+
+
+            <div class="row justify-content-between align-items-center align-content-center"
+                 style="padding-top: 50px">
+
+                <div class="col-sm mt-3">
+
+                    <div id="left-section-header">
+                        <div
+                                style="color: #452056; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 20px; text-align: left; padding-bottom: 60px">
+                            <svg th:replace="~{fragments/svg_fragments :: svg-number-1-active}"></svg>
+                            <span class="padding-left-20px">select display kit and quantity</span>
+                        </div>
+                    </div>
+
+                    <div class="text-center ttp-bg-color-light-shade-grey ttp-border-radius-10px pt-2 pb-5"
+                         style="min-width: 320px; max-width: 380px">
+
+                        <div class="mt-5 mb-4">
+                            <img th:src="@{${products.get(0).getImageList().get(0)}}"
+                                 th:alt="${products.get(0).getName()}" style="width: 175px; height: 233px">
+                        </div>
+
+                        <div class="ttp-card-sub-header ttp-color-purple mb-2"
+                             th:text="${products.get(0).getName()}">
+                        </div>
+
+                        <div class="mb-2">
+                                <span class="ttp-color-main-grey">
+                                    $<span th:text="${products.get(0).getOneTimeFeeInCents() / 100}"></span> mini clip purchase / per kit
+                                </span>
+                        </div>
+
+                        <div class="mb-3">
+                                <span class="ttp-card-info ttp-color-dark-grey">The mini display clip comes
+                                    pre-assembled with a battery as<br>well as a cable and wall plug required to charge
+                                    the battery.</span>
+                        </div>
+
+                        <button id="more-info-mini-clip-kit" type="button"
+                                class="ttp-card-info-md ttp-color-fuschia mb-4 text-nowrap"
+                                style="border: none; outline: none; background: transparent"
+                                data-container="body"
+                                data-toggle="popover"
+                                data-placement="right"
+                                data-content="<div class='ttp-color-purple font-weight-bold'>Mini Clip Kit</div>
+                                <div class='ttp-color-purple font-weight-bold mb-3'>Information</div>
+                                <div class='mb-3'><span class='ttp-color-main-grey font-weight-bold'>Dimensions:</span> 00.00” W x 00.00” H x 00.00” D</div>
+                                <div class='mb-2'><span class='ttp-color-main-grey font-weight-bold'>Parts Included:</span><li>Cradle stand</li><li>20Ah battery</li><li>5 ft charging cable</li><li>Wall plug</li></div>"
+                                data-html="true">
+                            more info
+                        </button>
+                        <br>
+
+                        <label class="ttp-color-purple m-0">
+                            Kit Quantity
+                        </label>
+
+                        <div class="mb-4 mt-1">
+                            <label>
+                                <select style="width: 170px; background-color: #E5E5E5"
+                                        class="custom-select form-item"
+                                        onchange="changeQuantity(this.getAttribute('id'))"
+                                        th:id="${products.get(0).getId()}"
+                                        th:name="${products.get(0).getId()}">
+                                    <option value="" hidden></option>
+                                    <option th:each="number : ${#numbers.sequence(0, 99)}"
+                                            th:value="${number}"
+                                            th:selected="${number == storeShoppingBag.getMiniClipKitQty()}"
+                                            th:text="${number}"></option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <label class="ttp-color-purple m-0">
+                            Mini Clip Purchase Total*
+                        </label>
+                        <div class="ttp-color-dark-grey">
+                            $<span class="miniClipKitOneTimeFeeTotal"></span>
+                        </div>
+
+                        <div class="ttp-footer-text-sm font-italic mt-4 mb-4">
+                            *Each display kit is a one-time purchase (yours to keep)
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-sm mt-3">
+
+                    <div id="right-section-header">
+                        <div
+                                style="color: #452056; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 20px; text-align: left; padding-bottom: 30px">
+                            <svg th:replace="~{fragments/svg_fragments :: svg-number-2-active}"></svg>
+                            <span class="padding-left-20px">complete your display kit by selecting device
+                                    denominations and quantity</span>
+                        </div>
+                    </div>
+
+                    <div class="text-center ttp-bg-color-light-shade-grey ttp-border-radius-10px pt-3 pb-2"
+                         style="min-width: 320px; max-width: 380px">
+
+                        <div class="ttp-card-sub-header ttp-color-purple mb-2 mt-4">
+                            tiptap device
+                        </div>
+
+                        <div class="mb-3">
+                                <span class="ttp-color-main-grey">
+                                    $<span th:text="${products.get(1).getRentalFeeInCents() / 100}"></span> monthly rental fee /
+                                    per device
+                                </span>
+                        </div>
+
+                        <div class="mb-3">
+                                <span class="ttp-card-info ttp-color-dark-grey">
+                                    Accept contactless donations with our simple to use<br>devices. Parishioners can tap
+                                    to give. easily.
+                                </span>
+                        </div>
+
+                        <button id="more-info-tiptap-device" type="button"
+                                class="ttp-card-info-md ttp-color-fuschia mb-2 text-nowrap"
+                                style="border: none; outline: none; background: transparent"
+                                data-container="body"
+                                data-toggle="popover"
+                                data-placement="right"
+                                data-content="<div class='ttp-color-purple font-weight-bold'>tiptap Device</div>
+                                <div class='ttp-color-purple font-weight-bold mb-3'>Information</div>
+                                <div class='mb-3'><span class='ttp-color-main-grey font-weight-bold'>Dimensions:</span> 00.00” W x 00.00” H x 00.00” D</div>
+                                <div class='mb-2'><span class='ttp-color-main-grey font-weight-bold'>Parts Included:</span><li>Single tiptap device</li></div>"
+                                data-html="true">
+                            more info
+                        </button>
+
+                        <table class="table table-borderless mt-3 ml-2">
+
+                            <tr style="border: none">
+
+                                <td style="vertical-align: middle; padding: 0 0 15px 0">
+                                    <label class="ttp-color-purple m-0">
+                                        Device<br>Denomination
+                                    </label>
+                                </td>
+
+                                <td style="vertical-align: middle; padding: 0 0 15px 0">
+                                    <p style="margin-bottom: 0 !important;" class="text-nowrap">
+                                        <label class="ttp-color-purple m-0">
+                                            Device<br>Quantity
+                                        </label>
+                                </td>
+
+                            </tr>
+
+
+                            <!--                                DOLLAR 5 -->
+                            <tr style="border: none;">
+                                <td style="vertical-align: middle; padding: 0">
+                                    <img th:src="@{${products.get(1).getImageList().get(0)}}"
+                                         th:alt="${products.get(1).getName() + ' image'}"
+                                         style="width: 70px; border: 2px solid transparent; border-radius: 10px;">
+                                    <div class="ttp-card-sub-header ttp-color-purple"
+                                         th:text="${products.get(1).getName()}"></div>
+                                </td>
+
+                                <td style="vertical-align: middle; padding: 0;">
+                                    <p style="margin-bottom: 0 !important;" class="text-nowrap">
+                                    <div>
+                                        <label>
+                                            <select style="width: 120px; background-color: #E5E5E5"
+                                                    class="custom-select form-item"
+                                                    onchange="changeQuantity(this.getAttribute('id'))"
+                                                    th:id="${products.get(1).getId()}"
+                                                    th:name="${products.get(1).getId()}">
+                                                <option value="" hidden></option>
+                                                <option th:each="number : ${#numbers.sequence(0, 99)}"
+                                                        th:selected="${storeShoppingBag.getDevice5DollarQty() == number}"
+                                                        th:value="${number}" th:text="${number}"></option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                            <!--                                DOLLAR 10 -->
+                            <tr style="border: none;">
+                                <td style="vertical-align: middle; padding: 30px 0 0 0;">
+                                    <img th:src="@{${products.get(2).getImageList().get(0)}}"
+                                         th:alt="${products.get(2).getName() + ' image'}"
+                                         style="width: 70px; border: 2px solid transparent; border-radius: 10px;">
+                                    <div class="ttp-card-sub-header ttp-color-purple"
+                                         th:text="${products.get(2).getName()}"></div>
+                                </td>
+
+                                <td style="vertical-align: middle; padding: 30px 0 0 0;">
+                                    <p style="margin-bottom: 0 !important;" class="text-nowrap">
+                                    <div>
+                                        <label>
+                                            <select style="width: 120px; background-color: #E5E5E5"
+                                                    class="custom-select form-item"
+                                                    onchange="changeQuantity(this.getAttribute('id'))"
+                                                    th:id="${products.get(2).getId()}"
+                                                    th:name="${products.get(2).getId()}">
+                                                <option value="" hidden></option>
+                                                <option th:each="number : ${#numbers.sequence(0, 99)}"
+                                                        th:selected="${storeShoppingBag.getDevice10DollarQty() == number}"
+                                                        th:value="${number}" th:text="${number}"></option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                            <!--                                DOLLAR 20 -->
+                            <tr style="border: none; padding-top: 20px">
+                                <td style="vertical-align: middle; padding: 30px 0 0 0;">
+                                    <img th:src="@{${products.get(3).getImageList().get(0)}}"
+                                         th:alt="${products.get(3).getName() + ' image'}"
+                                         style="width: 70px; border: 2px solid transparent; border-radius: 10px;">
+                                    <div class="ttp-card-sub-header ttp-color-purple"
+                                         th:text="${products.get(3).getName()}"></div>
+                                </td>
+
+                                <td style="vertical-align: middle; padding: 30px 0 0 0;">
+                                    <p style="margin-bottom: 0 !important;" class="text-nowrap">
+                                    <div>
+                                        <label>
+                                            <select style="width: 120px; background-color: #E5E5E5"
+                                                    class="custom-select form-item"
+                                                    onchange="changeQuantity(this.getAttribute('id'))"
+                                                    th:id="${products.get(3).getId()}"
+                                                    th:name="${products.get(3).getId()}">
+                                                <option value="" hidden></option>
+                                                <option th:each="number : ${#numbers.sequence(0, 99)}"
+                                                        th:selected="${storeShoppingBag.getDevice20DollarQty() == number}"
+                                                        th:value="${number}" th:text="${number}"></option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+                        <label class="ttp-color-purple mt-4">
+                            Monthly Rental Fee Total
+                        </label>
+                        <div class="ttp-color-dark-grey mb-4">
+                            $<span class="devicesRentalFeeTotal"></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-sm mt-3 d-flex justify-content-center">
+                    <div id="your-orders-section" class="" style="">
+
+                        <div id="your-orders-section-body" class="text-center mx-3"
+                             style="min-width: 230px; max-width: 230px">
+
+                            <div id="your-orders-section-content-body"
+                                 class="ttp-bg-color-light-shade-grey ttp-border-radius-10px pb-2">
+
+                                <div class="ttp-card-header ttp-color-purple pt-4">
+                                    fees & totals
+                                </div>
+
+                                <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                    mini clip purchase
+                                </div>
+                                <div class="ttp-card-info ttp-color-dark-grey">
+                                    ( one-time purchase )
+                                </div>
+                                <div class="ttp-color-dark-grey">
+                                    $<span class="miniClipKitOneTimeFeeTotal"></span>
+                                </div>
+
+                                <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                    monthly rental fee
+                                </div>
+                                <div class="ttp-color-dark-grey">
+                                    $<span class="devicesRentalFeeTotal"></span>
+                                </div>
+
+                                <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                    shipping
+                                </div>
+                                <div class="ttp-card-info ttp-color-dark-grey font-italic">
+                                    calculated in next step
+                                </div>
+
+                                <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                    setup fee
+                                </div>
+                                <div class="ttp-color-dark-grey">
+                                    $<span class="taxAmountInCard"
+                                           th:text="${storeShoppingBag.serviceAmountInCentsFormatted()}"></span>
+                                </div>
+
+                                <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                    total
+                                </div>
+                                <div class="ttp-fs-24px ttp-fw-700 ttp-color-purple">
+                                    $<span class="overallTotal"></span>
+                                </div>
+                                <div class="ttp-card-info ttp-color-dark-grey mb-3 font-italic">
+                                    updated in next step
+                                </div>
+
+                            </div>
+
+                            <div id="your-orders-section-content-footer" class="mt-4">
+                                <button type="submit" style="width: 200px;" class="ttp-button-primary">
+                                    continue
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+
+
+        <div id="ttp-toast" role="alert" aria-live="assertive" aria-atomic="true" class="toast ttp-toast">
+            <div class="toast-header">
+
+                <svg id="ttp-toast-indicator-success" style=""
+                     th:insert="~{fragments/svg_fragments :: green-checked-data-svg}" height="40px"
+                     width="40px"></svg>
+                <svg id="ttp-toast-indicator-error" style=""
+                     th:insert="~{fragments/svg_fragments :: status-failed-svg}" height="40px" width="40px"></svg>
+                &nbsp;&nbsp;
+
+                <strong class="mr-auto"><span id="ttp-toast-title"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                <button type="button" onclick="toastSwitcher('ttp-toast', false, 0)" class="ml-2 mb-1 close"
+                        data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="ttp-toast-message" class="toast-body"></div>
+        </div>
+
+
+        <div class="text-center pt-5" style="margin-top: 250px">
+            <div
+                    style="font-family: Mulish, sans-serif; opacity: 1; color: #901F7A; font-size: 12px; font-weight: 400; padding: 0 0 25px 0;">
+                order&nbsp;&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;&nbsp;contact &
+                shipping&nbsp;&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;&nbsp;review&nbsp;&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;&nbsp;payment
+            </div>
+        </div>
+        <hr class="custom-hr-grey">
+
+        <div th:insert="~{fragments/store/footer :: footer}"></div>
+
+    </div>
+
+
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+    const bagBadge = document.getElementById('shopping-bag-device-number');
+    const totalOneTimeFeeFormatted = document.getElementById('totalOneTimeFeeFormatted');
+    const totalRentalFeeFormatted = document.getElementById('totalRentalFeeFormatted');
+    const totalAmountFormatted = document.getElementById('totalAmountFormatted');
+    const totalProducts = document.getElementById('totalProducts');
+
+    const elementsMiniClipKitOneTimeFeeTotal = document.querySelectorAll('.miniClipKitOneTimeFeeTotal');
+    const elementsDevicesRentalFeeTotal = document.querySelectorAll('.devicesRentalFeeTotal');
+    const elementsOverallTotal = document.querySelectorAll('.overallTotal');
+
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+
+    document.addEventListener('DOMContentLoaded', function () {
+        updateCardTexts(totalOneTimeFeeFormatted.value, totalRentalFeeFormatted.value, totalAmountFormatted.value);
+
+        updateBagBadgeNumber(totalProducts.value << 0);
+    });
+
+    function updateCardTexts(oneTimeFeeAmount, rentalFeeAmount, totalAmount) {
+        elementsMiniClipKitOneTimeFeeTotal.forEach(function (element) {
+            element.textContent = oneTimeFeeAmount;
+        });
+
+        elementsDevicesRentalFeeTotal.forEach(function (element) {
+            element.textContent = rentalFeeAmount;
+        });
+
+        elementsOverallTotal.forEach(function (element) {
+            element.textContent = totalAmount;
+        });
+    }
+
+    function updateCardOptions( id, miniClipKitQty, device5DollarQty, device10DollarQty, device20DollarQty) {
+        const elem = document.getElementById(id);
+        switch (id){
+            case 'miniClipKit':
+                elem.value = miniClipKitQty
+                return;
+            case 'device5Dollar':
+                elem.value = device5DollarQty
+                return;
+            case 'device10Dollar':
+                elem.value = device10DollarQty
+                return;
+            case 'device20Dollar':
+                elem.value = device20DollarQty
+                return;
+        }
+    }
+
+    function updateBagBadgeNumber(num) {
+        if (num === 0) {
+            bagBadge.textContent = '';
+        } else {
+            bagBadge.textContent = num;
+        }
+    }
+
+    async function updateBag(formData, itemId) {
+        let response;
+        try {
+            response = await fetch('/us-catholic/fresno-diocese/shopping-bag/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+        } catch (error) {
+            showToastWithMessage('ttp-toast', 'Error', error.message, 'error', 2000);
+        }
+
+        if (!response.ok) {
+            showToastWithMessage('ttp-toast', 'Network Issue', 'Please try again later', 'error', 2000);
+        }
+
+        const responseData = await response.json();
+
+        if (responseData.success) {
+            const {
+                miniClipKitQty,
+                device5DollarQty,
+                device10DollarQty,
+                device20DollarQty,
+                totalProducts,
+                totalOneTimeFeeAmount,
+                totalRentalFeeAmount,
+                totalAmount
+            } = responseData;
+
+            updateBagBadgeNumber(totalProducts);
+            updateCardTexts(totalOneTimeFeeAmount, totalRentalFeeAmount, totalAmount);
+            updateCardOptions(itemId, miniClipKitQty, device5DollarQty, device10DollarQty, device20DollarQty);
+            showToastWithMessage('ttp-toast', 'Bag Updated', 'Successfully updated', 'success', 1000);
+        }
+    }
+
+    function toastSwitcher(toastId, isShow, howLong) {
+        const toastElement = document.getElementById(toastId);
+        if (isShow) {
+            toastElement.classList.add('show');
+            setTimeout(function () {
+                toastElement.classList.remove('show');
+            }, (howLong << 0));
+        } else {
+            toastElement.classList.remove('show');
+        }
+    }
+
+    function showToastWithMessage(toastId, title, message, type, duration) {
+        const messageElement = document.getElementById(toastId + '-message');
+        const indicatorElementIdInitial = toastId + '-indicator-'
+        const titleElement = document.getElementById(toastId + '-title');
+
+        if (type === 'success') {
+            changeVisibility(indicatorElementIdInitial + "success", true);
+            changeVisibility(indicatorElementIdInitial + "error", false);
+        }
+
+        if (type === 'error') {
+            changeVisibility(indicatorElementIdInitial + "success", false);
+            changeVisibility(indicatorElementIdInitial + "error", true);
+        }
+
+        titleElement.textContent = title;
+        messageElement.textContent = message;
+
+        toastSwitcher(toastId, true, (duration << 0));
+    }
+
+    function changeVisibility(elementId, isVisible) {
+        const element = document.getElementById(elementId);
+        if (isVisible) {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+    }
+
+    function changeQuantity(itemId) {
+        const qty = document.getElementById(itemId).value;
+
+        const formData = [
+            {
+                id: itemId,
+                quantity: (qty << 0)
+            }
+        ];
+
+        updateBag(formData, itemId);
+    }
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="~{fragment/fragments :: header}"><title>tiptap</title></head>
+<body>
+<header>
+    <a href="https://tiptappay.com">
+        <img class="float-start" th:src="@{/images/salvation-army-logo.png}" style="height: 85px"
+             alt="salvation army logo"/>
+    </a>
+    <a href="https://tiptappay.com">
+        <img class="float-end" th:src="@{/images/tiptap_Logo_WhiteText_RGB.png}"
+             style="padding-top: 10px; height: 65px" alt="tiptap logo"/>
+    </a>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="d-flex flex-row my-5 justify-content-start align-items-start">
+                <img class="" th:src="@{/images/check_circle_outline_24px.png}" alt=""/>
+                <h1 class="ms-3 fw-bold text-purple">Your order was successfully placed!</h1>
+            </div>
+            <p class="fs-5 mb-5">Thank you for your order! Your order number is <span class="text-fuschia"
+                                                                                      th:text="${order.getId()}"></span>.
+                If you need to reach out to us about your order, please contact <a class="text-fuschia"
+                                                                                   href="mailto:support@tiptappay.com">support@tiptappay.com</a>
+                and reference your order number.</p>
+            <a class="btn ttp-btn-primary btn-lg" href="https://tiptappay.com">Go to tiptap website</a>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragment/fragments :: footer}"></div>
+</body>
+</html>

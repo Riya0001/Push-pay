@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en"
+>
+
+<head th:insert="~{fragments/store/header :: head}"></head>
+
+<body class="ttp-bg-white">
+
+<div id="content-wrapper" class="content-wrapper-cls">
+
+    <nav th:replace="~{fragments/store/navbar :: navbar-with-bag}"></nav>
+
+    <div class="container" style="margin-top: 100px">
+
+        <div hidden>
+            <input id="oneTimeFeeInCentsInput" th:value="${storeShoppingBag.getOneTimeFeeInCents()}">
+            <input id="rentalFeeInCentsInput" th:value="${storeShoppingBag.getRentalFeeInCents()}">
+            <input id="floorStandQtyInput" th:value="${storeShoppingBag.getKettleDisplayQty()}">
+            <input id="device5DollarQtyInput" th:value="${storeShoppingBag.getDevice5DollarQty()}">
+            <input id="device10DollarQtyInput" th:value="${storeShoppingBag.getDevice10DollarQty()}">
+            <input id="device20DollarQtyInput" th:value="${storeShoppingBag.getDevice20DollarQty()}">
+
+            <input id="totalOneTimeFeeFormatted" th:value="${storeShoppingBag.totalOneTimeFeeFormatted()}">
+            <input id="totalRentalFeeFormatted" th:value="${storeShoppingBag.totalRentalFeeFormatted()}">
+            <input id="totalAmountFormatted" th:value="${storeShoppingBag.totalAmountFormatted()}">
+            <input id="totalProducts" type="number" th:value="${storeShoppingBag.totalNumberOfProducts()}">
+            <input id="taxAmountInCentsFormatted" th:value="${storeShoppingBag.taxAmountInCentsFormatted()}">
+            <input id="shippingAmountInCentsFormatted"
+                   th:value="${storeShoppingBag.shippingAmountInCentsFormatted()}">
+
+            <input id="isQuoteAvailable" type="checkbox" th:value="${isQuoteAvailable}">
+        </div>
+
+
+        <div id="user-facing-screen-1">
+
+            <div id="form-section" class="mt-5" style="padding-bottom: 400px;">
+
+                <form id="order-form" method="POST">
+
+                    <div class="row justify-content-between align-items-start">
+
+                        <div class="col-sm-8">
+
+                            <h2 class="ttp-color-purple mb-3">shopping bag</h2>
+
+                            <table class="table table-borderless mt-3 ml-2">
+                                <tr style="border-top: 1px var(--light-grey) solid"
+                                    th:each="item : ${products}"
+                                    th:if="${item.getQuantity() > 0}"
+                                    th:id="${item.getId() + 'Row'}">
+                                    <td style="vertical-align: middle;">
+                                        <div class="ttp-bg-color-light-shade-grey ttp-border-radius-10px row align-items-center justify-content-center"
+                                             style="width: 80px; height: 80px;">
+                                            <img th:src="@{${item.getImageList().get(0)}}" alt="Floor Stand Image"
+                                                 style="width: 50%">
+                                        </div>
+                                    </td>
+
+                                    <td style="vertical-align: middle;">
+                                        <div class="ttp-card-sub-header ttp-color-purple" th:text="${item.getName()}">
+                                        </div>
+                                    </td>
+
+                                    <td class="" style="vertical-align: middle; padding-bottom: 6px;">
+                                        <div>
+                                            <label>
+                                                <input style="width: 70px" class="form-control" type="number"
+                                                       th:id="${'quantityInput-' + item.getId()}" min="1" max="200"
+                                                       th:value="${item.getQuantity()}" readonly
+                                                >
+                                            </label>
+                                        </div>
+                                    </td>
+
+                                    <td style="vertical-align: middle;">
+                                        <div class="ttp-color-dark-grey"
+                                             th:id="${'itemTotal-' + item.getId()}"
+                                             th:text="${'$' + fmt.formatCents((item.getQuantity() * (item.getOneTimeFeeInCents() + item.getRentalFeeInCents())))  + (item.getId() == 'kettleDisplay' ? '' : ' (2 months)')}">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <div id="bag-is-empty-section" class="text-center"
+                                 th:style="${storeShoppingBag.totalNumberOfProducts() > 0} ? 'display: none;' : 'display: block;'">
+                                <svg th:replace="~{fragments/svg_fragments :: bag-v2-cross-primary-svg}"></svg>
+                                <h3 class="mt-3 text-center">Bag is empty!</h3>
+                            </div>
+
+
+                            <a href="/salvation-army-us/order" class="ttp-card-sub-header-md fuschia-a pt-4">
+                                + keep shopping
+                            </a>
+
+                        </div>
+
+                        <div class="col-sm-4 d-flex justify-content-center">
+
+                            <div id="your-orders-section" class="mt-5">
+
+                                <div id="your-orders-section-body" class="text-center mx-3"
+                                     style="min-width: 300px; max-width: 300px">
+
+                                    <div id="your-orders-section-content-body"
+                                         class="ttp-bg-color-light-shade-grey ttp-border-radius-10px pb-2">
+
+                                        <div class="ttp-card-header ttp-color-purple pt-4">
+                                            fees & totals
+                                        </div>
+
+                                        <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                            Kettle display purchase
+                                        </div>
+                                        <div class="ttp-card-info ttp-color-dark-grey">
+                                            ( signage, power cables, plugs )
+                                        </div>
+                                        <div class="ttp-color-dark-grey">
+                                            $<span class="floorStandOneTimeFeeTotal"
+                                                   th:text="${storeShoppingBag.totalOneTimeFeeFormatted()}"></span>
+                                        </div>
+
+                                        <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                            Rental (2 months)
+                                        </div>
+                                        <div class="ttp-card-info ttp-color-dark-grey">
+                                            ( devices & batteries )
+                                        </div>
+                                        <div class="ttp-color-dark-grey">
+                                            $<span class="devicesRentalFeeTotal"
+                                                   th:text="${storeShoppingBag.totalRentalFeeFormatted()}"></span>
+                                        </div>
+
+                                        <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                            Setup fee
+                                        </div>
+                                        <div class="ttp-color-dark-grey">
+                                            <span class="taxAmountInCard">N/A</span>
+                                        </div>
+
+                                        <!--                                        <div id="invalidated-shipping-tax-section"-->
+                                        <!--                                             th:style="${isQuoteAvailable} ? 'display: none;' : 'display: block;'">-->
+
+                                        <!--                                            <div class="ttp-card-sub-header ttp-color-fuschia mt-4">-->
+                                        <!--                                                taxes-->
+                                        <!--                                            </div>-->
+                                        <!--                                            <div class="ttp-card-info ttp-color-dark-grey font-italic">-->
+                                        <!--                                                calculated in next step-->
+                                        <!--                                            </div>-->
+
+                                        <!--                                            <div class="ttp-card-sub-header ttp-color-fuschia mt-4">-->
+                                        <!--                                                shipping-->
+                                        <!--                                            </div>-->
+                                        <!--                                            <div class="ttp-card-info ttp-color-dark-grey font-italic">-->
+                                        <!--                                                calculated in next step-->
+                                        <!--                                            </div>-->
+
+                                        <!--                                        </div>-->
+
+                                        <!--                                        <div id="original-shipping-tax-section"-->
+                                        <!--                                             th:style="${isQuoteAvailable} ? 'display: block;' : 'display: none;'">-->
+
+                                        <!--                                            <div class="ttp-card-sub-header ttp-color-fuschia mt-4">-->
+                                        <!--                                                taxes-->
+                                        <!--                                            </div>-->
+                                        <!--                                            <div class="ttp-color-dark-grey">-->
+                                        <!--                                                $<span class="taxAmountInCard"-->
+                                        <!--                                                       th:text="${storeShoppingBag.taxAmountInCentsFormatted()}"></span>-->
+                                        <!--                                            </div>-->
+
+                                        <!--                                            <div class="ttp-card-sub-header ttp-color-fuschia mt-4">-->
+                                        <!--                                                shipping-->
+                                        <!--                                            </div>-->
+                                        <!--                                            <div class="ttp-color-dark-grey">-->
+                                        <!--                                                $<span class="shippingAmountInCard"-->
+                                        <!--                                                       th:text="${storeShoppingBag.shippingAmountInCentsFormatted()}"></span>-->
+                                        <!--                                            </div>-->
+
+                                        <!--                                        </div>-->
+
+                                        <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                            Total
+                                        </div>
+
+                                        <div id="total-amount-not-zero-case"
+                                             th:style="${storeShoppingBag.totalAmount() > 0} ? 'display: block;' : 'display: none;'">
+
+                                            <div class="ttp-fs-24px ttp-fw-700 ttp-color-purple mb-2">
+                                                $<span class="overallTotal"
+                                                       th:text="${storeShoppingBag.totalAmountFormatted()}"></span>*
+                                            </div>
+
+                                            <div class="ttp-card-info ttp-color-dark-grey font-italic">
+                                                * for tax, shipping and setup fee information
+                                            </div>
+                                            <div class="ttp-card-info ttp-color-dark-grey font-italic">
+                                                please continue with your order
+                                            </div>
+
+                                        </div>
+
+                                        <div id="total-amount-zero-case"
+                                             th:style="${storeShoppingBag.totalAmount() <= 0} ? 'display: block;' : 'display: none;'">
+
+                                            <div class="ttp-fs-24px ttp-fw-700 ttp-color-purple mb-2">
+                                                $<span class="overallTotal"
+                                                       th:text="${storeShoppingBag.totalAmountFormatted()}"></span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div id="your-orders-section-content-footer" class="mt-4">
+                                        <button id="continue-btn" type="button" style="width: 220px;"
+                                                class="ttp-button-primary" onclick="continueWithYourOrder()">
+                                            continue with your order
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div id="user-facing-screen-2" style="display: none">
+
+            <div id="main-section" style="padding-bottom: 500px; padding-top: 100px;">
+
+                <h4 class="ttp-color-purple text-center">calculating shipping and taxes</h4><br>
+                <div class="row justify-content-center align-items-center">
+                    <div class="dot-flashing"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div id="ttp-toast" role="alert" aria-live="assertive" aria-atomic="true" class="toast ttp-toast">
+            <div class="toast-header">
+
+                <svg id="ttp-toast-indicator-success" style=""
+                     th:insert="~{fragments/svg_fragments :: green-checked-data-svg}" height="40px" width="40px"></svg>
+                <svg id="ttp-toast-indicator-error" style="" th:insert="~{fragments/svg_fragments :: status-failed-svg}"
+                     height="40px" width="40px"></svg>
+                &nbsp;&nbsp;
+
+                <strong class="mr-auto"><span id="ttp-toast-title"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                <button type="button" onclick="toastSwitcher('ttp-toast', false, 0)" class="ml-2 mb-1 close"
+                        data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="ttp-toast-message" class="toast-body"></div>
+        </div>
+
+
+        <div th:insert="~{fragments/store/footer :: footer}" style="padding-top: 250px"></div>
+
+    </div>
+
+
+</div>
+
+
+<script>
+    const bagBadge = document.getElementById('shopping-bag-device-number');
+    // const invalidatedOverAllMessage = document.getElementById('invalidated-overall-message')
+
+    const removeButtons = document.querySelectorAll('[id^="removeItem-"]');
+    const updateInputs = document.querySelectorAll('[id^="quantityInput-"]');
+
+    const elementsFloorStandOneTimeFeeTotal = document.querySelectorAll('.floorStandOneTimeFeeTotal');
+    const elementsDevicesRentalFeeTotal = document.querySelectorAll('.devicesRentalFeeTotal');
+    const elementsOverallTotal = document.querySelectorAll('.overallTotal');
+
+    let quoteInvalidated = false;
+    let showScroller = false;
+
+    removeButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const itemId = button.id.split('-')[1];
+            removeItem(itemId);
+        });
+    });
+
+    updateInputs.forEach(inputTag => {
+        inputTag.addEventListener('input', function () {
+            const itemId = inputTag.id.split('-')[1];
+            updateItem(itemId);
+        });
+    });
+
+    function removeItem(itemId) {
+        const formData = [
+            {
+                id: itemId,
+                quantity: 0
+            }
+        ];
+
+        updateBag(formData, itemId, true);
+    }
+
+    function updateItem(itemId) {
+        const element = document.getElementById('quantityInput-' + itemId);
+        let qty = element.value << 0;
+
+        if (qty <= 0) {
+            element.value = 1;
+            qty = 1;
+        }
+
+        if (qty > 99) {
+            element.value = 99;
+            qty = 99;
+        }
+
+        const formData = [
+            {
+                id: itemId,
+                quantity: qty << 0
+            }
+        ];
+
+        updateBag(formData, itemId, false);
+    }
+
+    function showElement(elementId, isShow) {
+        const element = document.getElementById(elementId);
+
+        if (isShow) {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+    }
+
+    function updateBagBadgeNumber(num) {
+        if (num === 0) {
+            bagBadge.textContent = '';
+            changeVisibility('bag-is-empty-section', true)
+            switchVisibility('total-amount-zero-case', 'total-amount-not-zero-case');
+            showScroller = false;
+        } else {
+            bagBadge.textContent = num;
+            changeVisibility('bag-is-empty-section', false)
+            switchVisibility('total-amount-not-zero-case', 'total-amount-zero-case');
+            showScroller = true;
+        }
+    }
+
+    async function updateBag(formData, itemId, isRemove) {
+        let response;
+        try {
+            response = await fetch('/mosques/shopping-bag/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+        } catch (error) {
+            showToastWithMessage('ttp-toast', 'Error', error.message, 'error', 2000);
+        }
+
+        if (!response.ok) {
+            showToastWithMessage('ttp-toast', 'Network Issue', 'Please try again later', 'error', 2000);
+        }
+
+        const responseData = await response.json();
+
+        if (responseData.success) {
+            quoteInvalidated = true;
+
+            const {
+                totalProducts,
+                totalOneTimeFeeAmount,
+                totalRentalFeeAmount,
+                totalAmount,
+                floorStandTotalAmount,
+                device5DollarTotalAmount,
+                device10DollarTotalAmount,
+                device20DollarTotalAmount
+            } = responseData;
+            updateBagBadgeNumber(totalProducts);
+
+            if (isRemove) {
+                showElement(itemId + 'Row', false);
+            }
+
+            updateCardTexts(totalOneTimeFeeAmount, totalRentalFeeAmount, totalAmount);
+            updateTotalsPerProduct(
+                floorStandTotalAmount,
+                device5DollarTotalAmount,
+                device10DollarTotalAmount,
+                device20DollarTotalAmount
+            );
+            showToastWithMessage('ttp-toast', 'Bag Updated', 'Successfully updated', 'success', 1000);
+        }
+
+    }
+
+    function updateCardTexts(oneTimeFeeAmount, rentalFeeAmount, totalAmount, taxAmount, shippingAmount) {
+        elementsFloorStandOneTimeFeeTotal.forEach(function (element) {
+            element.textContent = oneTimeFeeAmount;
+        });
+
+        elementsDevicesRentalFeeTotal.forEach(function (element) {
+            element.textContent = rentalFeeAmount;
+        });
+
+        elementsOverallTotal.forEach(function (element) {
+            element.textContent = totalAmount;
+        });
+    }
+
+    function updateTotalsPerProduct(floorStandTotalAmount, device5DollarTotalAmount, device10DollarTotalAmount, device20DollarTotalAmount) {
+        const itemTotals = document.querySelectorAll('[id^="itemTotal-"]');
+
+        itemTotals.forEach(item => {
+            const itemId = item.id.split('-')[1];
+
+            if (itemId === 'floorStand' && floorStandTotalAmount !== undefined) {
+                item.textContent = '$' + floorStandTotalAmount;
+            }
+
+            if (itemId === 'device5Dollar' && device5DollarTotalAmount !== undefined) {
+                item.textContent = '$' + device5DollarTotalAmount;
+            }
+
+            if (itemId === 'device10Dollar' && device10DollarTotalAmount !== undefined) {
+                item.textContent = '$' + device10DollarTotalAmount;
+            }
+
+            if (itemId === 'device20Dollar' && device20DollarTotalAmount !== undefined) {
+                item.textContent = '$' + device20DollarTotalAmount;
+            }
+
+        });
+    }
+
+    function continueWithYourOrder() {
+        if (showScroller) {
+            switchVisibility('user-facing-screen-2', 'user-facing-screen-1');
+            scrollToTop();
+        }
+        window.history.back();
+    }
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    function toastSwitcher(toastId, isShow, howLong) {
+        const toastElement = document.getElementById(toastId);
+        if (isShow) {
+            toastElement.classList.add('show');
+            setTimeout(function () {
+                toastElement.classList.remove('show');
+            }, (howLong << 0));
+        } else {
+            toastElement.classList.remove('show');
+        }
+    }
+
+    function showToastWithMessage(toastId, title, message, type, duration) {
+        const messageElement = document.getElementById(toastId + '-message');
+        const indicatorElementIdInitial = toastId + '-indicator-'
+        const titleElement = document.getElementById(toastId + '-title');
+
+        if (type === 'success') {
+            changeVisibility(indicatorElementIdInitial + "success", true);
+            changeVisibility(indicatorElementIdInitial + "error", false);
+        }
+
+        if (type === 'error') {
+            changeVisibility(indicatorElementIdInitial + "success", false);
+            changeVisibility(indicatorElementIdInitial + "error", true);
+        }
+
+        titleElement.textContent = title;
+        messageElement.textContent = message;
+
+        toastSwitcher(toastId, true, (duration << 0));
+    }
+
+    function changeVisibility(elementId, isVisible) {
+        const element = document.getElementById(elementId);
+        if (isVisible) {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+    }
+
+    function switchVisibility(elementIdToShow, elementIdToHide) {
+        changeVisibility(elementIdToShow, true);
+        changeVisibility(elementIdToHide, false);
+    }
+
+</script>
+
+</body>
+</html>

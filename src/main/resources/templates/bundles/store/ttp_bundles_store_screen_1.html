@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:fragment="head-page-1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Most Devices -->
+    <link rel="icon" type="image/png" href="/images/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/images/favicon/favicon-32x32.png" sizes="32x32">
+
+    <!-- Android -->
+    <link rel="icon" type="image/png" href="/images/favicon/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/images/favicon/android-chrome-512x512.png" sizes="512x512">
+
+    <!-- IOS -->
+    <link rel="apple-touch-icon" type="image/png" href="/images/favicon/apple-touch-icon.png">
+
+    <!-- IE -->
+    <link rel="shortcut icon" type="image/png" href="/images/favicon/favicon.ico">
+
+    <!-- Web Manifest -->
+    <link rel="manifest" type="image/png" href="/images/favicon/site.webmanifest">
+
+    <title>tiptap | Bundles | Pricing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+          rel="stylesheet">
+    <!--    <link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" th:href="@{/css/bundles/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bundles/css/custom/common.css}">
+    <link rel="stylesheet" th:href="@{/css/bundles/css/custom/page1.css}">
+
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-59JFNDD3');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "qtfyso1mfx");
+    </script>
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FDJL41MRCT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-FDJL41MRCT');
+    </script>
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-59JFNDD3"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div hidden>
+    <label for="srInput"></label>
+    <input th:value="${salesRepId}" id="srInput">
+</div>
+
+<nav th:replace="~{fragments/bundles/navbar :: navbar}"></nav>
+
+<div class="container">
+
+    <div th:replace="~{fragments/bundles/landing-hero :: slider}"></div>
+
+    <!-- Header Section -->
+    <div class="header mb-3">
+        <div style="font-size: 26px; font-weight: 700;">Compare Pricing Plans:</div>
+        <div style="font-size: 26px; font-weight: 700;">Monthly and Yearly Options Tailored to Your Needs</div>
+        <p>Choose the perfect plan for your needs. Select number of devices and payment plan</p>
+    </div>
+
+
+    <div style="text-align: right;" class="pb-3">
+    <span class="ttp-color-fuchsia" style="font-size: 13px; padding-top: 10px; display: inline-block;">
+        <span class="fw-bold">Save 7%</span> with one-time payment!
+    </span>&nbsp;&nbsp;
+
+        <span class="pay-plan-switcher"
+              style="border: 1px solid lightgrey; border-radius: 20px; padding: 3px; float: right; text-align: right;">
+        <label class="pay-plan-switcher-light" style="display: block;">
+            <input id="toggle" type="checkbox" style="float: right; margin-right: 10px;">
+            <span style="display: block;">
+                <span class="fw-bold text-transition" id="toggle-monthly" style="font-size: 11px; float: left;">Monthly Payment</span>
+                <span class="fw-bold text-transition" id="toggle-yearly" style="font-size: 11px; float: right;">One Time Payment Upfront</span>
+            </span>
+            <a class="btn ttp-btn-fuchsia" style="border-radius: 30px; float: right;"></a>
+        </label>
+    </span>
+    </div>
+
+
+    <!-- Pricing Cards Section -->
+    <div class="mt-5 mb-5">
+        <div class="row g-3" id="pricing-plans">
+            <!-- Dynamic content here -->
+        </div>
+
+        <div style="text-align: left; padding-top: 25px; font-size: 14px; color: #18181B">
+                *Discount applies only at the time of your original purchase
+        </div>
+    </div>
+
+
+    <div style="margin-top: 200px">
+        <div th:replace="~{fragments/bundles/footer :: footer}"></div>
+    </div>
+
+</div>
+
+<script th:src="@{/js/bundles/js/bootstrap.bundle.min.js}"></script>
+
+<script>
+    const URL_NEXT = '/bundles/order/customize';
+    const STORE_INITIAL = '';
+</script>
+
+<script th:src="@{/js/bundles/js/custom/page1.js}"></script>
+</body>
+</html>

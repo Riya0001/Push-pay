@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:insert="~{fragments/store/header :: head}"></head>
+
+<body class="ttp-bg-white">
+
+<div id="content-wrapper" class="content-wrapper-cls">
+
+    <nav th:replace="~{fragments/store/navbar :: navbar-with-bag}"></nav>
+
+    <div class="container" style="margin-top: 100px">
+
+        <div id="user-facing-screen-1">
+
+            <div th:replace="~{fragments/store/stepper :: stepper}"></div>
+            <div th:replace="~{fragments/store/stepper :: stepper-sm}"></div>
+
+            <div hidden>
+                <input id="oneTimeFeeInCentsInput" th:value="${storeShoppingBag.getOneTimeFeeInCents()}">
+                <input id="rentalFeeInCentsInput" th:value="${storeShoppingBag.getRentalFeeInCents()}">
+                <input id="miniClipKitQtyInput" th:value="${storeShoppingBag.getMiniClipKitQty()}">
+                <input id="device5DollarQtyInput" th:value="${storeShoppingBag.getDevice5DollarQty()}">
+                <input id="device10DollarQtyInput" th:value="${storeShoppingBag.getDevice10DollarQty()}">
+                <input id="device20DollarQtyInput" th:value="${storeShoppingBag.getDevice20DollarQty()}">
+
+                <input id="totalOneTimeFeeFormatted" th:value="${storeShoppingBag.totalOneTimeFeeFormatted()}">
+                <input id="totalRentalFeeFormatted" th:value="${storeShoppingBag.totalRentalFeeFormatted()}">
+                <input id="totalAmountFormatted" th:value="${storeShoppingBag.totalAmountFormatted()}">
+                <input id="totalProducts" type="number" th:value="${storeShoppingBag.totalNumberOfProducts()}">
+            </div>
+
+            <div id="form-section" class="mt-5" style="padding-bottom: 400px;">
+
+                <div th:if="${invalidAddress}" th:text="${invalidAddress}" style="color: red"></div>
+
+                <form id="order-form" th:object="${contactAndShipping}" method="POST">
+
+                    <div class="row justify-content-between align-items-start">
+
+                        <div class="col-sm-8">
+
+                            <h2 class="ttp-color-purple">contact & shipping</h2>
+
+                            <div id="form-sub-section-customer-information" class="mb-4">
+
+                                <div id="form-sub-section-customer-information-header">
+
+                                    <h4 class="ttp-color-purple">customer information</h4>
+                                    <hr class="ttp-bg-color-light-grey mt-0">
+
+                                </div>
+
+                                <div id="form-sub-section-customer-information-body" class="row">
+
+                                    <div id="parishSearch" class="parish-content col-12 col-md-12 mb-3">
+                                        <label for="customerNameSearch" class="form-label ttp-color-purple">Search
+                                            Parish Name</label>
+                                        <div class="ttp-card-info ttp-color-dark-grey mb-3">
+                                            Please search your parish and set parish name by clicking on the found
+                                            name.
+                                        </div>
+                                        <input type="text" placeholder="Search Parish" id="customerNameSearch"
+                                               class="form-control form-item" autocomplete="off" onkeyup="filterFunction()">
+                                        <div class="scrollable-list mt-2">
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Catholic Community of St. Jude Our Lady of the Assumption, Easton')">Catholic
+                                                Community of St. Jude Our Lady of the Assumption, Easton</a>
+                                            </div>
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Frances Cabrini, Huron')">St. Frances
+                                                Cabrini, Huron</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Frances Cabrini, Woodlake')">St.
+                                                Frances
+                                                Cabrini, Woodlake</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Christ the King, Bakersfield')">Christ
+                                                the
+                                                King, Bakersfield</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Francis of Assisi, Bakersfield')">St.
+                                                Francis of Assisi, Bakershield</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Divine Mercy Catholic Parish, Clovis')">Divine
+                                                Mercy Catholic Parish, Clovis</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Genevieve, Fresno')">St. Genevieve,
+                                                Fresno</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Good Shepherd Catholic Parish, Visalia The Nativity of the Blessed Virgin Mary, Holy Family, St. Charles Borromeo, and St. Thomas the Apostle, Goshen')">Good
+                                                Shepherd Catholic Parish, Visalia The Nativity of the Blessed
+                                                Virgin
+                                                Mary, Holy Family, St. Charles Borromeo, and St. Thomas the
+                                                Apostle,
+                                                Goshen</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Isidore the Farmer, Orange Cove')">St.
+                                                Isidore the Farmer, Orange Cove</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Helen, Fresno')">St. Helen,
+                                                Fresno</a>
+                                            </div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Joachim, Madera')">St. Joachim,
+                                                Madera</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Holy Family, Kingsburg')">Holy Family,
+                                                Kingsburg</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. John the Evangelist, Tipton')">St.
+                                                John
+                                                the Evangelist, Tipton</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Holy Rosary, Hilmar')">Holy Rosary,
+                                                Hilmar</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. John the Evangelist, Wasco')">St.
+                                                John
+                                                the Evangelist, Wasco</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Holy Spirit, Fresno')">Holy Spirit,
+                                                Fresno</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. John\'s Cathedral, Fresno')">St.
+                                                John's
+                                                Cathedral, Fresno</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Immaculate Heart of Mary, Hanford')">Immaculate
+                                                Heart of Mary, Hanford</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Joseph, Avenal')">St. Joseph,
+                                                Avenal</a>
+                                            </div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Our Lady of Guadalupe, Delano')">Our Lady
+                                                of
+                                                Guadalupe, Delano</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Joseph, Bakersfield')">St. Joseph,
+                                                Bakersfield</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Our Lady of Guadalupe, Mendota')">Our
+                                                Lady of
+                                                Guadalupe, Mendota</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Joseph, Firebaugh')">St. Joseph,
+                                                Firebaugh</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Our Lady of La Vang, Fresno')">Our Lady
+                                                of La
+                                                Vang, Fresno</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Joseph, Los Banos')">St. Joseph, Los
+                                                Banos</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Our Lady of Lourdes, California City')">Our
+                                                Lady of Lourdes, California City</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Joseph, Mariposa')">St. Joseph,
+                                                Mariposa</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Our Lady of Lourdes, Corcoran')">Our Lady
+                                                of
+                                                Lourdes, Corcoran</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Joseph, Selma')">St. Joseph,
+                                                Selma</a>
+                                            </div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Our Lady of Mt. Carmel, Fresno')">Our
+                                                Lady of
+                                                Mt. Carmel, Fresno</a></div>
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Jude Thaddeus, Earlimart')">St. Jude
+                                                Thaddeus, Earlimart</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Our Lady of Perpetual Help, Bakersfield')">Our
+                                                Lady of Perpetual Help, Bakersfield</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Jude Thaddeus, Wofford Heights')">St.
+                                                Jude Thaddeus, Wofford Heights</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Our Lady of Perpetual Help, Bishop')">Our
+                                                Lady of Perpetual Help, Bishop</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Lucy, Fowler')">St. Lucy, Fowler</a>
+                                            </div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Our Lady of Perpetual Help, Clovis')">Our
+                                                Lady of Perpetual Help, Clovis</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Malachy, Tehachapi')">St. Malachy,
+                                                Tehachapi</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Our Lady of Sorrows, Parlier')">Our Lady
+                                                of
+                                                Sorrows, Parlier</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Mary, Buttonwillow')">St. Mary,
+                                                Buttonwillow</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Our Lady of Victory, Fresno')">Our Lady
+                                                of
+                                                Victory, Fresno</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Mary, Cutler')">St. Mary, Cutler</a>
+                                            </div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Our Lady of the Sierra, Oakhurst')">Our
+                                                Lady
+                                                of the Sierra, Oakhurst</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Mary, Sanger')">St. Mary, Sanger</a>
+                                            </div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Our Lady of the Snows, Yosemite')">Our
+                                                Lady
+                                                of the Snows, Yosemite</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Mary, Taft')">St.
+                                                Mary, Taft</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Our Lady of the Snows Mission, Frazier Park')">Our
+                                                Lady of the Snows Mission, Frazier Park</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Mary of the Desert, Rosamond')">St.
+                                                Mary
+                                                of the Desert, Rosamond</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Sacred Heart, Bakersfield')">Sacred
+                                                Heart,
+                                                Bakersfield</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Mary of the Miraculous Medal, Delano')">St.
+                                                Mary of the Miraculous Medal, Delano</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Sacred Heart, Dos Palos')">Sacred Heart,
+                                                Dos
+                                                Palos</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Mary Queen of The Apostles, Fresno')">St.
+                                                Mary Queen of The Apostles, Fresno</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Sacred Heart, Exeter')">Sacred Heart,
+                                                Exeter</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Patrick, Kerman')">St. Patrick,
+                                                Kerman</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Sacred Heart, Fresno')">Sacred Heart,
+                                                Fresno</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Patrick/Our Lady of Mercy, Merced')">St.
+                                                Patrick/Our Lady of Mercy, Merced</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Sacred Heart, Lindsay')">Sacred Heart,
+                                                Lindsay</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Paul, Tranquillity')">St. Paul,
+                                                Tranquillity</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Sacred Heart, Merced')">Sacred Heart,
+                                                Merced</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Paul Catholic Newman Center, Fresno')">St.
+                                                Paul Catholic Newman Center, Fresno</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Sacred Heart, Planada')">Sacred Heart,
+                                                Planada</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Paul the Apostle, Coalinga')">St.
+                                                Paul
+                                                the Apostle, Coalinga</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Aloysius, Tulare')">St. Aloysius,
+                                                Tulare</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Peter Prince of Apostles, Lemoore')">St.
+                                                Peter Prince of Apostles, Lemoore</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Alphonsus, Fresno')">St. Alphonsus,
+                                                Fresno</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Philip the Apostle, Bakersfield')">St.
+                                                Philip the Apostle, Bakersfield</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Ann, Ridgecrest')">St. Ann,
+                                                Ridgecrest</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Rita, Tulare')">St. Rita, Tulare</a>
+                                            </div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Ann, Riverdale')">St. Ann,
+                                                Riverdale</a>
+                                            </div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Therese, Shafter')">St. Therese,
+                                                Shafter</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Anne/Holy Cross, Porterville')">St.
+                                                Anne/Holy Cross, Porterville</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Thomas the Apostle, Arvin')">St.
+                                                Thomas
+                                                the Apostle, Arvin</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Anthony, Atwater')">St. Anthony,
+                                                Atwater</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('San Clemente Mission Parish, Bakersfield')">San
+                                                Clemente Mission Parish, Bakersfield</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Anthony Claret, Fresno')">St. Anthony
+                                                Claret, Fresno</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Santa Rosa, Lone Pine')">Santa Rosa, Lone
+                                                Pine</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Anthony of Padua, Fresno')">St.
+                                                Anthony
+                                                of Padua, Fresno</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Shrine of Our Lady of Fatima, Laton')">Shrine
+                                                of Our Lady of Fatima, Laton</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Anthony of Padua, Reedley')">St.
+                                                Anthony
+                                                of Padua, Reedley</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Shrine of Our Lady of Guadalupe, St. Augustine, Lamont')">Shrine
+                                                of Our Lady of Guadalupe, St. Augustine, Lamont</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Co-Patroness of the Unborn, Bakersfield')">Co-Patroness
+                                                of the Unborn, Bakersfield</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Brigid, Hanford')">St. Brigid,
+                                                Hanford</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('Shrine of Our Lady of Miracles, Gustine')">Shrine
+                                                of Our Lady of Miracles, Gustine</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Catherine of Siena, Dinuba')">St.
+                                                Catherine of Siena, Dinuba</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('The Shrine of St. Jude Thaddeus, Livingston')">The
+                                                Shrine of St. Jude Thaddeus, Livingston</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Columba, Chowchilla')">St. Columba,
+                                                Chowchilla</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('The Shrine of St. Thérèse, Fresno')">The
+                                                Shrine of St. Thérèse, Fresno</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Elizabeth, McFarland')">St.
+                                                Elizabeth,
+                                                McFarland</a></div>
+
+                                            <div><a href="javascript:void(0);"
+                                                    onclick="selectParish('St. Elizabeth Ann Seton, Bakersfield')">St.
+                                                Elizabeth Ann Seton, Bakersfield</a></div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-12 col-md-12 mt-3">
+                                        <label for="customerName" class="form-label ttp-color-purple">Selected
+                                            Parish
+                                            Name</label>
+                                        <input type="text" class="form-control form-item" id="customerName"
+                                               name="customerName" maxlength="200"
+                                               th:value="${contactAndShipping.getCustomerName()}"
+                                               th:field="*{customerName}" required readonly>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div id="form-sub-section-contact-information" class="mb-4">
+
+                                <div id="form-sub-section-contact-information-header">
+
+                                    <h4 class="ttp-color-purple">contact information</h4>
+                                    <hr class="ttp-bg-color-light-grey mt-0">
+
+                                </div>
+
+                                <div id="form-sub-section-contact-information-body" class="row">
+
+                                    <div class="col-12 col-md-6">
+                                        <label for="contactFirstName" class="form-label ttp-color-purple">First
+                                            Name</label>
+                                        <input type="text" class="form-control form-item" id="contactFirstName"
+                                               name="contactFirstName" placeholder="First Name" maxlength="100"
+                                               th:value="${contactAndShipping.getContactFirstName()}"
+                                               th:field="*{contactFirstName}" required>
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <label for="contactLastName" class="form-label ttp-color-purple">Last
+                                            Name</label>
+                                        <input type="text" class="form-control form-item" id="contactLastName"
+                                               name="contactLastName" placeholder="Last Name" maxlength="100"
+                                               th:value="${contactAndShipping.getContactLastName()}"
+                                               th:field="*{contactLastName}" required>
+                                    </div>
+
+                                    <div class="col-12 col-md-2 mt-3">
+                                        <label for="contactPhoneCountryCode"
+                                               class="form-label ttp-color-purple">Country
+                                            Code</label>
+                                        <select class="custom-select form-item bg-white"
+                                                id="contactPhoneCountryCode" name="contactPhoneCountryCode"
+                                                th:value="${contactAndShipping.getContactPhoneCountryCode()}"
+                                                th:field="*{contactPhoneCountryCode}" required>
+                                            <option value="+1">+1</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-12 col-md-4 mt-3">
+                                        <label for="contactPhone" class="form-label ttp-color-purple">Phone</label>
+                                        <input type="tel" class="form-control form-item" id="contactPhone"
+                                               name="contactPhone" placeholder="(000) 000-0000" maxlength="14"
+                                               minlength="14" th:value="${contactAndShipping.getContactPhone()}"
+                                               th:field="*{contactPhone}" required>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mt-3">
+                                        <label for="contactEmail" class="form-label ttp-color-purple">Email</label>
+                                        <input type="email" class="form-control form-item" id="contactEmail"
+                                               name="contactEmail" placeholder="you@example.com" maxlength="200"
+                                               th:value="${contactAndShipping.getContactEmail()}"
+                                               th:field="*{contactEmail}" required>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mt-3">
+                                        <label for="contactPrefContactMethod"
+                                               class="form-label ttp-color-purple">Preferred
+                                            Contact
+                                            Method</label>
+                                        <select class="custom-select form-item bg-white"
+                                                id="contactPrefContactMethod" name="contactPrefContactMethod"
+                                                th:value="${contactAndShipping.getContactPrefContactMethod()}"
+                                                th:field="*{contactPrefContactMethod}" required>
+                                            <option value="" hidden></option>
+                                            <option value="Email">Email</option>
+                                            <option value="Phone">Phone</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div id="form-sub-section-shipping-information" class="mb-4">
+
+                                <div id="form-sub-section-shipping-information-header">
+
+                                    <h4 class="ttp-color-purple">shipping information</h4>
+                                    <hr class="ttp-bg-color-light-grey mt-0">
+
+                                </div>
+
+                                <div id="form-sub-section-shipping-information-body" class="row">
+
+                                    <div class="col-12 col-md-6 mt-3">
+                                        <label for="attentionTo" class="form-label ttp-color-purple">Attention
+                                            To</label>
+                                        <input type="text" class="form-control form-item" id="attentionTo"
+                                               name="attentionTo" placeholder="Attention To" maxlength="200"
+                                               th:value="${contactAndShipping.getAttentionTo()}"
+                                               th:field="*{attentionTo}" required>
+                                    </div>
+
+                                    <div class="col-12 mt-3">
+                                        <label for="shippingAddr1" class="form-label ttp-color-purple">Address Line
+                                            1
+                                            (PO Boxes not
+                                            accepted)</label>
+                                        <input type="text" class="form-control form-item" id="shippingAddr1"
+                                               name="shippingAddr1" placeholder="Address Line 1" maxlength="200"
+                                               th:value="${contactAndShipping.getShippingAddr1()}"
+                                               th:field="*{shippingAddr1}" required>
+                                    </div>
+
+                                    <div class="col-12 mt-3">
+                                        <label for="shippingAddr2" class="form-label ttp-color-purple">Address Line
+                                            2
+                                            (Optional)</label>
+                                        <input type="text" class="form-control form-item" id="shippingAddr2"
+                                               name="shippingAddr2" placeholder="Address Line 2 (Optional)"
+                                               th:value="${contactAndShipping.getShippingAddr2()}"
+                                               th:field="*{shippingAddr2}" maxlength="200">
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mt-3">
+                                        <label for="shippingCity" class="form-label ttp-color-purple">City</label>
+                                        <input type="text" class="form-control form-item" id="shippingCity"
+                                               name="shippingCity" placeholder="City" maxlength="100"
+                                               th:value="${contactAndShipping.getShippingCity()}"
+                                               th:field="*{shippingCity}" required>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mt-3" id="shipping-state-ca-field">
+                                        <label for="shippingStateCA"
+                                               class="form-label ttp-color-purple">Province</label>
+                                        <select class="custom-select form-item bg-white" id="shippingStateCA"
+                                                name="shippingStateCA"
+                                                autocomplete="off"
+                                                th:value="${contactAndShipping.getShippingProvince()}"
+                                                th:field="*{shippingProvince}" required>
+                                            <option value="Alberta">Alberta</option>
+                                            <option value="British Columbia">British Columbia</option>
+                                            <option value="Manitoba">Manitoba</option>
+                                            <option value="New Brunswick">New Brunswick</option>
+                                            <option value="Newfoundland and Labrador">Newfoundland and Labrador
+                                            </option>
+                                            <option value="Nova Scotia">Nova Scotia</option>
+                                            <option value="Northwest Territories">Northwest Territories</option>
+                                            <option value="Nunavut">Nunavut</option>
+                                            <option value="Ontario">Ontario</option>
+                                            <option value="Prince Edward Island">Prince Edward Island</option>
+                                            <option value="Quebec">Quebec</option>
+                                            <option value="Saskatchewan">Saskatchewan</option>
+                                            <option value="Yukon">Yukon</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mt-3" id="shipping-state-us-field">
+                                        <label for="shippingStateUS"
+                                               class="form-label ttp-color-purple">State</label>
+                                        <select class="custom-select form-item bg-white" id="shippingStateUS"
+                                                name="shippingStateUS"
+                                                autocomplete="off"
+                                                th:value="${contactAndShipping.getShippingState()}"
+                                                th:field="*{shippingState}" required>
+                                            <option value="Alabama">Alabama</option>
+                                            <option value="Alaska">Alaska</option>
+                                            <option value="Arizona">Arizona</option>
+                                            <option value="Arkansas">Arkansas</option>
+                                            <option value="California">California</option>
+                                            <option value="Colorado">Colorado</option>
+                                            <option value="Connecticut">Connecticut</option>
+                                            <option value="Delaware">Delaware</option>
+                                            <option value="District Of Columbia">District Of Columbia</option>
+                                            <option value="Florida">Florida</option>
+                                            <option value="Georgia">Georgia</option>
+                                            <option value="Hawaii">Hawaii</option>
+                                            <option value="Idaho">Idaho</option>
+                                            <option value="Illinois">Illinois</option>
+                                            <option value="Indiana">Indiana</option>
+                                            <option value="Iowa">Iowa</option>
+                                            <option value="Kansas">Kansas</option>
+                                            <option value="Kentucky">Kentucky</option>
+                                            <option value="Louisiana">Louisiana</option>
+                                            <option value="Maine">Maine</option>
+                                            <option value="Maryland">Maryland</option>
+                                            <option value="Massachusetts">Massachusetts</option>
+                                            <option value="Michigan">Michigan</option>
+                                            <option value="Minnesota">Minnesota</option>
+                                            <option value="Mississippi">Mississippi</option>
+                                            <option value="Missouri">Missouri</option>
+                                            <option value="Montana">Montana</option>
+                                            <option value="Nebraska">Nebraska</option>
+                                            <option value="Nevada">Nevada</option>
+                                            <option value="New Hampshire">New Hampshire</option>
+                                            <option value="New Jersey">New Jersey</option>
+                                            <option value="New Mexico">New Mexico</option>
+                                            <option value="New York">New York</option>
+                                            <option value="North Carolina">North Carolina</option>
+                                            <option value="North Dakota">North Dakota</option>
+                                            <option value="Ohio">Ohio</option>
+                                            <option value="Oklahoma">Oklahoma</option>
+                                            <option value="Oregon">Oregon</option>
+                                            <option value="Pennsylvania">Pennsylvania</option>
+                                            <option value="Rhode Island">Rhode Island</option>
+                                            <option value="South Carolina">South Carolina</option>
+                                            <option value="South Dakota">South Dakota</option>
+                                            <option value="Tennessee">Tennessee</option>
+                                            <option value="Texas">Texas</option>
+                                            <option value="Utah">Utah</option>
+                                            <option value="Vermont">Vermont</option>
+                                            <option value="Virginia">Virginia</option>
+                                            <option value="Washington">Washington</option>
+                                            <option value="West Virginia">West Virginia</option>
+                                            <option value="Wisconsin">Wisconsin</option>
+                                            <option value="Wyoming">Wyoming</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mt-3">
+                                        <label for="shippingCountry"
+                                               class="form-label ttp-color-purple">Country</label>
+                                        <select class="custom-select form-item bg-white" id="shippingCountry"
+                                                name="shippingCountry"
+                                                autocomplete="off"
+                                                th:value="${contactAndShipping.getShippingCountry()}"
+                                                th:field="*{shippingCountry}" required>
+                                            <option value="United States">United States</option>
+                                            <option value="Canada">Canada</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mt-3" id="shipping-zip-code-field">
+                                        <label for="shippingZip" class="form-label ttp-color-purple">Zip
+                                            Code</label>
+                                        <input type="text" class="form-control form-item" id="shippingZip"
+                                               name="shippingZip" placeholder="00000" maxlength="5"
+                                               title="Please enter a 5-digit ZIP Code"
+                                               autocomplete="off"
+                                               th:value="${contactAndShipping.getShippingZip()}"
+                                               th:field="*{shippingZip}">
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mt-3" id="shipping-postal-code-field">
+                                        <label for="shippingPostalCode" class="form-label ttp-color-purple">Postal
+                                            Code</label>
+                                        <input type="text" class="form-control form-item" id="shippingPostalCode"
+                                               name="shippingPostalCode" placeholder="A1A 1A1" maxlength="7"
+                                               autocomplete="off"
+                                               title="Please enter a postal code in the A1A 1A1 format"
+                                               th:value="${contactAndShipping.getShippingPostalCode()}"
+                                               th:field="*{shippingPostalCode}">
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-sm-4 d-flex justify-content-center">
+
+                            <div id="your-orders-section" class="mt-5">
+
+                                <div id="your-orders-section-body" class="text-center mx-3"
+                                     style="min-width: 300px; max-width: 300px">
+
+                                    <div id="your-orders-section-content-body"
+                                         class="ttp-bg-color-light-shade-grey ttp-border-radius-10px pb-2">
+
+                                        <div class="ttp-card-header ttp-color-purple pt-4">
+                                            your order
+                                        </div>
+
+                                        <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                            mini clip purchase
+                                        </div>
+                                        <div class="ttp-card-info ttp-color-dark-grey">
+                                            ( one-time purchase )
+                                        </div>
+                                        <div class="ttp-color-dark-grey">
+                                            $<span class="miniClipKitOneTimeFeeTotal"
+                                                   th:text="${storeShoppingBag.totalOneTimeFeeFormatted()}"></span>
+                                        </div>
+
+                                        <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                            monthly rental fee
+                                        </div>
+                                        <div class="ttp-color-dark-grey">
+                                            $<span class="devicesRentalFeeTotal"
+                                                   th:text="${storeShoppingBag.totalRentalFeeFormatted()}"></span>
+                                        </div>
+
+                                        <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                            taxes
+                                        </div>
+                                        <div class="ttp-card-info ttp-color-dark-grey font-italic">
+                                            calculated in next step
+                                        </div>
+
+                                        <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                            shipping
+                                        </div>
+                                        <div class="ttp-card-info ttp-color-dark-grey font-italic">
+                                            calculated in next step
+                                        </div>
+
+                                        <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                            setup fee
+                                        </div>
+                                        <div class="ttp-color-dark-grey">
+                                            $<span class="taxAmountInCard"
+                                                   th:text="${storeShoppingBag.serviceAmountInCentsFormatted()}"></span>
+                                        </div>
+
+                                        <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                            total
+                                        </div>
+                                        <div class="ttp-fs-24px ttp-fw-700 ttp-color-purple">
+                                            $<span class="overallTotal"
+                                                   th:text="${storeShoppingBag.totalAmountFormatted()}"></span>
+                                        </div>
+                                        <div class="ttp-card-info ttp-color-dark-grey mb-3 font-italic">
+                                            updated in next step
+                                        </div>
+
+                                    </div>
+
+                                    <div id="your-orders-section-content-footer" class="mt-4">
+                                        <button type="submit" style="width: 220px;" class="ttp-button-primary">
+                                            calculate shipping & taxes
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div id="user-facing-screen-2" style="display: none">
+
+            <div th:fragment="stepper" id="stepper-section" class="mt-5 mx-3">
+                <div
+                        class="row justify-content-center align-items-center text-center ttp-bg-color-light-shade-grey ttp-border-radius-20px p-4 mt-5">
+                    <div class="col-sm">
+                        <svg th:replace="~{fragments/svg_fragments :: svg-stepper-completed-step}"></svg>
+                        <div class="ttp-card-sub-header-xs ttp-color-fuschia">Select Your Solution</div>
+                    </div>
+                    <div class="col-sm">
+                        <hr class="stepper-hr-fuchsia">
+                    </div>
+                    <div class="col-sm">
+                        <svg th:replace="~{fragments/svg_fragments :: svg-stepper-completed-step}"></svg>
+                        <div class="ttp-card-sub-header-xs ttp-color-fuschia">Contact & Shipping Info</div>
+                    </div>
+                    <div class="col-sm">
+                        <hr class="stepper-hr-fuchsia">
+                    </div>
+                    <div class="col-sm">
+                        <svg th:replace="~{fragments/svg_fragments :: svg-stepper-inactive-step}"></svg>
+                        <div class="ttp-card-sub-header-xs ttp-color-medium-grey">Confirm & Submit</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="main-section" style="padding-bottom: 500px; padding-top: 100px;">
+
+                <h4 class="ttp-color-purple text-center">calculating shipping and taxes</h4><br>
+                <div class="row justify-content-center align-items-center">
+                    <div class="dot-flashing"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div id="ttp-toast" role="alert" aria-live="assertive" aria-atomic="true" class="toast ttp-toast">
+            <div class="toast-header">
+
+                <svg id="ttp-toast-indicator-success" style=""
+                     th:insert="~{fragments/svg_fragments :: green-checked-data-svg}" height="40px"
+                     width="40px"></svg>
+                <svg id="ttp-toast-indicator-error" style=""
+                     th:insert="~{fragments/svg_fragments :: status-failed-svg}" height="40px" width="40px"></svg>
+                &nbsp;&nbsp;
+
+                <strong class="mr-auto"><span id="ttp-toast-title"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                <button type="button" onclick="toastSwitcher('ttp-toast', false, 0)" class="ml-2 mb-1 close"
+                        data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="ttp-toast-message" class="toast-body"></div>
+        </div>
+
+
+        <div th:insert="~{fragments/store/footer :: footer}" style="padding-top: 250px"></div>
+
+    </div>
+
+
+</div>
+
+
+<script>
+    const shippingPostalCode = document.getElementById('shippingPostalCode');
+    const shippingZip = document.getElementById('shippingZip');
+    const shippingCountry = document.getElementById('shippingCountry');
+    const customerName = document.getElementById('customerName');
+    const customerNameSearch = document.getElementById('customerNameSearch');
+    const parishSearch = document.getElementById('parishSearch');
+    const contactEmail = document.getElementById('contactEmail');
+    const contactPhone = document.getElementById('contactPhone');
+
+    document.addEventListener('DOMContentLoaded', function () {
+        let iCase = 1;
+        if (shippingPostalCode.value === "" && shippingZip.value === "") {
+            iCase = 0;
+        }
+
+        updateShippingMask(iCase);
+
+        shippingCountry.addEventListener('change', function () {
+            updateShippingMask(0);
+        });
+
+    });
+
+    document.getElementById('order-form').addEventListener('submit', function (event) {
+        let message = [];
+
+        if (!validateEmail()) {
+            message.push("Invalid Email");
+        }
+
+        if (!validateCustomerName()) {
+            message.push("Empty Parish Name");
+        }
+
+        if (shippingCountry.value === 'Canada') {
+            if(!validatePostalCode()){
+                message.push("Invalid Postal Code");
+            }
+        }
+
+        if (shippingCountry.value === 'United States') {
+            if(!validateZip()){
+                message.push("Invalid Zip");
+            }
+        }
+
+        if (message.length === 0) {
+            switchVisibility('user-facing-screen-2', 'user-facing-screen-1');
+            scrollToTop();
+        } else {
+            event.preventDefault();
+            showToastWithMessage('ttp-toast', "Invalid Entry", message, 'error', 2000);
+        }
+    });
+
+    contactPhone.addEventListener('input', handlePhoneInput);
+    shippingZip.addEventListener('input', handleZipInput);
+    shippingPostalCode.addEventListener('input', handlePostalCodeInput);
+
+    function selectParish(val) {
+        customerName.value = val;
+        customerNameSearch.value = "";
+        filterFunctionWithInput("");
+    }
+
+    function filterFunction() {
+        let filter, a, i;
+        filter = customerNameSearch.value.toUpperCase();
+        a = parishSearch.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            let txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
+
+    function filterFunctionWithInput(filter) {
+        let a, i;
+        filter = filter.toUpperCase();
+        a = parishSearch.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            let txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
+
+    function formatPhoneNumber(phoneNumber) {
+        const cleaned = ('' + phoneNumber).replace(/\D/g, '');
+        const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+        if (match) {
+            return '(' + match[1] + ') ' + match[2] + '-' + match[3];
+        }
+        return null;
+    }
+
+    function handlePhoneInput(event) {
+        const input = event.target;
+        const value = input.value;
+        const formattedValue = formatPhoneNumber(value);
+        if (formattedValue) {
+            input.value = formattedValue;
+        }
+    }
+
+    function formatPostalCode(postalCode) {
+        const cleaned = postalCode.trim().toUpperCase();
+        const match = cleaned.match(/^([A-Za-z]\d[A-Za-z])\s?(\d[A-Za-z]\d)$/);
+        if (match) {
+            return match[1] + ' ' + match[2];
+        }
+        return null;
+    }
+
+    function formatZip(postalCode) {
+        const cleaned = postalCode.trim();
+        const match = cleaned.match(/^\d{5}$/);
+        if (match) {
+            return match[0];
+        }
+        return null;
+    }
+
+    function handleZipInput(event) {
+        const input = event.target;
+        const value = input.value;
+        const formattedValue = formatZip(value);
+        if (formattedValue) {
+            input.value = formattedValue;
+        }
+    }
+
+    function handlePostalCodeInput(event) {
+        const input = event.target;
+        const value = input.value;
+        const formattedValue = formatPostalCode(value);
+        if (formattedValue) {
+            input.value = formattedValue;
+        }
+    }
+
+    function setPlaceHolder(id, value) {
+        document.getElementById(id).value = value;
+    }
+
+    function updateShippingMask(iCase) {
+        if (shippingCountry.value === 'United States') {
+            shippingUSCase(iCase);
+        } else {
+            shippingCACase(iCase);
+        }
+    }
+
+    function shippingUSCase(iCase) {
+        switchVisibility('shipping-state-us-field', 'shipping-state-ca-field');
+        switchVisibility('shipping-zip-code-field', 'shipping-postal-code-field');
+        if (iCase === 0) {
+            setPlaceHolder("shippingZip", "");
+        }
+    }
+
+    function shippingCACase(iCase) {
+        switchVisibility('shipping-state-ca-field', 'shipping-state-us-field');
+        switchVisibility('shipping-postal-code-field', 'shipping-zip-code-field');
+        if (iCase === 0) {
+            setPlaceHolder("shippingPostalCode", "")
+        }
+    }
+
+    function validateEmail() {
+        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return regex.test(contactEmail.value);
+    }
+
+    function validatePostalCode() {
+        const regex = /^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$/;
+        return regex.test(shippingPostalCode.value);
+    }
+
+    function validateZip() {
+        const regex = /^\d{5}$/;
+        return regex.test(shippingZip.value);
+    }
+
+    function validateCustomerName() {
+        return !(customerName.value === "" || customerName.value === null || customerName.value === undefined);
+    }
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    function toastSwitcher(toastId, isShow, howLong) {
+        const toastElement = document.getElementById(toastId);
+        if (isShow) {
+            toastElement.classList.add('show');
+            setTimeout(function () {
+                toastElement.classList.remove('show');
+            }, (howLong << 0));
+        } else {
+            toastElement.classList.remove('show');
+        }
+    }
+
+    function showToastWithMessage(toastId, title, message, type, duration) {
+        const messageElementId = toastId + '-message';
+        const indicatorElementIdInitial = toastId + '-indicator-'
+        const titleElement = document.getElementById(toastId + '-title');
+
+        if (type === 'success') {
+            changeVisibility(indicatorElementIdInitial + "success", true);
+            changeVisibility(indicatorElementIdInitial + "error", false);
+        }
+
+        if (type === 'error') {
+            changeVisibility(indicatorElementIdInitial + "success", false);
+            changeVisibility(indicatorElementIdInitial + "error", true);
+        }
+
+        titleElement.textContent = title;
+        revertLines(messageElementId);
+        createLines(messageElementId, message);
+
+        toastSwitcher(toastId, true, (duration << 0));
+    }
+
+    function changeVisibility(elementId, isVisible) {
+        const element = document.getElementById(elementId);
+        if (isVisible) {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+    }
+
+    function switchVisibility(elementIdToShow, elementIdToHide) {
+        changeVisibility(elementIdToShow, true);
+        changeVisibility(elementIdToHide, false);
+    }
+
+    function createLines(elemId, lines) {
+        const outputDiv = document.getElementById(elemId);
+        lines.forEach(function(lineText) {
+            const lineElement = document.createElement("div");
+            lineElement.innerHTML = lineText;
+            outputDiv.appendChild(lineElement);
+        });
+    }
+
+    function revertLines(elemId) {
+        const outputDiv = document.getElementById(elemId);
+        while (outputDiv.firstChild) {
+            outputDiv.removeChild(outputDiv.firstChild);
+        }
+    }
+</script>
+
+</body>
+
+</html>

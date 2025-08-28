@@ -1,0 +1,203 @@
+.header {
+    color: black;
+    padding: 40px 0 5px 0;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2rem;
+}
+
+.header h3 {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    background-color: white;
+}
+
+.card h5 {
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 2px;
+    margin: 0;
+}
+
+.card h6 {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-bottom: 15px;
+}
+
+.card-price {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #6c63ff;
+}
+
+.most-popular-badge {
+    position: absolute;
+    top: -15px;
+    left: -2px;
+    width: calc(100% + 4px);
+    background-color: #9E007E;
+    color: white;
+    padding: 5px 12px;
+    font-size: 0.75rem;
+    border-radius: 5px 5px 0 0;
+}
+
+.most-popular {
+    border: 2px solid #9E007E;
+}
+
+.most-popular-text {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.accordion-item {
+    border: none;
+}
+
+.accordion-button {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 25px 0 0 0;
+    margin-top: 15px;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.accordion-body {
+    border-top: none;
+    padding: 20px 10px 0 10px;
+}
+
+
+.accordion-button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.left-align-center {
+    text-align: left;
+    vertical-align: middle;
+}
+
+
+.pay-plan-switcher {
+    max-width: 22em;
+    min-width: 21em;
+}
+
+.pay-plan-switcher-light > span, .switch-toggle > span {
+    color: #000000;
+}
+
+.pay-plan-switcher-light span span, .pay-plan-switcher-light label, .switch-toggle span span, .switch-toggle label {
+    color: #2b2b2b;
+}
+
+.switch-toggle a,
+.pay-plan-switcher-light span span {
+    display: none;
+}
+
+.pay-plan-switcher-light {
+    display: block;
+    height: 30px;
+    position: relative;
+    overflow: visible;
+    padding: 0;
+    margin-left: 0;
+}
+
+.pay-plan-switcher-light * {
+    box-sizing: border-box;
+}
+
+.pay-plan-switcher-light a {
+    display: block;
+    transition: all 0.3s ease-out 0s;
+}
+
+.pay-plan-switcher-light label,
+.pay-plan-switcher-light > span {
+    line-height: 30px;
+    vertical-align: middle;
+}
+
+.pay-plan-switcher-light label {
+    font-weight: 700;
+    margin-bottom: 0;
+    max-width: 100%;
+}
+
+.pay-plan-switcher-light input {
+    position: absolute;
+    opacity: 0;
+    z-index: 5;
+}
+
+.pay-plan-switcher-light input:checked ~ a {
+    right: 0%;
+}
+
+.pay-plan-switcher-light > span {
+    position: absolute;
+    left: -100px;
+    width: 100%;
+    margin: 0;
+    padding-right: 100px;
+    text-align: left;
+}
+
+.pay-plan-switcher-light > span span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    display: block;
+    width: 50%;
+    margin-left: 100px;
+    text-align: center;
+}
+
+.pay-plan-switcher-light > span span:last-child {
+    left: 50%;
+}
+
+.pay-plan-switcher-light a {
+    position: absolute;
+    right: 50%;
+    top: 0;
+    z-index: 4;
+    display: block;
+    width: 50%;
+    height: 100%;
+    padding: 0;
+}
+
+.text-transition {
+    transition: color 0.5s ease;
+}
+
+.backgrounds {
+    height: 400px;
+    background: linear-gradient(to bottom,
+    white 0px,
+    white 85px,
+    pink 85px,
+    pink 375px,
+    white 375px,
+    white 400px);
+}

@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+
+
+<a th:fragment="solution-card-1"
+   id="solution-card-1" class="col-sm card m-2 py-4 nav-link inner-border-hover"
+   style="max-width: 328px; min-width: 300px">
+    <div class="text-center m-auto">
+        <div class="custom-outline-container">
+
+            <img th:src="@{'/images/small_counter.png'}"
+                 alt="Counter Display Image"
+                 style="height: 150px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+            >
+
+        </div>
+        <h4 class="text-no-wrap text-purple text-center mt-3 mb-1 text-bold" style="font-size: 20px">small counter</h4>
+
+        <table class="table table-borderless mt-3 ml-2">
+
+            <!--                                DOLLAR 2 -->
+            <tr style="border: none">
+
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar2-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="smallCounterCard2DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+
+            </tr>
+
+            <!--                                DOLLAR 5 -->
+            <tr style="border: none">
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar5-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="smallCounterCard5DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+
+            </tr>
+
+            <!--                                DOLLAR 10 -->
+            <tr style="border: none">
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar10-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="smallCounterCard10DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+            </tr>
+
+            <!--                                DOLLAR 20 -->
+            <tr style="border: none">
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar20-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="smallCounterCard20DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+            </tr>
+
+        </table>
+
+        <button id="smallCounterCardAddToBagButton" type="button" class="btn btn-outline-primary btn-small" style="text-transform: lowercase !important;">
+            Add to Bag
+        </button>
+    </div>
+</a>
+
+<a th:fragment="solution-card-2"
+   id="solution-card-2" class="col-sm card m-2 py-4 nav-link inner-border-hover"
+   style="max-width: 328px; min-width: 300px">
+    <div class="text-center m-auto">
+        <div class="custom-outline-container">
+
+            <img th:src="@{'/images/medium_counter.png'}"
+                 alt="Counter Display Image"
+                 style="height: 150px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+            >
+
+        </div>
+        <h4 class="text-no-wrap text-purple text-center mt-3 mb-1 text-bold" style="font-size: 20px">medium counter</h4>
+
+        <table class="table table-borderless mt-3 ml-2">
+
+            <!--                                DOLLAR 2 -->
+            <tr style="border: none">
+
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar2-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="mediumCounterCard2DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+
+            </tr>
+
+            <!--                                DOLLAR 5 -->
+            <tr style="border: none">
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar5-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="mediumCounterCard5DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+
+            </tr>
+
+            <!--                                DOLLAR 10 -->
+            <tr style="border: none">
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar10-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="mediumCounterCard10DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+            </tr>
+
+            <!--                                DOLLAR 20 -->
+            <tr style="border: none">
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar20-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="mediumCounterCard20DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+            </tr>
+
+        </table>
+
+        <button id="mediumCounterCardAddToBagButton" type="button" class="btn btn-outline-primary btn-small" style="text-transform: lowercase !important;">
+            Add to Bag
+        </button>
+    </div>
+</a>
+
+<a th:fragment="solution-card-3"
+   id="solution-card-3" class="col-sm card m-2 py-4 nav-link inner-border-hover"
+   style="max-width: 328px; min-width: 300px">
+    <div class="text-center m-auto">
+        <div class="custom-outline-container">
+
+            <img th:src="@{'/images/large_counter.png'}"
+                 alt="Counter Display Image"
+                 style="height: 150px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+            >
+
+        </div>
+        <h4 class="text-no-wrap text-purple text-center mt-3 mb-1 text-bold" style="font-size: 20px">large counter</h4>
+
+        <table class="table table-borderless mt-3 ml-2">
+
+            <!--                                DOLLAR 2 - 5 - 10 -->
+            <tr style="border: none">
+
+                <td style="vertical-align: middle; padding: 43px 0 0 0">
+                    <img th:src="@{'/images/dollar2-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                    <img th:src="@{'/images/dollar5-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                    <img th:src="@{'/images/dollar10-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 43px 0 0 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="largeCounterCard2510DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+
+            </tr>
+
+            <!--                                DOLLAR 5 - 10 - 20 -->
+            <tr style="border: none">
+                <td style="vertical-align: middle; padding: 0 0 43px 0">
+                    <img th:src="@{'/images/dollar5-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                    <img th:src="@{'/images/dollar10-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                    <img th:src="@{'/images/dollar20-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0 0 43px 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="largeCounterCard51020DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+
+            </tr>
+
+        </table>
+
+        <button id="largeCounterCardAddToBagButton" type="button" class="btn btn-outline-primary btn-small" style="text-transform: lowercase !important;">
+            Add to Bag
+        </button>
+    </div>
+</a>
+
+<a th:fragment="solution-card-4"
+   id="solution-card-4" class="col-sm card m-2 py-4 nav-link inner-border-hover"
+   style="max-width: 328px; min-width: 300px">
+    <div class="text-center m-auto">
+        <div class="custom-outline-container">
+
+            <img th:src="@{'/images/floor_stand.png'}"
+                 alt="Counter Display Image"
+                 style="height: 150px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+            >
+
+        </div>
+        <h4 class="text-no-wrap text-purple text-center mt-3 mb-1 text-bold" style="font-size: 20px">floor stand</h4>
+
+        <table class="table table-borderless mt-3 ml-2">
+
+            <!--                                DOLLAR 2 - 5 - 10 -->
+            <tr style="border: none">
+
+                <td style="vertical-align: middle; padding: 43px 0 0 0">
+                    <img th:src="@{'/images/dollar2-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                    <img th:src="@{'/images/dollar5-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                    <img th:src="@{'/images/dollar10-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 43px 0 0 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="floorStandCard2510DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+
+            </tr>
+
+            <!--                                DOLLAR 5 - 10 - 20 -->
+            <tr style="border: none">
+                <td style="vertical-align: middle; padding: 0 0 43px 0">
+                    <img th:src="@{'/images/dollar5-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                    <img th:src="@{'/images/dollar10-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                    <img th:src="@{'/images/dollar20-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0 0 43px 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="floorStandCard51020DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+
+            </tr>
+
+        </table>
+
+        <button id="floorStandCardAddToBagButton" type="button" class="btn btn-outline-primary btn-small" style="text-transform: lowercase !important;">
+            Add to Bag
+        </button>
+    </div>
+</a>
+
+<a th:fragment="solution-card-5"
+   id="solution-card-5" class="col-sm card m-2 py-4 nav-link inner-border-hover"
+   style="max-width: 328px; min-width: 300px">
+    <div class="text-center m-auto">
+        <div class="custom-outline-container">
+
+            <img th:src="@{'/images/lanyard.png'}"
+                 alt="Counter Display Image"
+                 style="height: 150px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+            >
+
+        </div>
+        <h4 class="text-no-wrap text-purple text-center mt-3 mb-1 text-bold" style="font-size: 20px">lanyard</h4>
+
+        <table class="table table-borderless mt-3 ml-2">
+
+            <!--                                DOLLAR 2 -->
+            <tr style="border: none">
+
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar2-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="lanyardCard2DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+
+            </tr>
+
+            <!--                                DOLLAR 5 -->
+            <tr style="border: none">
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar5-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="lanyardCard5DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+
+
+            </tr>
+
+            <!--                                DOLLAR 10 -->
+            <tr style="border: none">
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar10-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="lanyardCard10DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+
+            </tr>
+
+            <!--                                DOLLAR 20 -->
+            <tr style="border: none">
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar20-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="lanyardCard20DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+
+            </tr>
+
+        </table>
+
+        <button id="lanyardCardAddToBagButton" type="button" class="btn btn-outline-primary btn-small" style="text-transform: lowercase !important;">
+            Add to Bag
+        </button>
+    </div>
+</a>
+
+<a th:fragment="solution-card-6"
+   id="solution-card-6" class="col-sm card m-2 py-4 nav-link inner-border-hover"
+   style="max-width: 328px; min-width: 300px">
+    <div class="text-center m-auto">
+        <div class="custom-outline-container">
+
+            <img th:src="@{'/images/selfie_stick.png'}"
+                 alt="Counter Display Image"
+                 style="height: 150px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+            >
+
+        </div>
+        <h4 class="text-no-wrap text-purple text-center mt-3 mb-1 text-bold" style="font-size: 20px">selfie stick</h4>
+
+        <table class="table table-borderless mt-3 ml-2">
+
+            <!--                                DOLLAR 2 -->
+            <tr style="border: none">
+
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar2-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="selfieStickCard2DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+
+            </tr>
+
+            <!--                                DOLLAR 5 -->
+            <tr style="border: none">
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar5-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="selfieStickCard5DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+
+            </tr>
+
+            <!--                                DOLLAR 10 -->
+            <tr style="border: none">
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar10-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="selfieStickCard10DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+            </tr>
+
+            <!--                                DOLLAR 20 -->
+            <tr style="border: none">
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar20-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="selfieStickCard20DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+            </tr>
+
+        </table>
+
+        <button id="selfieStickCardAddToBagButton" type="button" class="btn btn-outline-primary btn-small" style="text-transform: lowercase !important;">
+            Add to Bag
+        </button>
+    </div>
+</a>
+
+
+<a th:fragment="solution-card-7"
+   id="solution-card-7" class="col-sm card m-2 py-4 nav-link inner-border-hover"
+   style="max-width: 328px; min-width: 300px">
+    <div class="text-center m-auto">
+        <div class="custom-outline-container">
+
+            <img data-toggle="modal" data-target="#mini-clip-device-details-modal" th:src="@{'/images/mini_clip.png'}"
+                 alt="mini clip image"
+                 style="height: 150px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+            >
+
+        </div>
+        <h4 class="text-no-wrap text-purple text-center mt-3 mb-1 text-bold" style="font-size: 20px">mini clip</h4>
+
+        <table class="table table-borderless mt-3 ml-2">
+
+            <!--                                DOLLAR 2 -->
+            <tr style="border: none">
+
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar2-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="miniClipCard2DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+
+            </tr>
+
+            <!--                                DOLLAR 5 -->
+            <tr style="border: none">
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar5-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="miniClipCard5DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+
+            </tr>
+
+            <!--                                DOLLAR 10 -->
+            <tr style="border: none">
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar10-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="miniClipCard10DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+            </tr>
+
+            <!--                                DOLLAR 20 -->
+            <tr style="border: none">
+                <td style="vertical-align: middle; padding: 0">
+                    <img th:src="@{'/images/dollar20-device.png'}"
+                         alt="Mini Clip Image"
+                         style="width: 40px; border: 2px solid transparent; border-radius: 10px;"
+                    >
+                </td>
+
+                <td style="vertical-align: middle; padding: 0"><p style="margin-bottom: 0 !important;" class="text-nowrap">
+                    <input style="width: 70px" class="form-control"
+                           type="number"
+                           id="miniClipCard20DollarInput"
+                           min="0"
+                           max="99"
+                    >
+                </td>
+            </tr>
+
+        </table>
+
+        <button id="miniClipCardAddToBagButton" type="button" class="btn btn-outline-primary btn-small" style="text-transform: lowercase !important;">
+            Add to Bag
+        </button>
+    </div>
+</a>
+
+
+</html>

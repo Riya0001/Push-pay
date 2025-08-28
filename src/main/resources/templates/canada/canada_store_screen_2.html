@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:insert="~{fragments/store/header :: head}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="ttp-bg-white">
+<div id="content-wrapper" class="content-wrapper-cls">
+
+    <nav th:replace="~{fragments/store/navbar ::navbar-without-bag}"></nav>
+
+    <div class="container" style="margin-top: 100px">
+        <div id="user-facing-screen-1">
+            <div th:replace="~{fragments/store/stepper :: stepper}"></div>
+            <div th:replace="~{fragments/store/stepper :: stepper-sm}"></div>
+
+            <div hidden>
+                <input id="totalProducts" type="number" th:value="${storeShoppingBag.totalNumberOfProducts()}">
+            </div>
+
+            <!-- Loading section (initially hidden) -->
+            <div id="form-loading-section" class="text-center" style="display: none; padding: 100px;">
+                <h4 class="ttp-color-purple text-center">calculating shipping and taxes</h4><br>
+                <div class="row justify-content-center align-items-center">
+                    <div class="dot-flashing"></div>
+                </div>
+            </div>
+
+            <!-- Form Section -->
+            <!-- Form Section -->
+            <div id="form-section" class="mt-5" style="padding-bottom: 400px;">
+                <form id="order-form" th:object="${contactAndShipping}" method="POST">
+                    <div class="row justify-content-between align-items-start">
+                        <!-- Left: User Form -->
+                        <div class="col-sm-8">
+
+                            <!-- Ministry Unit Information -->
+                            <div class="mb-4">
+                                <h4 class="ttp-color-purple">2. Ministry Unit Information</h4>
+                                <hr class="ttp-bg-color-light-grey mt-0">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-label ttp-color-purple">Division</label>
+                                        <select class="custom-select form-item bg-white" required id="divisionInput" th:field="*{division}">
+                                            <option th:value="''" hidden>Please select a division</option>
+                                            <option th:value="'ATL'">ATL</option>
+                                            <option th:value="'BC'">BC</option>
+                                            <option th:value="'ONT'">ONT</option>
+                                            <option th:value="'PRNT'">PRNT</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label ttp-color-purple">RESPC #</label>
+                                        <input type="text" class="form-control form-item" th:field="*{respcNumber}" required />
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <label class="form-label ttp-color-purple">Ministry Unit Name</label>
+                                        <input type="text" class="form-control form-item" th:field="*{ministryName}" required />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Contact Information -->
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h4 class="ttp-color-purple mb-0">3. Contact Information</h4>
+                                    <small class="text-end" style="color: #901691; max-width: 430px;">
+                                        <em>
+                                            Note: <strong>the Dashboard login details</strong> required to view your collections will be sent to this user. This user will have the ability to add other members to the Dashboard.
+                                        </em>
+                                    </small>
+                                </div>
+                                <hr class="ttp-bg-color-light-grey mt-2">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-label ttp-color-purple">First Name</label>
+                                        <input type="text" class="form-control form-item" th:field="*{contactFirstName}" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label ttp-color-purple">Last Name</label>
+                                        <input type="text" class="form-control form-item" th:field="*{contactLastName}" required>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <label class="form-label ttp-color-purple">Phone</label>
+                                        <input type="tel" class="form-control form-item"
+                                               th:field="*{contactPhone}"
+                                               pattern="^\d{9,}$"
+                                               title="Phone number must be at least 9 digits and digits only"
+                                               required>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <label class="form-label ttp-color-purple">Email</label>
+                                        <input type="email" class="form-control form-item" th:field="*{contactEmail}" required>
+                                        <div class="form-text text-muted" style="margin-top: 2px; ">
+                                           This email will be used to access your Dashboard
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Shipping Information -->
+                            <div class="mb-4">
+                                <h4 class="ttp-color-purple">4. Shipping Information</h4>
+                                <hr class="ttp-bg-color-light-grey mt-0">
+                                <div class="row">
+                                    <div class="col-md-12 mt-3">
+                                        <label class="form-label ttp-color-purple">Attention To</label>
+                                        <input type="text" class="form-control form-item" th:field="*{attentionTo}" required>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <label class="form-label ttp-color-purple">Address Line 1</label>
+                                        <input type="text" class="form-control form-item" th:field="*{shippingAddr1}" required>
+                                    </div>
+                                    <small class="form-text text-muted mb-1" style="margin-left: 15px;">P.O. boxes are not allowed</small>
+                                    <div class="col-md-12 mt-3">
+                                        <label class="form-label ttp-color-purple">Address Line 2 (Optional)</label>
+                                        <input type="text" class="form-control form-item" th:field="*{shippingAddr2}">
+                                        <small class="form-text text-muted mb-1">P.O. boxes are not allowed</small>
+                                    </div>
+
+                                    <div class="col-md-6 mt-3">
+                                        <label class="form-label ttp-color-purple">City</label>
+                                        <input type="text" class="form-control form-item" th:field="*{shippingCity}" required>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <label class="form-label ttp-color-purple">Province</label>
+                                        <select class="custom-select form-item bg-white" th:field="*{shippingProvince}" required>
+                                            <option value="" hidden>Select Province</option>
+                                            <option value="Alberta">Alberta</option>
+                                            <option value="British Columbia">British Columbia</option>
+                                            <option value="Manitoba">Manitoba</option>
+                                            <option value="New Brunswick">New Brunswick</option>
+                                            <option value="Newfoundland">Newfoundland and Labrador</option>
+                                            <option value="Nova Scotia">Nova Scotia</option>
+                                            <option value="Ontario">Ontario</option>
+                                            <option value="Prince Edward Island">Prince Edward Island</option>
+                                            <option value="Quebec">Quebec</option>
+                                            <option value="Saskatchewan">Saskatchewan</option>
+                                            <option value="Northwest Territories">Northwest Territories</option>
+                                            <option value="Nunavut">Nunavut</option>
+                                            <option value="Yukon">Yukon</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <label class="form-label ttp-color-purple">Postal Code</label>
+                                        <input type="text" class="form-control form-item"
+                                               th:field="*{shippingPostalCode}"
+                                               maxlength="7"
+                                               placeholder="A1A 1A1"
+                                               pattern="^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$"
+                                               title="Postal code must be in the format A1A 1A1"
+                                               required>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <label class="form-label ttp-color-purple">Country</label>
+                                        <select class="custom-select form-item bg-white" th:field="*{shippingCountry}" required>
+                                            <option value="Canada" selected>Canada</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: Order Summary -->
+                        <div class="col-sm-4 d-flex justify-content-center">
+                            <div id="your-orders-section" class="mt-5">
+                                <div id="your-orders-section-body" class="text-center mx-3" style="min-width: 300px; max-width: 300px">
+                                    <div class="ttp-bg-color-light-shade-grey ttp-border-radius-10px pb-2">
+                                        <div class="ttp-card-header ttp-color-purple pt-4">Your Order</div>
+
+                                        <div class="ttp-card-sub-header ttp-color-fuschia mt-4">Total Kettle Display Quantity</div>
+                                        <div class="ttp-card-info ttp-color-dark-grey">
+    <span th:text="${storeShoppingBag.threeDeviceDisplayBilingualQuantity + storeShoppingBag.threeDeviceDisplayEnglishQuantity + storeShoppingBag.threeDeviceDisplayFrenchQuantity}"
+          style="font-size: 20px; font-weight: bold;"></span>
+                                        </div>
+
+
+                                        <div class="ttp-card-sub-header ttp-color-fuschia mt-4">Total Counter Display Quantity</div>
+                                        <div class="ttp-card-info ttp-color-dark-grey">
+    <span style="font-size: 20px; font-weight: bold;"
+          th:text="${storeShoppingBag.singleCurveBilingualQuantity + storeShoppingBag.singleCurveEnglishQuantity + storeShoppingBag.singleCurveFrenchQuantity}">
+    </span>
+                                        </div>
+
+
+                                        <div class="ttp-card-sub-header ttp-color-purple mt-4" style="font-size: 18px;">Total Order</div>
+                                        <div class="ttp-card-sub-header ttp-color-fuschia">(Before Shipping and Taxes)</div>
+                                        <div class="ttp-fs-24px ttp-fw-700 ttp-color-purple">
+                                            $<span th:text="${#numbers.formatDecimal(storeShoppingBag.totalAmountFormatted(), 1, 'COMMA', 2, 'POINT')}"></span>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="mt-4" style="display: flex; gap: 10px; margin-left: 10px; margin-right: 10px;">
+                                        <button type="button" style="width: 200px;" class="ttp-button-primary" onclick="history.back()">
+                                            &lt; BACK
+                                        </button>
+                                        <button type="button" style="width: 200px;" class="ttp-button-primary" onclick="showLoadingAndSubmitForm()">
+                                            NEXT &gt;
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function showLoadingAndSubmitForm() {
+        const form = document.getElementById('order-form');
+
+        if (form.checkValidity()) {
+            // Hide form and show loading animation
+            document.getElementById('form-section').style.display = 'none';
+            document.getElementById('form-loading-section').style.display = 'block';
+            form.submit();
+        } else {
+            // Let browser show native validation UI
+            form.reportValidity();
+        }
+    }
+</script>
+
+</body>
+</html>

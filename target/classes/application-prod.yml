@@ -1,0 +1,67 @@
+server:
+  ssl:
+    key-store: ${KEY_STORE_PATH}
+    key-store-password: ${KEY_STORE_PASSWORD}
+    key-store-type: pkcs12
+    key-alias: tiptappay
+    key-password: ${KEY_PASSWORD}
+    protocol: TLS
+    enabled-protocols: TLSv1.2
+    ciphers: ECDHE-RSA-AES256-GCM-SHA384, ECDHE-ECDSA-AES256-GCM-SHA384, ECDHE-RSA-AES128-GCM-SHA256, ECDHE-ECDSA-AES128-GCM-SHA256
+  port: 443
+
+spring:
+  mail:
+    protocol: smtp
+    test-connection: true
+    host: ${SMTP_HOST}
+    port: 587
+    username: ${SMTP_USERNAME}
+    password: ${SMTP_PASSWORD}
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        smtp:
+          auth: true
+          connectiontimeout: 30000
+          timeout: 30000
+          starttls:
+            enable: true
+        debug: "false"
+    default-from-address: ${MAIL_DEFAULT_FROM_ADDRESS}
+    enable-sending-email: true
+
+netsuite:
+  environment: ${NETSUITE_ENVIRONMENT}
+  restlet:
+    consumer-key: ${CONSUMER_KEY}
+    consumer-secret: ${CONSUMER_SECRET}
+    token: ${TOKEN}
+    token-secret: ${TOKEN_SECRET}
+    signature-method: ${SIGNATURE_METHOD}
+    version: ${VERSION}
+    account-id: ${ACCOUNT_ID}
+    base-url: ${BASE_URL}
+    http-method: ${HTTP_METHOD}
+    script: ${SCRIPT}
+    deployment-id: ${DEPLOYMENT_ID}
+
+app:
+  environment: ${APP_ENVIRONMENT}
+  developer:
+    insights:
+      enabled: ${INSIGHTS_ENABLED}
+    debug:
+      enabled: ${DEBUG_ENABLED}
+
+  cookie:
+    encryption-key: ${COOKIE_ENCRYPTION_KEY}
+    path: /
+    exp: 3600
+    http-only: true
+    secure: true
+athena:
+  api:
+    prefix: api/athena/v1
+    key: ${ATHENA_INTERNAL_API_KEY}

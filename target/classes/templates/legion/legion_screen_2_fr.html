@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tiptap</title>
+
+    <!-- Favicon & Fonts -->
+    <link rel="icon" href="/images/favicon/favicon.ico" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Mulish:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<div class="container py-5">
+    <header style="padding-left : 0px; padding-right : 0px">
+        <a href="https://tiptappay.com">
+            <img class="float-start" style="height: 70px" src="/images/logo_lockup.png" alt=""/>
+        </a>
+        <a href="https://tiptappay.com">
+            <img class="float-end" style="padding-top: 5px; height: 45px" src="/images/tiptap_Logo_Grey_RGB.png" alt=""/>
+        </a>
+    </header>
+    <div class="row mb-3">
+        <div class="col d-flex flex-column align-items-start">
+            <a class="btn ttp-btn-outline-primary btn-lg" href="/legion/fr/order">Précédent</a>
+            <h1 class="mt-3 text-grey fw-bold">Réviser votre commande</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="my-4 p-1">
+            <h2 class="text-grey fw-bold">Information relative à la filiale</h2>
+            <hr>
+        </div>
+        <div class="col"><label>Direction provinciale</label><p th:text="${order.province}"></p></div>
+        <div class="col"><label>Filiale</label><p th:text="${order.branchNumber}"></p></div>
+        <div class="col"><label>Direction provinciale</label><p th:text="${order.provincialCommand}"></p></div>
+        <div class="col-4"><label>Estimation de la population environnante desservie par votre filiale</label><p th:text="${order.estimatedPopulation}"></p></div>
+    </div>
+    <div class="row">
+        <div class="my-4 p-1">
+            <h2 class="text-grey fw-bold">Coordonnées – Personne contact</h2>
+            <hr>
+        </div>
+        <div class="col"><label>Prénom du contact</label><p th:text="${order.contactFirstName}"></p></div>
+        <div class="col"><label>Nom de famille du contact</label><p th:text="${order.contactLastName}"></p></div>
+        <div class="col"><label>Adresse courriel du contact</label><p th:text="${order.contactEmail}"></p></div>
+        <div class="col"><label>Nº de téléphone</label><p th:text="${order.contactPhoneNumber}"></p></div>
+    </div>
+    <div class="row">
+        <div class="my-4 p-1">
+            <h2 class="text-grey fw-bold">Informations sur la livraison</h2>
+            <hr>
+        </div>
+        <div class="col"><label>Nº & Nom de rue (ligne 1)</label><p th:text="${order.shippingAddressLine1}"></p></div>
+        <div class="col"><label>Nº & Nom de rue (ligne 2) (facultatif)</label><p th:text="${order.shippingAddressLine2}"></p></div>
+        <div class="col"><label>Ville</label><p th:text="${order.shippingCity}"></p></div>
+        <div class="col"><label>Province</label><p th:text="${order.shippingState}"></p></div>
+        <div class="col"><label>Code postal</label><p th:text="${order.shippingZipCode}"></p></div>
+        <div class="w-100"></div>
+        <div class="col"><label>Contact à la livraison</label><p th:text="${order.shippingFullName}"></p></div>
+        <div class="col"><label>Numéro de contact pour la livraison</label><p th:text="${order.shippingPhone}"></p></div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col">
+            <p class="mb-1"><strong style="color: #b73838;">Les commandes devraient arriver d'ici le 11 octobre. Aucun frais de transport ne sera appliqué.</strong></p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="my-4 p-1">
+            <h2 class="text-grey fw-bold">Articles demandés</h2>
+            <hr>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th class="text-grey">Description de l’article</th>
+                    <th class="text-grey text-center">Quantité totale</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Boîte de coquelicots</td>
+                    <td class="text-center" th:text="${order.twoPackPoppyDisplay}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <hr>
+    <p style="color: #b73838;">À la fin de la Campagne du coquelicot 2025, tous les appareils à 5 $ devront <strong>IMMÉDIATEMENT</strong> être retournés à tiptap. Des instructions d'envoi et une étiquette de retour seront envoyées avec chaque boîte. Si votre/vos boîte(s) n'est (ne sont) pas reçue(s) par tiptap en date du 28 novembre, les filiales seront facturées pour tous les dispositifs manquants. </p>
+    <!-- FINAL FORM -->
+    <form method="post" action="/legion/fr/order-submit" id="orderForm">
+        <input type="hidden" name="cart" th:value="${cartJson}" />
+        <input type="hidden" name="checkout" th:value="${checkoutJson}" />
+
+        <div id="acknowledgement-section" class="alert alert-secondary mt-5 mb-5" role="alert">
+            <p>SVP confirmer que les informations ci-dessus sont correctes avant de soumettre votre commande.</p>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="acknowledgementCheckboxInput" required>
+                <label class="form-check-label" for="acknowledgementCheckboxInput">
+                    Je confirme que les informations fournies sont exactes et j'accepte la déclaration ci-dessus.
+                </label>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col d-flex justify-content-between">
+                <a class="btn ttp-btn-outline-primary btn-lg" href="/legion/fr/order">Modifier la commande</a>
+                <div class="btn-group">
+                    <button type="submit" id="submitBtn" class="btn ttp-btn-primary btn-lg">Placer la commande</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
+<script>
+    const form = document.getElementById('orderForm');
+    const submitBtn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', function () {
+        submitBtn.disabled = true;
+        submitBtn.classList.remove('ttp-btn-primary');
+        submitBtn.classList.add('btn-secondary');
+        submitBtn.innerText = 'Soumission...';
+    });
+</script>

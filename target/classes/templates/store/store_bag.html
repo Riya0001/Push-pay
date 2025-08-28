@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en"
+>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.css">
+    <link rel="icon" type="image/x" href="/favicon.ico">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <title>tiptap</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/app.css"/>
+
+    <meta charset="UTF-8" content="MBoyQBsQODEBNHceP31SFiBYDEkgOgcdGyaryiAu6VAXi5kLp3yxUXKn" csrf-param="_csrf_token"
+          method-param="_method" name="csrf-token">
+
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        .sp-container {
+            display: flex;
+        }
+
+        .sp-left-column {
+            width: 1500px; /* Adjust width as needed */
+        }
+
+        .sp-right-column {
+            width: 500px; /* Adjust width as needed */
+        }
+    </style>
+</head>
+
+<body style="background-color: #fcfcfc">
+
+<div id="content-wrapper" class="">
+
+    <nav th:replace="~{fragments/navbar :: navbar}"></nav>
+
+    <div class="container d-flex mt-5">
+
+        <main
+                id=""
+                class="bg-lightgrey flex-grow-6 flex-shrink-1 px-4 py-5 w-100"
+                role="main"
+        >
+            <form method="POST" th:object="${bag}" id="order-form">
+                <div class="d-flex justify-content-between align-items-center mt-3 mb-3">
+
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <a class="btn btn-outline-primary btn-small position-relative d-flex align-items-center"
+                           th:href="@{${backTo}}">
+                            <svg th:replace="~{fragments/svg_fragments :: svg-left-arrow}"></svg>
+                        </a>
+
+                        <a class="btn btn-outline-primary btn-small position-relative d-flex align-items-center ml-2"
+                           href="/store">
+                            <svg th:replace="~{fragments/svg_fragments :: svg-store-home}"></svg>
+                        </a>
+
+                    </div>
+
+<!--                    <button class="btn btn-outline-primary btn-small position-relative d-flex align-items-center"-->
+<!--                            value="/store" type="submit">-->
+<!--                        <svg th:replace="~{fragments/svg_fragments :: svg-right-arrow}"></svg>-->
+<!--                    </button>-->
+
+                </div>
+
+                <section class="mb-3">
+                    <div class="mb-4">
+                        <header>
+                            <h1>Store Bag</h1>
+                        </header>
+                    </div>
+                </section>
+
+
+                    <!--   SUMMARY : START   -->
+
+
+                    <!--                <form method="POST" th:object="${bag}" id="order-form">-->
+
+                    <div class="row justify-content-between">
+                        <div id="shopping-bag-section" class="col-sm bg-white mb-5" style="border-radius: 20px;">
+
+                            <table th:fragment="store-bag-table"
+                                   id="store-bag-table"
+                                   th:class="${bag.isBagEmpty(bag) ? 'hidden table table-borderless table-responsive mt-3' : 'table table-borderless table-responsive mt-3'}"
+                                   style="border-radius: 20px">
+                                <tr style="border: none">
+                                    <td style="vertical-align: middle"><p
+                                            style="margin-bottom: 0 !important; font-weight: bold;"
+                                            class="text-fuscia text-nowrap">Item</p></td>
+                                    <td style="vertical-align: middle"><p
+                                            style="margin-bottom: 0 !important; font-weight: bold;"
+                                            class="text-fuscia text-nowrap"></p></td>
+                                    <td style="vertical-align: middle"><p
+                                            style="margin-bottom: 0 !important; font-weight: bold;"
+                                            class="text-fuscia text-nowrap">Qty</p></td>
+                                    <td style="vertical-align: middle"><p
+                                            style="margin-bottom: 0 !important; font-weight: bold"
+                                            class="text-fuscia text-nowrap">Subtotal</p></td>
+                                    <td style="vertical-align: middle"><p
+                                            style="margin-bottom: 0 !important; font-weight: bold"
+                                            class="text-fuscia text-nowrap"></p></td>
+                                </tr>
+
+                                <!--   small counter - denomination: $2    -->
+                                <tr id="smallCounter2DollarTr"
+                                    th:class="${bag.getSmallCounter2Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/small_counter.png'}"
+                                             alt="small counter image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">small counter</span>
+                                        <br>denomination: $2
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getSmallCounter2Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="smallCounter2DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getSmallCounter2Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="smallCounter2Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   small counter - denomination: $5    -->
+
+                                <tr id="smallCounter5DollarTr"
+                                    th:class="${bag.getSmallCounter5Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/small_counter.png'}"
+                                             alt="small counter image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">small counter</span>
+                                        <br>denomination: $5
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getSmallCounter5Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="smallCounter5DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getSmallCounter5Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="smallCounter5Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   small counter - denomination: $10    -->
+
+                                <tr id="smallCounter10DollarTr"
+                                    th:class="${bag.getSmallCounter10Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/small_counter.png'}"
+                                             alt="small counter image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">small counter</span>
+                                        <br>denomination: $10
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getSmallCounter10Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="smallCounter10DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getSmallCounter10Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="smallCounter10Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   small counter - denomination: $20    -->
+
+                                <tr id="smallCounter20DollarTr"
+                                    th:class="${bag.getSmallCounter20Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/small_counter.png'}"
+                                             alt="small counter image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">small counter</span>
+                                        <br>denomination: $20
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getSmallCounter20Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="smallCounter20DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getSmallCounter20Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="smallCounter20Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   medium counter - denomination: $2    -->
+                                <tr id="mediumCounter2DollarTr"
+                                    th:class="${bag.getMediumCounter2Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/medium_counter.png'}"
+                                             alt="medium counter image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">medium counter</span>
+                                        <br>denomination: $2
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getMediumCounter2Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="mediumCounter2DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getMediumCounter2Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="mediumCounter2Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   medium counter - denomination: $5    -->
+                                <tr id="mediumCounter5DollarTr"
+                                    th:class="${bag.getMediumCounter5Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/medium_counter.png'}"
+                                             alt="medium counter image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">medium counter</span>
+                                        <br>denomination: $5
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getMediumCounter5Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="mediumCounter5DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getMediumCounter5Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="mediumCounter5Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   medium counter - denomination: $10    -->
+                                <tr id="mediumCounter10DollarTr"
+                                    th:class="${bag.getMediumCounter10Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/medium_counter.png'}"
+                                             alt="medium counter image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">medium counter</span>
+                                        <br>denomination: $10
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getMediumCounter10Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="mediumCounter10DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getMediumCounter10Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="mediumCounter10Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   medium counter - denomination: $20    -->
+                                <tr id="mediumCounter20DollarTr"
+                                    th:class="${bag.getMediumCounter20Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/medium_counter.png'}"
+                                             alt="medium counter image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">medium counter</span>
+                                        <br>denomination: $20
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getMediumCounter20Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="mediumCounter20DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getMediumCounter20Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="mediumCounter20Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   large counter - denomination: $2 $5 $10   -->
+                                <tr id="largeCounter2510DollarTr"
+                                    th:class="${bag.getLargeCounter2510Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/large_counter.png'}"
+                                             alt="large counter image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">large counter</span>
+                                        <br>denomination: $2 $5 $10
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getLargeCounter2510Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="largeCounter2510DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getLargeCounter2510Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="largeCounter2510Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   large counter - denomination: $5 $10 $20   -->
+                                <tr id="largeCounter51020DollarTr"
+                                    th:class="${bag.getLargeCounter51020Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/large_counter.png'}"
+                                             alt="large counter image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">large counter</span>
+                                        <br>denomination: $5 $10 $20
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getLargeCounter51020Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="largeCounter51020DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getLargeCounter51020Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="largeCounter51020Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   floor stand - denomination: $2 $5 $10   -->
+                                <tr id="floorStand2510DollarTr"
+                                    th:class="${bag.getFloorStand2510Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/floor_stand.png'}"
+                                             alt="floor stand image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">floor stand</span>
+                                        <br>denomination: $2 $5 $10
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getFloorStand2510Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="floorStand2510DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getFloorStand2510Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="floorStand2510Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   floor stand - denomination: $5 $10 $20   -->
+                                <tr id="floorStand51020DollarTr"
+                                    th:class="${bag.getFloorStand51020Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/floor_stand.png'}"
+                                             alt="floor stand image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">floor stand</span>
+                                        <br>denomination: $5 $10 $20
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getFloorStand51020Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="floorStand51020DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getFloorStand51020Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="floorStand51020Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   lanyard - denomination: $2    -->
+                                <tr id="lanyard2DollarTr" th:class="${bag.getLanyard2Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/lanyard.png'}"
+                                             alt="lanyard image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">lanyard</span>
+                                        <br>denomination: $2
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getLanyard2Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="lanyard2DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getLanyard2Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="lanyard2Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   lanyard - denomination: $5    -->
+
+                                <tr id="lanyard5DollarTr" th:class="${bag.getLanyard5Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/lanyard.png'}"
+                                             alt="lanyard image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">lanyard</span>
+                                        <br>denomination: $5
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getLanyard5Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="lanyard5DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getLanyard5Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="lanyard5Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   lanyard - denomination: $10    -->
+
+                                <tr id="lanyard10DollarTr" th:class="${bag.getLanyard10Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/lanyard.png'}"
+                                             alt="lanyard image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">lanyard</span>
+                                        <br>denomination: $10
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getLanyard10Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="lanyard10DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getLanyard10Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="lanyard10Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   lanyard - denomination: $20    -->
+
+                                <tr id="lanyard20DollarTr" th:class="${bag.getLanyard20Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/lanyard.png'}"
+                                             alt="lanyard image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">lanyard</span>
+                                        <br>denomination: $20
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getLanyard20Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="lanyard20DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getLanyard20Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="lanyard20Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+
+                                <!--   selfie stick - denomination: $2    -->
+                                <tr id="selfieStick2DollarTr" th:class="${bag.getSelfieStick2Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/selfie_stick.png'}"
+                                             alt="selfie stick image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">selfie stick</span>
+                                        <br>denomination: $2
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getSelfieStick2Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="selfieStick2DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getSelfieStick2Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="selfieStick2Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   selfie stick - denomination: $5    -->
+
+                                <tr id="selfieStick5DollarTr" th:class="${bag.getSelfieStick5Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/selfie_stick.png'}"
+                                             alt="selfie stick image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">selfie stick</span>
+                                        <br>denomination: $5
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getSelfieStick5Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="selfieStick5DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getSelfieStick5Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="selfieStick5Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   selfie stick - denomination: $10    -->
+
+                                <tr id="selfieStick10DollarTr"
+                                    th:class="${bag.getSelfieStick10Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/selfie_stick.png'}"
+                                             alt="selfie stick image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">selfie stick</span>
+                                        <br>denomination: $10
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getSelfieStick10Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="selfieStick10DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getSelfieStick10Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="selfieStick10Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   selfie stick - denomination: $20    -->
+
+                                <tr id="selfieStick20DollarTr"
+                                    th:class="${bag.getSelfieStick20Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/selfie_stick.png'}"
+                                             alt="selfie stick image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">selfie stick</span>
+                                        <br>denomination: $20
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getSelfieStick20Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="selfieStick20DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getSelfieStick20Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="selfieStick20Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   mini clip - denomination: $2    -->
+                                <tr id="miniClip2DollarTr" th:class="${bag.getMiniClip2Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/mini_clip.png'}"
+                                             alt="mini clip image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">mini clip</span>
+                                        <br>denomination: $2
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getMiniClip2Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="miniClip2DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getMiniClip2Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="miniClip2Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   mini clip - denomination: $5    -->
+
+                                <tr id="miniClip5DollarTr" th:class="${bag.getMiniClip5Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/mini_clip.png'}"
+                                             alt="mini clip image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">mini clip</span>
+                                        <br>denomination: $5
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getMiniClip5Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="miniClip5DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getMiniClip5Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="miniClip5Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   mini clip - denomination: $10    -->
+
+                                <tr id="miniClip10DollarTr" th:class="${bag.getMiniClip10Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/mini_clip.png'}"
+                                             alt="mini clip image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">mini clip</span>
+                                        <br>denomination: $10
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getMiniClip10Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="miniClip10DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getMiniClip10Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="miniClip10Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <!--   mini clip - denomination: $20    -->
+
+                                <tr id="miniClip20DollarTr" th:class="${bag.getMiniClip20Dollar() <= 0} ? 'hidden'">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px">
+                                        <img th:src="@{'/images/mini_clip.png'}"
+                                             alt="mini clip image"
+                                             style="width: 50px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 10px;"
+                                        >
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <span style="font-weight: bold;">mini clip</span>
+                                        <br>denomination: $20
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <span th:text="${bag.getMiniClip20Dollar()}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        $<span id="miniClip20DollarSubtotalText"
+                                               th:text="${formatter.formatCents(bag.getMiniClip20Dollar() * pricing.getMonthlyFeeAmount())}"></span>
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <a class="deleteButton" type="button" data-item="miniClip20Dollar"
+                                           style="text-transform: lowercase !important;">
+                                            <svg th:replace="~{fragments/svg_fragments :: garbage-bin-svg}"></svg>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr style="border: none">
+                                    <td style="vertical-align: middle; padding: 0 20px 0 15px"></td>
+                                    <td style="vertical-align: middle;"></td>
+                                    <td style="vertical-align: middle"></td>
+                                    <td style="vertical-align: middle"></td>
+                                    <td style="vertical-align: middle"></td>
+                                </tr>
+
+                            </table>
+
+
+                            <div id="bag-is-empty-section"
+                                 th:class="${bag.isBagEmpty(bag) ? 'text-center mt-5' : 'hidden text-center mt-5'}">
+
+                                <svg th:replace="~{fragments/svg_fragments :: bag-v2-cross-primary-svg}"></svg>
+                                <h3 class="mt-3">Bag is empty!</h3>
+                            </div>
+                        </div>
+
+                        <div id="bag-summary-section" class="col-sm card py-4 nav-link inner-border-hover"
+                             style="max-width: 328px; min-width: 300px; max-height: 420px; margin: 0 10px 0 10px">
+                            <div class="">
+
+                                <table class="table table-borderless mt-3">
+
+                                    <tbody>
+                                    <tr style="border: none">
+
+                                        <td style="">
+                                            <p class="text-black font-weight-bold">Summary</p>
+                                        </td>
+
+                                        <td style=""><p style="margin-bottom: 0 !important;"
+                                                        class="text-nowrap text-fuscia"></p></td>
+
+                                    </tr>
+
+                                    <tr style="border: none">
+
+                                        <td style="">
+                                            <span class="text-black font-weight-bold">Subscription Fee</span>
+                                        </td>
+
+                                        <td style="">
+                                            <span style="margin-bottom: 0 !important;" class="text-nowrap text-fuscia">
+                                                $<span id="subscriptionFeeText"
+                                                       th:text="${formatter.formatCents(subscriptionFee)}"></span>
+                                            </span>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr style="">
+
+                                        <td style="">
+                                            <span class="text-black font-weight-bold">Service Fee</span>
+                                        </td>
+
+                                        <td style="">
+                                            <span style="margin-bottom: 0 !important;" class="text-nowrap text-fuscia">
+                                                $<span id="serviceFeeText"
+                                                       th:text="${formatter.formatCents(serviceFee)}"></span>
+                                            </span>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr style="border: none">
+
+                                        <td style="">
+                                            <p class="text-black font-weight-bold">Total</p>
+                                        </td>
+
+                                        <td style="">
+                                            <p style="margin-bottom: 0 !important;" class="text-nowrap text-fuscia">
+                                                $<span id="totalAmountText"
+                                                       th:text="${formatter.formatCents(totalAmount)}"></span>
+                                            </p>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr style="border: none">
+                                        <td colspan="2" class="pt-1">
+                                            <button class="btn btn-block btn-small btn-primary" name="action"
+                                                    value="/store"
+                                                    type="submit" style="text-transform: none">
+                                                Checkout
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+            </form>
+
+    <!--   SUMMARY : END   -->
+
+
+    </main>
+
+</div>
+</div>
+
+<script type="text/javascript" src="/js/app.js"></script>
+
+<script>
+
+    document.getElementById('order-form').addEventListener('submit', function (event) {
+        const action = event.submitter.getAttribute('value');
+        const form = event.target;
+        form.action = action;
+    });
+
+
+    const removeButtons = document.querySelectorAll('.deleteButton');
+    const bagBadge = document.getElementById('shopping-bag-device-number');
+
+    // ********************* EVENT LISTENERS *************
+
+    removeButtons.forEach(function (deleteButton) {
+        deleteButton.addEventListener('click', function () {
+            const itemInfo = deleteButton.getAttribute('data-item');
+            console.log('Clicked on item:', itemInfo);
+
+            const formData = {
+                fieldName: itemInfo
+            };
+
+            removeFromBag(formData);
+            updateCalculation(itemInfo);
+        });
+    });
+
+
+    function log(value) {
+        console.log(value)
+    }
+
+    function showHideItemRow(id, isShow) {
+        const row = document.getElementById(id);
+        if (row) {
+            if (isShow) {
+                row.classList.remove("hidden");
+            } else {
+                row.classList.add("hidden");
+            }
+        }
+    }
+
+    function updateCalculation(id) {
+        const subscriptionFeeText = document.getElementById('subscriptionFeeText');
+        const totalAmountText = document.getElementById('totalAmountText');
+        const serviceFeeText = document.getElementById('serviceFeeText');
+        const valueToRemoveText = document.getElementById(id + 'SubtotalText');
+
+        const subsFeeNew = (getCentsFromText(subscriptionFeeText) << 0) - (getCentsFromText(valueToRemoveText) << 0);
+
+        if (subsFeeNew === 0) {
+            serviceFeeText.textContent = (0).toFixed(2);
+            showHideItemRow('store-bag-table', false);
+            showHideItemRow('bag-is-empty-section', true);
+        }
+
+        const totalNew = (subsFeeNew << 0) + (getCentsFromText(serviceFeeText) << 0);
+
+        totalAmountText.textContent = (totalNew / 100).toFixed(2);
+        subscriptionFeeText.textContent = (subsFeeNew / 100).toFixed(2);
+    }
+
+    function getCentsFromText(textElem) {
+        return textElem.textContent.replace(/\D/g, '');
+    }
+
+    function updateBagBadgeNumber(num) {
+        if (num === 0) {
+            bagBadge.textContent = '';
+        } else {
+            bagBadge.textContent = num;
+        }
+    }
+
+    function removeFromBag(formData) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'bag/remove');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    console.log(xhr.responsePayment);
+
+                    showHideItemRow(formData.fieldName + "Tr", false);
+
+                    if(JSON.parse(xhr.responsePayment).removed){
+                        let totalDevices = JSON.parse(xhr.responsePayment).totalDevices;
+                        updateBagBadgeNumber(totalDevices);
+                    }
+
+                } else {
+                    // Error handling
+                    console.error('Error:', xhr.statusText);
+                }
+            }
+        };
+
+        log(JSON.stringify(formData))
+        xhr.send(JSON.stringify(formData));
+    }
+
+</script>
+
+</body>
+</html>

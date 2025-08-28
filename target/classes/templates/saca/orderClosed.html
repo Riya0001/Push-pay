@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="~{fragment/fragments :: header}"><title>tiptap</title></head>
+<body>
+<header>
+    <a href="https://tiptappay.com">
+        <img class="float-start" th:src="@{/images/salvation-army-logo.png}" style="height: 85px" alt="salvation army logo"/>
+    </a>
+    <a href="https://tiptappay.com">
+        <img class="float-end" th:src="@{/images/tiptap_Logo_WhiteText_RGB.png}"
+             style="padding-top: 10px; height: 65px" alt="tiptap logo"/>
+    </a>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <img class="mt-5" th:src="@{/images/ttpXSA.png}"/>
+            <div class="d-flex flex-row my-5 justify-content-start align-items-start">
+                <img class="" th:src="@{/images/check_circle_outline_24px.png}"/>
+                <h1 class="ms-3 fw-bold text-purple">The Ordering Window has closed.</h1>
+            </div>
+            <p class="fs-5 mb-5">Thank you for your interest in ordering tiptap devices for your 2022 Christmas Kettle
+                campaign. The deadline for ordering was September 1st so we are no longer accepting any new orders.</p>
+            <p class="fs-5 mb-5">
+                If you would like to speak to someone regarding this program, please contact Alexandria Venables at <a
+                    href="mailto:Alexandria.Venables@salvationarmy.ca">Alexandria.Venables@salvationarmy.ca</a>
+            </p>
+            <p class="fs-5 mb-5">We look forward to supporting The Salvation Army in the upcoming 2022 Christmas Kettle
+                Campaign!</p>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragment/fragments :: footer}"></div>
+</body>
+</html>

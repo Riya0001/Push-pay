@@ -1,0 +1,188 @@
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 425px;
+    background: linear-gradient(180deg, #422055 40%, #810d71 100%);
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar a {
+    display: block;
+    padding: 16px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.sidebar .logo {
+    margin: 50px 0 20px 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.sidebar .centered svg {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    object-fit: cover;
+}
+
+.sidebar .bottom-text {
+    margin: 16px 0 50px 0;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+div.content {
+    margin-left: 425px;
+    padding: 16px;
+    overflow: auto;
+}
+
+.main-content {
+    max-width: 900px;
+    width: 100%;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    margin: 0 auto;
+}
+
+.action-content {
+    max-width: 800px;
+    width: 100%;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    margin: 0 auto;
+}
+
+#customization-section {
+    max-width: 500px;
+    min-width: 320px;
+}
+
+#customization-preview-section {
+    width: 265px;
+}
+
+.customization-body {
+    background-color: #FBFBFB;
+    padding: 15px;
+}
+
+.customization-preview-body {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 9px;
+}
+
+.svg-container {
+    position: relative;
+    width: 250px;
+    height: 505px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.svg-container #phone-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.svg-scrollable {
+    position: absolute;
+    top: 28px;
+    left: 13px;
+    width: 220px;
+    height: 463px;
+    overflow-y: scroll; /* or auto */
+    background: rgba(255, 255, 255, 0.7);
+    padding: 5px;
+    border-radius: 15px;
+    background: linear-gradient(to bottom, #FFFFFF 5%, #E6E6E6 100%);
+
+    /* Hide scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+}
+
+/* Hide scrollbar for WebKit-based browsers (Chrome, Safari) */
+.scrollable::-webkit-scrollbar {
+    display: none;
+}
+
+.purple-radio {
+    accent-color: #4b2960;
+}
+
+/* Tablet and Smaller Screens */
+@media screen and (max-width: 1150px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .sidebar a {
+        display: flex;
+        justify-content: center;
+    }
+
+    div.content {
+        margin-left: 0;
+    }
+}
+
+/* Small Mobile Screens */
+@media screen and (max-width: 400px) {
+    .sidebar a {
+        text-align: center;
+    }
+}
+
+/* Notification Container */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: -350px;
+    background-color: #FFFFFF;
+    color: black;
+    padding: 15px;
+    border-radius: 15px 0 0 15px;
+    border: 1px solid hsl(0deg 0% 92.94%);
+    box-shadow: 15px 10px 35px rgba(0, 0, 0, 0.2);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.5s ease-in-out, right 0.5s ease-in-out;
+    max-width: 350px;
+    z-index: 9999;
+}
+
+/* Slide in */
+.show-notification {
+    right: -2px;
+}
+
+/* Slide out */
+.hide-notification {
+    right: -350px;
+}
+
+.icon-wrapper {
+    width: 45px; /* circle size */
+    height: 45px;
+    background-color: hsl(135deg 68.57% 86.27%);
+    border-radius: 50%; /* circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+}

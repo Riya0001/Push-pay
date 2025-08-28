@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+
+<head th:fragment="head" id="footer">
+
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Most Devices -->
+  <link rel="icon" type="image/png" href="/images/favicon/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/images/favicon/favicon-32x32.png" sizes="32x32">
+
+  <!-- Android -->
+  <link rel="icon" type="image/png" href="/images/favicon/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/images/favicon/android-chrome-512x512.png" sizes="512x512">
+
+  <!-- IOS -->
+  <link rel="apple-touch-icon" type="image/png" href="/images/favicon/apple-touch-icon.png">
+
+  <!-- IE -->
+  <link rel="shortcut icon" type="image/png" href="/images/favicon/favicon.ico">
+
+  <!-- Web Manifest -->
+  <link rel="manifest" type="image/png" href="/images/favicon/site.webmanifest">
+
+
+  <title>tiptap</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+          rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+  <link rel="stylesheet" href="/css/base_app.css"/>
+
+  <style>
+    body {
+      font-family: Mulish, sans-serif;
+    }
+
+    .padding-left-30px {
+      padding-left: 30px;
+      text-align: left;
+    }
+
+    .padding-left-20px {
+      padding-left: 20px;
+      text-align: left;
+    }
+
+    hr.custom-hr-grey {
+      opacity: .3;
+      background-color: #000000;
+    }
+
+    hr.stepper-hr-grey {
+      opacity: .3;
+      height: 1px;
+      background-color: #000000;
+    }
+
+    hr.stepper-hr-fuchsia {
+      opacity: 1;
+      height: 1px;
+      background-color: #901F7A;
+    }
+
+    @media (max-width: 780px) {
+      #stepper-section {
+        display: none;
+      }
+
+      #stepper-sm {
+        display: block;
+      }
+    }
+
+    @media (min-width: 781px) {
+      #stepper-sm {
+        display: none !important;
+      }
+    }
+
+    .form-control::placeholder {
+      color: var(--light-grey);
+    }
+
+    .scrollable-list {
+      height: 100px;
+      overflow-y: scroll;
+    }
+
+    .scrollable-list a {
+      color: var(--main-grey);
+    }
+
+    .scrollable-list a:hover {
+      color: var(--fuschia);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .scrollable-list::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .scrollable-list::-webkit-scrollbar-track {
+      background: #f0f0f0;
+    }
+
+    .scrollable-list::-webkit-scrollbar-thumb {
+      background-color: #888888;
+    }
+
+    .fuschia-a {
+      color: var(--fuschia);
+    }
+
+    .fuschia-a:hover {
+      text-decoration: none;
+      color: var(--fuschia);
+    }
+
+    .ttp-toast {
+      position: fixed;
+      top: 85px;
+      right: 10px;
+      z-index: 1051;
+    }
+  </style>
+
+</head>
+
+</html>

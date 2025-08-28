@@ -1,0 +1,284 @@
+:root {
+    --black: #000000;
+    --main-grey: #474747;
+    --dark-grey: #666666;
+    --medium-grey: #A8A8A8;
+    --light-grey: #E5E5E5;
+    --lighter-grey: #FAFAFA;
+    --light-shade-grey: #F1F0F0;
+    --white: #FFFFFF;
+    --purple: #402253;
+    --fuschia: #901F7A;
+    --orange: #D5782C;
+    --red: #FF0000;
+}
+
+.ttp-color-black {
+    color: var(--black);
+}
+
+.ttp-color-main-grey {
+    color: var(--main-grey);
+}
+
+.ttp-color-dark-grey {
+    color: var(--dark-grey);
+}
+
+.ttp-color-medium-grey {
+    color: var(--medium-grey);
+}
+
+.ttp-color-light-grey {
+    color: var(--light-grey);
+}
+
+.ttp-color-lighter-grey {
+    color: var(--lighter-grey);
+}
+
+.ttp-color-white {
+    color: var(--white);
+}
+
+.ttp-color-purple {
+    color: var(--purple);
+}
+
+.ttp-color-fuschia {
+    color: var(--fuschia);
+}
+
+.ttp-color-orange {
+    color: var(--orange);
+}
+
+.ttp-color-error {
+    color: var(--red);
+}
+
+.ttp-bg-color-black {
+    background-color: var(--black);
+}
+
+.ttp-bg-color-main-grey {
+    background-color: var(--main-grey);
+}
+
+.ttp-bg-color-dark-grey {
+    background-color: var(--dark-grey);
+}
+
+.ttp-bg-color-medium-grey {
+    background-color: var(--medium-grey);
+}
+
+.ttp-bg-color-light-grey {
+    background-color: var(--light-grey);
+}
+
+.ttp-bg-color-lighter-grey {
+    background-color: var(--lighter-grey);
+}
+
+.ttp-bg-color-light-shade-grey {
+    background-color: var(--light-shade-grey);
+}
+
+.ttp-bg-color-white {
+    background-color: var(--white);
+}
+
+.ttp-bg-color-purple {
+    background-color: var(--purple);
+}
+
+.ttp-bg-color-fuschia {
+    background-color: var(--fuschia);
+}
+
+.ttp-bg-color-orange {
+    background-color: var(--orange);
+}
+
+body {
+    font-family: Mulish, sans-serif;
+    font-size: 14px;
+}
+
+h1 {
+    font-family: Montserrat, sans-serif;
+    font-size: 34px;
+    font-weight: 800;
+    text-align: left;
+    padding-bottom: 12px;
+    margin: 0;
+}
+
+h2, .h2 {
+    font-family: Montserrat, sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: left;
+    padding-bottom: 12px;
+    margin: 0;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: 700;
+    text-align: left;
+    padding-bottom: 8px;
+    margin: 0;
+}
+
+h4 {
+    font-size: 16px;
+    font-weight: 800;
+    text-align: left;
+    padding-bottom: 5px;
+    margin: 0;
+}
+
+form label {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.ttp-fs-24px {
+    font-size: 24px;
+}
+
+.ttp-fw-700 {
+    font-weight: 700;
+}
+
+.ttp-body-lead {
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+}
+
+.ttp-body-link {
+    text-decoration: none;
+}
+
+.ttp-body-link:hover {
+    text-decoration: none;
+}
+
+.ttp-body-info {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.ttp-body-tag {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.ttp-form-label {
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.ttp-form-value {
+    font-family: Montserrat, sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.ttp-border-radius-10px {
+    border-radius: 10px;
+}
+
+.ttp-border-radius-20px {
+    border-radius: 20px;
+}
+
+.ttp-card-header {
+    font-weight: 900;
+    font-size: 18px;
+}
+
+.ttp-card-sub-header-xs {
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.ttp-card-sub-header {
+    font-weight: 800;
+    font-size: 14px;
+}
+
+.ttp-card-sub-header-md {
+    font-weight: 800;
+    font-size: 15px;
+}
+
+.ttp-card-info {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.ttp-card-info-md {
+    font-weight: 800;
+    font-size: 13px;
+}
+
+.ttp-button-primary-sm {
+    background-color: var(--fuschia);
+    color: var(--white);
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.ttp-button-primary {
+    background-color: var(--fuschia);
+    color: var(--white);
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.ttp-button-secondary-sm {
+    background-color: var(--purple);
+    color: var(--white);
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 12px;
+}
+
+.ttp-button-secondary {
+    background-color: var(--purple);
+    color: var(--white);
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.ttp-footer-text-sm {
+    opacity: .5;
+    color: var(--black);
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.selected-card {
+    outline: 5px solid var(--fuschia);
+    outline-offset: -2px;
+}
+
+#messageBundle {
+    position: relative;
+}
+
+#messageTextBundle {
+    display: inline-block;
+}

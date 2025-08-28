@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:fragment="head-page-1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Most Devices -->
+    <link rel="icon" type="image/png" href="/images/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/images/favicon/favicon-32x32.png" sizes="32x32">
+
+    <!-- Android -->
+    <link rel="icon" type="image/png" href="/images/favicon/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/images/favicon/android-chrome-512x512.png" sizes="512x512">
+
+    <!-- IOS -->
+    <link rel="apple-touch-icon" type="image/png" href="/images/favicon/apple-touch-icon.png">
+
+    <!-- IE -->
+    <link rel="shortcut icon" type="image/png" href="/images/favicon/favicon.ico">
+
+    <!-- Web Manifest -->
+    <link rel="manifest" type="image/png" href="/images/favicon/site.webmanifest">
+
+    <title>tiptap | Bundles | Pricing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+          rel="stylesheet">
+    <!--    <link href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" th:href="@{/css/bundles/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bundles/css/custom/common.css}">
+    <link rel="stylesheet" th:href="@{/css/bundles/css/custom/page1.css}">
+
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-59JFNDD3');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "qtfyso1mfx");
+    </script>
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FDJL41MRCT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-FDJL41MRCT');
+    </script>
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-59JFNDD3"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<div hidden>
+    <label for="srInput"></label>
+    <input th:value="${salesRepId}" id="srInput">
+</div>
+
+<nav th:replace="~{fragments/bundles/navbar :: navbar}"></nav>
+
+<div class="container" id="main-container">
+
+    <div class="row g-5 mt-2">
+
+        <div id="page-title-section" class="">
+
+            <div class="row">
+                <div class="col-sm-6" style="text-align: left">
+                    <h1 style="color: black; font-weight: 600">Cart</h1>
+                </div>
+
+                <div class="col-sm-6" style="text-align: right">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Left Column -->
+        <div class="col-sm-8">
+
+            <div class="mb-3" style="background-color: rgb(251, 251, 251);">
+                <div class="card-body">
+
+                    <div class="" style="padding: 20px 34px 0 34px">
+                        <div style="display: flex; align-items: center;">
+                            <span style="padding-right: 10px;">
+                                <svg width="18" height="18" viewBox="0 0 15 18" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_308_364)">
+                                        <path d="M12.6414 18.0001H1.98349C1.96792 17.9924 1.95307 17.9811 1.93645 17.9776C0.824373 17.7311 0.238805 16.9849 0.294675 15.8482C0.369639 14.322 0.460868 12.7969 0.54644 11.2711C0.647217 9.47094 0.751178 7.67081 0.850186 5.87031C0.87706 5.38013 1.11433 5.1442 1.60478 5.14349C2.36326 5.14244 3.12173 5.14349 3.88021 5.14349C3.9428 5.14349 4.00503 5.14349 4.08177 5.14349C4.08177 5.04348 4.08141 4.96813 4.08177 4.89279C4.08636 4.24872 4.06444 3.60323 4.10086 2.96128C4.2073 1.09317 6.04817 -0.307288 7.88973 0.0585851C9.45656 0.369877 10.5149 1.63688 10.5318 3.2282C10.5379 3.7962 10.5329 4.36421 10.5329 4.93222C10.5329 4.99522 10.5329 5.05826 10.5329 5.14349C10.6139 5.14349 10.6765 5.14349 10.739 5.14349C11.5152 5.14349 12.2914 5.14102 13.0675 5.14453C13.4738 5.14629 13.7429 5.3921 13.7652 5.78404C13.8522 7.30353 13.9342 8.82369 14.0194 10.3432C14.0842 11.4947 14.1517 12.6458 14.2164 13.7973C14.2581 14.5397 14.3143 15.2816 14.332 16.0246C14.3504 16.7997 13.9961 17.3892 13.3168 17.7638C13.111 17.8772 12.8674 17.9234 12.6414 18.0001ZM9.23907 5.1347C9.23907 4.43429 9.24581 3.75641 9.23449 3.07854C9.23164 2.91233 9.18778 2.74119 9.13265 2.58272C8.825 1.6985 7.91765 1.1629 7.00182 1.31537C6.07501 1.46961 5.39294 2.24643 5.37527 3.18277C5.36536 3.71521 5.37279 4.24763 5.37242 4.78043C5.37242 4.89593 5.37242 5.01142 5.37242 5.1347H9.23907Z"
+                                              fill="#9E007E"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_308_364">
+                                            <rect width="14.625" height="18" fill="white"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </span>
+                            <span class="ttp-text-purple" style="font-size: 16px; padding-top: 6px;">Your Cart</span>
+                        </div>
+                    </div>
+
+                    <div id="cart-list-container" class="table-responsive"></div>
+
+                </div>
+
+
+            </div>
+
+            <div class="mt-2 mb-5 mx-1 d-flex justify-content-between">
+                <div class="">
+                    <button class="btn btn-link remove-bundle" data-index="${index}"
+                            style="display: flex; align-items: center; border: none; padding: 0; text-decoration: none; color: #422055;"
+                            onclick="customizeLink()"
+                    >
+                        <span style="font-size: 14px; padding-left: 5px;">Continue Shopping</span>
+                    </button>
+                </div>
+                <div>
+                    <button class="btn btn-link remove-bundle" data-index="${index}"
+                            style="display: flex; align-items: center; border: none; padding: 0; text-decoration: none; color: #422055;"
+                            onclick="customizeLink()"
+                    >
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.97846 9.45601L3.97832 9.45587L3.97393 9.46055C3.96757 9.4669 3.96123 9.47322 3.9549 9.47953C3.84849 9.58565 3.74619 9.68766 3.67393 9.81529C3.60166 9.94292 3.56682 10.0831 3.53058 10.229C3.52791 10.2397 3.52523 10.2505 3.52253 10.2613L3.08018 12.0307C3.07858 12.0371 3.07695 12.0436 3.07531 12.0501C3.04957 12.1528 3.02046 12.269 3.01079 12.3679C3.00002 12.478 3.00101 12.6774 3.16186 12.8383C3.32272 12.9992 3.52221 13.0001 3.63229 12.9894C3.73114 12.9797 3.84731 12.9506 3.95002 12.9249C3.95657 12.9232 3.96305 12.9216 3.96948 12.92L5.73889 12.4776C5.74969 12.4749 5.76045 12.4723 5.77119 12.4696C5.91704 12.4333 6.05724 12.3985 6.18488 12.3262C6.31251 12.254 6.41452 12.1517 6.52064 12.0453C6.52845 12.0374 6.53628 12.0296 6.54415 12.0217L11.3402 7.22565L11.3581 7.20777C11.565 7.00091 11.7478 6.8181 11.8754 6.65092C12.0136 6.46971 12.124 6.26069 12.124 6C12.124 5.73931 12.0136 5.53029 11.8754 5.34908C11.7478 5.1819 11.565 4.99909 11.3581 4.79224L11.3402 4.77435L11.2258 4.65997L11.2079 4.64208C11.0011 4.43519 10.8183 4.25235 10.6511 4.1248C10.4699 3.98654 10.2609 3.87614 10.0002 3.87614C9.73947 3.87614 9.53045 3.98654 9.34924 4.1248C9.18206 4.25235 8.99925 4.43519 8.79239 4.64208L8.77451 4.65997L3.97846 9.45601Z"
+                                  stroke="#422055" stroke-width="0.8"/>
+                            <path d="M8.3335 5L11.0002 7.66667" stroke="#422055" stroke-width="0.666667"/>
+                        </svg>
+                        <span style="font-size: 14px; padding-left: 5px;">Edit Cart</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-sm-4 accordion">
+
+            <div class="card card-body" id="accordionExampleOuter" style="background-color: white; padding-top: 0">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="summary-bar"
+                        style="background-color: #9E007E; border-radius: 5px 5px 0 0;">
+                        <span class="accordion-button d-block text-center" style="color: white">
+                            Order Summary
+                        </span>
+                    </h2>
+
+                    <div id="summary-bar-container"></div>
+
+                    <!-- Shipping & Tax -->
+                    <div class="accordion-body" style="background-color: #FBFBFB;">
+
+                        <div class="ttp-text-gray mb-1">
+                            Shipping
+                        </div>
+
+                        <div class="mb-2">
+                            To Be Determined
+                        </div>
+
+                        <div class="ttp-text-gray mb-1">
+                            Tax
+                        </div>
+
+                        <div class="">
+                            To Be Determined
+                        </div>
+
+                    </div>
+
+                    <hr style="margin: 0;">
+
+                    <!-- Total -->
+                    <div class="accordion-body" style="background-color: #FBFBFB;">
+
+                        <div class="mb-1 text-black fw-bold" style="font-size: 14px">
+                            TOTAL
+                        </div>
+
+                        <div class="mb-1 text-black fw-bold" id="summary-bar-total" style="font-size: 20px">
+                            --
+                        </div>
+
+                    </div>
+
+                    <hr style="margin: 0;">
+
+                    <!-- Buttons -->
+                    <div class="accordion-body" style="background-color: #FBFBFB;">
+
+                        <div class="mt-1">
+                            <button type="button" class="btn ttp-btn-primary btn-sm w-100 p-2 mb-2"
+                                    onclick="reviewAndCheckout()"
+                                    style="border-radius: 10px">Review & Checkout
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <!-- Server Error Modal -->
+    <div class="modal fade" id="serverErrorModal" tabindex="-1" aria-labelledby="serverErrorModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center">
+                        <div class="spinner-grow" role="status"></div>
+                        <div class="mt-2">
+                            <div class="ttp-color-fuchsia fw-bold h5">Oops!</div>
+                            <div class="ttp-text-gray fw-bold small" id="error-modal-text">Server Error</div>
+                            <div id="error-code" class="ttp-text-gray fw-bold small mt-3" style="font-size: 11px">ERROR
+                                103
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn ttp-btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 200px">
+        <div th:replace="~{fragments/bundles/footer :: footer}"></div>
+    </div>
+
+</div>
+
+<div class="container" id="server-error-container" style="display: none">
+    <div class="text-center mt-5">
+        <div class="spinner-grow" role="status"></div>
+        <div class="mt-2">
+            <div class="ttp-color-fuchsia fw-bold h5">Oops!</div>
+            <div class="ttp-text-gray fw-bold small" id="error-modal-text-sm-2">Server Error</div>
+            <div id="error-code-sm-2" class="ttp-text-gray fw-bold small mt-3" style="font-size: 11px">ERROR 103</div>
+        </div>
+
+        <div class="mt-5">
+            <button type="button" class="btn ttp-btn-primary" onclick="switchContainers(true, false)">OK</button>
+        </div>
+    </div>
+</div>
+
+
+<script th:src="@{/js/bundles/js/bootstrap.bundle.min.js}"></script>
+
+<script>
+    const STORE_INITIAL = '';
+</script>
+
+<script th:src="@{/js/bundles/js/custom/page3.js}"></script>
+</body>
+</html>

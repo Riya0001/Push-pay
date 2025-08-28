@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="~{fragments/store/header :: head}"></head>
+<body class="ttp-bg-white">
+<div id="content-wrapper" class="content-wrapper-cls">
+    <nav th:replace="~{fragments/store/navbar :: navbar-without-bag}"></nav>
+    <div class="container" style="margin-top: 100px">
+        <div th:replace="~{fragments/store/stepper :: stepper}"></div>
+        <div th:replace="~{fragments/store/stepper :: stepper-sm}"></div>
+        <div id="main-section" style="padding-bottom: 500px; padding-top: 100px;">
+            <div class="text-center">
+                <h1 class="ttp-color-purple p-0 text-center">thank you for your order!</h1><br>
+
+                <h2 class="ttp-color-fuschia text-center">
+                    Order Confirmation #:
+                    <span th:text="${responsePayment != null ? responsePayment.getSoNumber() : '---'}"></span>
+                </h2><br>
+                <span class="ttp-body-lead">An order confirmation email has been sent to you.</span><br><br>
+
+                <div class="ttp-body-lead">
+                    A second email with your dashboard login link and access instructions has been sent to
+                    <span th:text="${contactEmail != null ? contactEmail : 'n/a'}" class="ttp-color-fuschia font-weight-bold"></span>.
+                </div>
+
+                <div class="mt-5">
+                    <a href="https://tiptappay.com/" class="ttp-card-sub-header-md fuschia-a pt-4">
+                        go to tiptap
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div th:insert="~{fragments/store/footer :: footer}" style="padding-top: 250px"></div>
+    </div>
+</div>
+<script>
+    function showHideDetails(id) {
+        const details = document.getElementById(id + '-body');
+        details.style.display = details.style.display === 'none' ? 'block' : 'none';
+    }
+</script>
+</body>
+</html>

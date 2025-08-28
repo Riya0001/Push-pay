@@ -1,0 +1,63 @@
+spring:
+  profiles:
+    active: dev
+
+server:
+  port: 8090
+  error:
+    whitelabel:
+      enabled: false
+  tomcat:
+    max-http-header-size: 65536  # In bytes (64 KB) to support large cookies/session
+  servlet:
+    session:
+      tracking-modes: cookie      # Ensure session tracking uses cookies
+
+app:
+  version: "@project.version@"
+
+stores:
+  store:
+    endpoint: store
+    active: false
+
+  salvation-army-us:
+    endpoint: salvation-army-us
+    active: true
+
+  us-catholic:
+    fresno-diocese:
+      endpoint: us-catholic/fresno-diocese
+      active: false
+
+  canada:
+    endpoint: canada-store
+    active: true
+
+  mosques:
+    endpoint: mosques
+    active: false
+
+  bundles:
+    endpoint: bundles
+    active: true
+
+  benevity:
+    endpoint: benevity
+    active: true
+    my-account:
+      token:
+        expiry: 60           # minutes
+      resend-email:
+        expiry-short: 5      # minutes
+        expiry-long: 10      # minutes
+    fb:
+      endpoint: benevity/faith
+      active: true
+    education:
+      endpoint: benevity/education
+      active: true
+
+  legion:
+    endpoint: legion
+    active: true

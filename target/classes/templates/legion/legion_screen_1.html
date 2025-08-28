@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tiptap</title>
+    <link rel="icon" href="/images/favicon/favicon.ico" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Mulish:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <header class="d-flex justify-content-between align-items-center mb-4">
+        <a href="https://tiptappay.com"><img style="height: 70px;" th:src="@{/images/logo_lockup.png}" alt="tiptap logo" /></a>
+        <a href="https://tiptappay.com"><img style="height: 45px;" th:src="@{/images/tiptap_Logo_Grey_RGB.png}" alt="tiptap grey logo" /></a>
+    </header>
+    <div class="text-center mb-4 d-flex justify-content-center align-items-center gap-2">
+        <h4 class="mb-0">Please select a language. / Veuillez sélectionner une langue.</h4>
+        <div class="dropdown">
+            <button class="btn btn-light border-0 dropdown-toggle d-flex align-items-center gap-2" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <span id="selectedLanguage">English</span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                <li><a class="dropdown-item" href="/legion/en/order" onclick="setLanguage('English')">English</a></li>
+                <li><a class="dropdown-item" href="/legion/fr/order" onclick="setLanguage('Français')">Français</a></li>
+            </ul>
+        </div>
+    </div>
+    <section class="mb-4">
+        <h1 class="fw-bold">Pay Tribute Poppy Box</h1>
+        <strong>Welcome to the Pay Tribute Poppy Box Order Portal!</strong>
+        <p>Please enter the number of boxes you would like and complete all required fields. Quantities are limited, so we cannot guarantee every request. Allocation will consider demand, past participation, and new applicants. You will be notified by <strong>August 15th</strong> about how many boxes you will receive.</p>
+    </section>
+    <form method="POST" th:object="${order}" onsubmit="return validateRequest()">
+        <input type="hidden" th:field="*{twoPackPoppyDisplay}" id="twoPackPoppyDisplay" />
+        <input type="hidden" th:field="*{selectedLanguage}" id="selectedLanguageInput" />
+        <input type="hidden" id="denominationDummy" value="$2 $5 $10" />
+        <section class="mb-4">
+            <h2 class="fw-bold">Branch Information</h2>
+            <hr>
+            <div class="row mb-3">
+                <input type="hidden" th:field="*{partner}" id="partnerField" />
+                <div class="col-md-6">
+                    <strong><label for="provinceSelect" class="form-label">Province </label></strong>
+                    <select id="provinceSelect" class="form-select" required th:field="*{province}" onchange="updateBranchOptions()">
+                        <option value="unselected">Please select the province</option>
+                        <option value="Alberta">Alberta</option>
+                        <option value="BritishColumbia">British Columbia</option>
+                        <option value="Manitoba">Manitoba</option>
+                        <option value="NewBrunswick">New Brunswick</option>
+                        <option value="NorthwesternOntario">Northwestern Ontario</option>
+                        <option value="Newfoundland">Newfoundland and Labrador</option>
+                        <option value="NovaScotia">Nova Scotia</option>
+                        <option value="Ontario">Ontario</option>
+                        <option value="PrinceEdwardIsland">Prince Edward Island</option>
+                        <option value="Quebec">Quebec</option>
+                        <option value="Saskatchewan">Saskatchewan</option>
+                        <option value="NorthwestTerritories">Northwest Territories</option>
+                        <option value="Nunavut">Nunavut</option>
+                        <option value="Yukon">Yukon</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <strong><label for="provincialCommandTextInput" class="form-label">Provincial Command </label></strong>
+                    <select id="provincialCommandTextInput" class="form-select" required th:field="*{provincialCommand}">
+                        <option value="" disabled selected>Please select a branch</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <strong><label for="branchSelect" class="form-label">Branch </label></strong>
+                    <select id="branchSelect" class="form-select" required th:field="*{branchNumber}">
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+            <div class="col-md-6">
+                <strong><label class="form-label" style="margin-top: 10px;">Estimated Population of Your Branch's Service Area</label></strong>
+                <input type="number" class="form-control" required th:field="*{estimatedPopulation}" min="0" />
+            </div>
+            </div>
+        </section>
+        <section class="mb-4">
+            <h2 class="fw-bold">Order Information</h2>
+            <hr>
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-7">
+                        <img src="/images/PB-000_2-PoppyBox-1755.png" class="img-fluid" alt="Poppy Box" style="padding-top: 10px; padding-left: 10px; padding-bottom: 10px; width: 500px; margin-left: 20px;">
+                        <div style="margin-left: 20px; padding-top: 10px;">
+                            <p>*Poppies not included</p>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="card-body" style="margin-right: 30px; margin-top: 20px;">
+                            <h5 class="card-title">Poppy Box Kit Includes:</h5>
+                            <ul>
+                                <li>One Poppy box</li>
+                                <li>One $5 device</li>
+                                <li>One 10ft cable and wall plug</li>
+                                <li>One external battery power bank</li>
+                            </ul>
+                            <p><strong>Dimensions:</strong> 11.5’’ High x 6.5’’ Wide x 8.5’’ Deep</p>
+                            <div>
+                                <label for="poppyBoxDeviceQuantityInput" class="form-label">Poppy Box Kit Quantity:
+                                </label>
+                                <input type="number"
+                                       min="1"
+                                       max="30"
+                                       required
+                                       class="form-control"
+                                       id="poppyBoxDeviceQuantityInput"
+                                       oninput="handleQuantityInput(this)"
+                                       oninvalid="this.setCustomValidity('Please select at least one 2-Pack device.')"
+                                       placeholder="Enter a quantity" />
+
+                            </div>
+                            <div class="d-grid mt-3">
+                                <button type="button" class="btn btn-danger btn-lg" onclick="addToRequest(0)">Add to Request</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="request-table-section" class="mb-4" style="display: none;">
+        <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th class="text-grey text-center">Product</th>
+                    <th class="text-grey text-center">Total Quantity</th>
+                    <th class="text-grey text-center"></th>
+                </tr>
+                </thead>
+                <tbody id="request-list-body">
+                </tbody>
+            </table>
+        </section>
+        <div class="my-4 p-1" style="margin-bottom: 20px;">
+            <h2 class="text-grey fw-bold d-flex justify-content-between align-items-center">
+                Contact Information
+                <span class="text-muted fs-6 ms-3" style="font-weight: 400; font-size: 14px; max-width: 950px;">
+            <strong style="color: #b73838;">(Note, the Dashboard login details required to view your collections will be sent to this user.
+            The user will have the ability to add other members to the Dashboard.)</strong>
+            </span>
+            </h2>
+            <hr>
+        </div>
+
+        <div class="mb-3">
+            <strong><label for="contactFirstNameInput" class="form-label required">Contact First Name</label></strong>
+            <input type="text" minlength="1" maxlength="255" required class="form-control"
+                   id="contactFirstNameInput" th:field="*{contactFirstName}" />
+        </div>
+        <div class="mb-3">
+            <strong><label for="contactLastNameInput" class="form-label required">Contact Last Name</label></strong>
+            <input type="text" minlength="1" maxlength="255" required class="form-control"
+                   id="contactLastNameInput" th:field="*{contactLastName}" />
+        </div>
+        <div class="mb-3">
+            <strong><label for="contactEmailInput" class="form-label required">Contact Email Address</label></strong>
+            <input type="email" required class="form-control" id="contactEmailInput"
+                   th:field="*{contactEmail}" />
+        </div>
+        <div class="mb-3 row">
+            <div class="col-md-2">
+                <strong><label class="form-label required">Country Code</label></strong>
+                <input type="text" readonly class="form-control" value="+1" />
+            </div>
+            <div class="col-md-7">
+                <strong><label for="contactPhoneNumberInput" class="form-label required">Phone Number</label></strong>
+                <input type="text" required class="form-control" id="contactPhoneNumberInput"
+                       th:field="*{contactPhoneNumber}" />
+            </div>
+            <div class="col-md-3">
+                <strong><label class="form-label">Extension</label></strong>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+
+        <div class="my-4 p-1">
+            <h2 class="text-grey fw-bold">Shipping Information</h2>
+            <hr>
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                </svg>
+                <div class="fs-5 fw-bold">P.O. BOX addresses will not be accepted.</div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <strong><label for="alternateShipToNameInput" class="form-label">Delivery Contact Name</label></strong>
+            <input type="text" autocomplete="off" minlength="1" maxlength="255" class="form-control"
+                   id="alternateShipToNameInput" th:field="*{shippingFullName}" />
+        </div>
+        <div class="mb-3">
+            <strong><label for="shippingPhoneNumberInput" class="form-label required">Phone Number</label></strong>
+            <input type="text" minlength="1" maxlength="255" required class="form-control"
+                   id="shippingPhoneNumberInput" th:field="*{shippingPhone}" />
+        </div>
+        <div class="mb-3">
+            <strong><label for="shippingAddressLine1Input" class="form-label required">Street Address Line 1</label></strong>
+            <input type="text" minlength="1" maxlength="255" required class="form-control"
+                   id="shippingAddressLine1Input" th:field="*{shippingAddressLine1}" pattern="^(?!.*\bP\.?O\.?\s+B[oO][xX]\b).*$"/>
+        </div>
+        <div class="mb-3">
+            <strong><label for="shippingAddressLine2Input" class="form-label">Street Address Line 2 (Optional)</label></strong>
+            <input type="text" minlength="1" maxlength="255" class="form-control"
+                   id="shippingAddressLine2Input" th:field="*{shippingAddressLine2}" pattern="^(?!.*\bP\.?O\.?\s+B[oO][xX]\b).*$"/>
+        </div>
+        <div class="mb-3">
+            <strong><label for="shippingCityInput" class="form-label required">City</label></strong>
+            <input type="text" minlength="1" maxlength="255" required class="form-control"
+                   id="shippingCityInput" th:field="*{shippingCity}" />
+        </div>
+        <div class="row mb-3" style="padding-bottom: 10px;">
+            <div class="col-8">
+                <strong><label for="shippingProvinceInput" class="form-label required">Province</label></strong>
+                <select class="form-select" required id="shippingProvinceInput" th:field="*{shippingState}">
+                    <option value="Ontario">Ontario</option>
+                    <option value="Quebec">Quebec</option>
+                    <option value="Nova Scotia">Nova Scotia</option>
+                    <option value="New Brunswick">New Brunswick</option>
+                    <option value="Manitoba">Manitoba</option>
+                    <option value="British Columbia">British Columbia</option>
+                    <option value="Prince Edward Island">Prince Edward Island</option>
+                    <option value="Saskatchewan">Saskatchewan</option>
+                    <option value="Alberta">Alberta</option>
+                    <option value="Newfoundland">Newfoundland and Labrador</option>
+                    <option value="Northwest Territories">Northwest Territories</option>
+                    <option value="Yukon">Yukon</option>
+                    <option value="Nunavut">Nunavut</option>
+                </select>
+            </div>
+            <div class="col-4">
+                <strong><label for="shippingPostalCodeInput" class="form-label required">Postal Code</label></strong>
+                <input type="text" class="form-control form-item"
+                       id="shippingPostalCodeInput"
+                       th:field="*{shippingZipCode}"
+                       maxlength="7"
+                       placeholder="A1A 1A1"
+                       pattern="^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$"
+                       title="Postal code must be in the format A1A 1A1"
+                       required>
+            </div>
+        </div>
+        <hr>
+        <div class="text-center my-4">
+            <p>If you have any questions or require any assistance with your request, please contact</p>
+            <p>
+                <a href="mailto:support@tiptappay.com" class="text-danger fw-bold">support@tiptappay.com</a>
+                &nbsp;or&nbsp;
+                <a href="tel:18333279244" class="text-danger fw-bold">1-833-327-9244</a>
+            </p>
+        </div>
+        <div class="d-grid my-4 pb-5">
+            <button type="submit" class="btn btn-danger btn-lg">Review Request</button>
+        </div>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script th:src="@{/js/data/branch-data.js}"></script>
+<script th:src="@{/js/customOrder.js}"></script>
+
+<script th:inline="javascript">
+    const items = [
+        {
+            quantityInputText: "poppyBoxDeviceQuantityInput",
+            denominationInputText: "denominationDummy",
+            deviceName: {
+                english: "Poppy Box",
+                french: "boîte coquelicot à 3 dispositifs"
+            },
+            denominations: [
+                { text: "twoPackPoppyDisplay", value: "" }
+            ]
+        }
+    ];
+
+    const branchOptions = {
+        "BritishColumbia": branch01,
+        "Yukon": branch01,
+        "Alberta": branch02,
+        "NorthwestTerritories": branch02,
+        "Saskatchewan": branch03,
+        "Manitoba": branch04,
+        "Ontario": branch05,
+        "NorthwesternOntario": branch04,
+        "Quebec": branch06,
+        "NewBrunswick": branch07,
+        "NovaScotia": branch08,
+        "Nunavut": branch08,
+        "PrinceEdwardIsland": branch09,
+        "Newfoundland": branch10,
+        "Other": branch00
+    };
+
+    const provincialCommandMap = {
+        "BritishColumbia": "01 RCL BC/YUKON COMMAND",
+        "Yukon": "01 RCL BC/YUKON COMMAND",
+        "Alberta": "02 RCL ALBERTA/NWT COMMAND",
+        "NorthwestTerritories": "02 RCL ALBERTA/NWT COMMAND",
+        "Saskatchewan": "03 RCL SASKATCHEWAN COMMAND",
+        "Manitoba": "04 RCL MANITOBA/NWO COMMAND",
+        "NorthwesternOntario": "04 RCL MANITOBA/NWO COMMAND", // ✅ updated key here
+        "Ontario": "05 RCL ONTARIO COMMAND",
+        "Quebec": "06 RCL QUEBEC COMMAND",
+        "NewBrunswick": "07 RCL NEW BRUNSWICK COMMAND",
+        "NovaScotia": "08 RCL NOVA SCOTIA/NUNAVUT COMMAND",
+        "Nunavut": "08 RCL NOVA SCOTIA/NUNAVUT COMMAND",
+        "PrinceEdwardIsland": "09 RCL PEI COMMAND",
+        "Newfoundland": "10 RCL NFLD/LABRADOR COMMAND"
+    };
+
+
+    function logToUI(message) {
+        const logDiv = document.getElementById("uiLog");
+        if (logDiv) {
+            logDiv.style.display = "block";
+            logDiv.textContent += `[LOG] ${message}\n`;
+        }
+    }
+
+    function updateBranchOptions() {
+        const province = document.getElementById("provinceSelect").value.trim();
+        logToUI("[updateBranchOptions] Selected province: " + province);
+
+        const branchSelect = document.getElementById("branchSelect");
+        branchSelect.innerHTML = "";
+
+        const branches = branchOptions[province];
+        logToUI("[updateBranchOptions] Branches: " + JSON.stringify(branches));
+
+        if (!branches || !Array.isArray(branches)) {
+            logToUI(`❌ No valid branches found for province: ${province}`);
+            return;
+        }
+
+        for (let i = 0; i < branches.length; i++) {
+            const option = document.createElement("option");
+            option.value = branches[i];
+            option.text = branches[i];
+            branchSelect.appendChild(option);
+        }
+
+        const provincialCommandSelect = document.getElementById("provincialCommandTextInput");
+        provincialCommandSelect.innerHTML = "";
+
+        const command = provincialCommandMap[province];
+        logToUI("[updateBranchOptions] Command: " + command);
+
+        const commandOption = document.createElement("option");
+        commandOption.value = command || "";
+        commandOption.text = command || "Please select a branch";
+        commandOption.selected = true;
+        if (!command) commandOption.disabled = true;
+        provincialCommandSelect.appendChild(commandOption);
+    }
+
+    function addToRequest(index) {
+        const item = items[index];
+        const quantity = +document.getElementById(item.quantityInputText).value;
+
+        if (quantity <= 0 || isNaN(quantity)) {
+            alert("Please enter a valid quantity.");
+            return;
+        }
+
+        document.getElementById("twoPackPoppyDisplay").value = quantity;
+
+        const tbody = document.getElementById("request-list-body");
+        tbody.innerHTML = "";
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td class="text-center">${item.deviceName.english}</td>
+            <td class="text-center">${quantity}</td>
+            <td class="text-center">
+                <button class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button>
+            </td>
+        `;
+        tbody.appendChild(row);
+
+        showRequestTableIfNeeded();
+    }
+
+    function removeRow(button) {
+        const row = button.closest("tr");
+        row.remove();
+        document.getElementById("twoPackPoppyDisplay").value = "0";
+        showRequestTableIfNeeded();
+    }
+
+    function showRequestTableIfNeeded() {
+        const section = document.getElementById("request-table-section");
+        const tbody = document.getElementById("request-list-body");
+        section.style.display = tbody.children.length > 0 ? "block" : "none";
+    }
+
+    function validateRequest() {
+        const quantity = parseInt(document.getElementById("twoPackPoppyDisplay").value, 10);
+        if (!quantity || quantity <= 0) {
+            document.querySelector(".card.mb-3")?.scrollIntoView({ behavior: "smooth", block: "center" });
+            return false;
+        }
+        return true;
+    }
+
+    function redirectByLanguage() {
+        window.location.href = document.getElementById("languageSelect").value;
+    }
+
+    // Set partner field on load
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("partnerField").value = "Legion";
+    });
+
+    // Restore selections and values on page load
+    window.addEventListener("DOMContentLoaded", function () {
+        const provinceSelect = document.getElementById("provinceSelect");
+
+        if (provinceSelect && provinceSelect.value && provinceSelect.value !== "unselected") {
+            updateBranchOptions();
+
+            const savedBranch = /*[[${order.branchNumber}]]*/ 'null';
+            const branchSelect = document.getElementById("branchSelect");
+            const branchOptionsList = branchSelect.options;
+            for (let i = 0; i < branchOptionsList.length; i++) {
+                if (branchOptionsList[i].value === savedBranch) {
+                    branchOptionsList[i].selected = true;
+                    break;
+                }
+            }
+
+            const savedCommand = /*[[${order.provincialCommand}]]*/ '';
+            const commandSelect = document.getElementById("provincialCommandTextInput");
+            const commandOptionsList = commandSelect.options;
+            for (let i = 0; i < commandOptionsList.length; i++) {
+                if (commandOptionsList[i].value === savedCommand) {
+                    commandOptionsList[i].selected = true;
+                    break;
+                }
+            }
+        }
+
+        const quantityHidden = document.getElementById("twoPackPoppyDisplay");
+        const quantityVisible = document.getElementById("poppyBoxDeviceQuantityInput");
+        const qty = parseInt(quantityHidden?.value || "0");
+
+        if (qty > 0 && quantityVisible) {
+            quantityVisible.value = qty;
+
+            const tbody = document.getElementById("request-list-body");
+            tbody.innerHTML = `
+                <tr>
+                    <td class="text-center">Poppy Box Kit</td>
+                    <td class="text-center">${qty}</td>
+                    <td class="text-center">
+                        <button class="btn btn-danger btn-sm" onclick="removeRow(this)">Remove</button>
+                    </td>
+                </tr>
+            `;
+            showRequestTableIfNeeded();
+        }
+    });
+</script>
+<script>
+    function validateQuantity(value) {
+        // Optional: Add your own validation logic here
+        return value.replace(/[^0-9]/g, '').slice(0, 2); // Keep it numeric and max 2 digits
+    }
+
+    function handleQuantityInput(inputElement) {
+        inputElement.setCustomValidity('');
+        inputElement.value = validateQuantity(inputElement.value);
+
+        const quantity = parseInt(inputElement.value, 10);
+        if (!isNaN(quantity) && quantity >= 1 && quantity <= 30) {
+            addToRequest(0); // You can pass quantity here if needed
+        }
+    }
+</script>
+</body>
+</html>

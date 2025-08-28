@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+
+<div th:fragment="slider" id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active text-center" style="background: white; border-radius: 10px;">
+            <div class="row" id="slider-svg-1">
+                <svg th:replace="~{fragments/bundles/svg_fragment_1d_desktop :: 1-device-bundle-desktop}" width="100%" height="100%"></svg>
+                <svg th:replace="~{fragments/bundles/svg_fragment_1d_mobile :: 1-device-bundle-mobile}" width="100%" height="100%"></svg>
+            </div>
+        </div>
+        <div class="carousel-item text-center" style="background: white; border-radius: 10px;">
+            <div class="row" id="slider-svg-2">
+                <svg th:replace="~{fragments/bundles/svg_fragment_3d_desktop :: 3-devices-bundle-desktop}" width="100%" height="100%"></svg>
+                <svg th:replace="~{fragments/bundles/svg_fragment_3d_mobile :: 3-devices-bundle-mobile}" width="100%" height="100%"></svg>
+            </div>
+        </div>
+    </div>
+    <!-- Custom Previous Button with SVG -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0.25" y="0.25" width="23.5" height="23.5" rx="11.75" fill="white"/>
+            <rect x="0.25" y="0.25" width="23.5" height="23.5" rx="11.75" stroke="#979797" stroke-width="0.5"/>
+            <path d="M14 8L10 12L14 16" stroke="#979797" stroke-width="1.33333"/>
+        </svg>
+
+        <span class="visually-hidden">Previous</span>
+    </button>
+
+    <!-- Custom Next Button with SVG -->
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="23.75" y="23.75" width="23.5" height="23.5" rx="11.75" transform="rotate(180 23.75 23.75)"
+                  fill="white"/>
+            <rect x="23.75" y="23.75" width="23.5" height="23.5" rx="11.75" transform="rotate(180 23.75 23.75)"
+                  stroke="#979797" stroke-width="0.5"/>
+            <path d="M10 16L14 12L10 8" stroke="#979797" stroke-width="1.33333"/>
+        </svg>
+
+        <span class="visually-hidden">Next</span>
+    </button>
+
+</div>
+
+</html>

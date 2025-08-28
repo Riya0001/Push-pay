@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <!-- Include fragment content inside head -->
+    <div th:replace="~{fragments/bundles/header :: head-page-2}"></div>
+
+    <title>.</title>
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "qtfyso1mfx");
+    </script>
+
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FDJL41MRCT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-FDJL41MRCT');
+    </script>
+</head>
+<body>
+
+<div hidden>
+    <label for="srInput"></label>
+    <input th:value="${salesRepId}" id="srInput">
+</div>
+
+<nav th:replace="~{fragments/benevity/education/navbar :: navbar}"></nav>
+
+<div class="container" id="main-container">
+
+    <div class="row g-5 mt-2">
+
+        <div id="page-title-section" class="">
+
+            <div class="row">
+                <div class="col-sm-6" style="text-align: left">
+                    <h1 style="color: black; font-weight: 600">Cart Checkout</h1>
+                </div>
+
+                <div class="col-sm-6" style="text-align: right">
+                    <svg width="100%" height="24" viewBox="0 0 524 24" style="max-width: 524px;" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_1118_6562)">
+                            <path d="M12.6414 21.0002H1.98349C1.96792 20.9924 1.95307 20.9812 1.93645 20.9776C0.824373 20.7311 0.238805 19.9849 0.294675 18.8482C0.369639 17.3221 0.460868 15.797 0.54644 14.2711C0.647217 12.471 0.751178 10.6708 0.850186 8.87034C0.87706 8.38016 1.11433 8.14423 1.60478 8.14352C2.36326 8.14247 3.12173 8.14352 3.88021 8.14352C3.9428 8.14352 4.00503 8.14352 4.08177 8.14352C4.08177 8.04351 4.08141 7.96817 4.08177 7.89282C4.08636 7.24875 4.06444 6.60326 4.10086 5.96131C4.2073 4.0932 6.04817 2.69274 7.88973 3.05862C9.45656 3.36991 10.5149 4.63691 10.5318 6.22823C10.5379 6.79623 10.5329 7.36424 10.5329 7.93225C10.5329 7.99525 10.5329 8.05829 10.5329 8.14352C10.6139 8.14352 10.6765 8.14352 10.739 8.14352C11.5152 8.14352 12.2914 8.14105 13.0675 8.14457C13.4738 8.14632 13.7429 8.39213 13.7652 8.78407C13.8522 10.3036 13.9342 11.8237 14.0194 13.3432C14.0842 14.4947 14.1517 15.6459 14.2164 16.7974C14.2581 17.5397 14.3143 18.2816 14.332 19.0246C14.3504 19.7997 13.9961 20.3892 13.3168 20.7639C13.111 20.8773 12.8674 20.9234 12.6414 21.0002ZM9.23907 8.13473C9.23907 7.43432 9.24581 6.75644 9.23449 6.07857C9.23164 5.91236 9.18778 5.74122 9.13265 5.58275C8.825 4.69853 7.91765 4.16293 7.00182 4.3154C6.07501 4.46964 5.39294 5.24646 5.37527 6.1828C5.36536 6.71524 5.37279 7.24766 5.37242 7.78046C5.37242 7.89596 5.37242 8.01145 5.37242 8.13473H9.23907Z"
+                                  fill="#9E007E"/>
+                        </g>
+                        <line x1="43.625" y1="11.5" x2="133.625" y2="11.5" stroke="#9E007E"/>
+                        <path d="M177.491 3.92505H162.625V16.5387H177.491V3.92505Z" stroke="#9E007E"
+                              stroke-width="2.25244" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M177.491 8.88037H179.969C180.745 8.88037 181.49 9.18888 182.039 9.73801C182.589 10.2872 182.897 11.0319 182.897 11.8085V16.5387H177.491V8.88037Z"
+                              stroke="#9E007E" stroke-width="2.25244" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M167.764 20.075C168.364 20.075 168.85 19.589 168.85 18.9894C168.85 18.3898 168.364 17.9037 167.764 17.9037C167.165 17.9037 166.679 18.3898 166.679 18.9894C166.679 19.589 167.165 20.075 167.764 20.075Z"
+                              stroke="#9E007E" stroke-width="2.25244" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M177.081 20.075C177.68 20.075 178.166 19.589 178.166 18.9894C178.166 18.3898 177.68 17.9037 177.081 17.9037C176.481 17.9037 175.995 18.3898 175.995 18.9894C175.995 19.589 176.481 20.075 177.081 20.075Z"
+                              stroke="#9E007E" stroke-width="2.25244" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M163.075 8.97498H168.481" stroke="#9E007E" stroke-width="2.25244"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                        <line x1="211.896" y1="11.5" x2="301.896" y2="11.5" stroke="#979797"/>
+                        <rect x="330.896" y="6" width="18" height="13" rx="2" stroke="#979797" stroke-width="2"/>
+                        <path d="M334.896 15H334.906" stroke="#979797" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M331.896 11H348.896" stroke="#979797" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="380.896" y1="11.5" x2="470.896" y2="11.5" stroke="#979797"/>
+                        <circle cx="511.896" cy="12" r="9" stroke="#979797" stroke-width="2"/>
+                        <path d="M507.896 12L510.896 15L515.896 9" stroke="#979797" stroke-width="2"/>
+                        <defs>
+                            <clipPath id="clip0_1118_6562">
+                                <rect width="14.625" height="18" fill="white" transform="translate(0 3)"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Left Column -->
+        <div class="col-sm-12">
+
+            <div id="cart-checkout-container">
+
+                <form id="cart-checkout-page-1-form">
+
+<!--                    <div class="card mb-4 accordion" id="accordion-benevity-details-section"-->
+<!--                         style="background-color: rgb(251, 251, 251);">-->
+<!--                        <div class="card-body">-->
+<!--                            <div class="accordion-item">-->
+<!--                                <h2 class="accordion-header text-center">-->
+<!--                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"-->
+<!--                                            data-bs-target="#collapseDevice_0_0" aria-expanded="true"-->
+<!--                                            aria-controls="collapseDevice_0_0"-->
+<!--                                            style="color: black; font-weight: bold; background-color: rgb(251, 251, 251);">-->
+<!--                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"-->
+<!--                                             xmlns="http://www.w3.org/2000/svg">-->
+<!--                                            <path d="M7.635 0.106871C7.8 0.0798933 8.058 0.0469208 8.205 0.0319333C8.352 0.0169457 8.793 0.0109507 9.18 0.0169457C9.702 0.0259383 9.993 0.0439233 10.305 0.0918833C10.536 0.127853 10.848 0.181808 10.995 0.214781C11.142 0.247754 11.427 0.322691 11.625 0.379644C11.823 0.439594 12.141 0.547504 12.33 0.622442C12.519 0.697379 12.846 0.844257 13.059 0.94917C13.269 1.05408 13.584 1.23093 13.764 1.33885C13.941 1.44975 14.268 1.67457 14.49 1.83943C14.748 2.03427 15.072 2.31903 15.378 2.62477C15.645 2.88855 15.975 3.24526 16.11 3.41911C16.248 3.59297 16.461 3.88972 16.587 4.07856C16.71 4.26741 16.917 4.62411 17.046 4.8729C17.172 5.1187 17.34 5.4784 17.415 5.66724C17.493 5.85608 17.601 6.16782 17.658 6.35667C17.718 6.54551 17.79 6.81529 17.823 6.95617C17.856 7.09705 17.91 7.37282 17.94 7.57066C17.991 7.8794 18 8.08023 18 9.00946C18 9.95067 17.991 10.1365 17.94 10.4632C17.907 10.6701 17.826 11.0388 17.763 11.2876C17.697 11.5334 17.583 11.905 17.508 12.1119C17.433 12.3187 17.271 12.6874 17.151 12.9362C17.028 13.182 16.839 13.5327 16.725 13.7155C16.614 13.8984 16.428 14.1742 16.311 14.33C16.194 14.4859 15.996 14.7377 15.87 14.8846C15.741 15.0314 15.486 15.2982 15.303 15.4751C15.12 15.6549 14.832 15.9097 14.661 16.0446C14.493 16.1795 14.187 16.4013 13.98 16.5362C13.773 16.6711 13.437 16.8719 13.23 16.9798C13.023 17.0877 12.714 17.2346 12.54 17.3066C12.366 17.3785 12.036 17.5014 11.805 17.5763C11.574 17.6513 11.229 17.7472 11.04 17.7891C10.851 17.8311 10.566 17.8881 10.41 17.915C10.203 17.951 9.879 17.969 9.21 17.981C8.478 17.99 8.217 17.984 7.905 17.945C7.692 17.918 7.353 17.8611 7.155 17.8221C6.957 17.7802 6.633 17.6992 6.435 17.6393C6.237 17.5823 5.928 17.4744 5.745 17.4025C5.562 17.3305 5.292 17.2166 5.145 17.1477C4.998 17.0787 4.734 16.9409 4.56 16.8419C4.386 16.743 4.098 16.5602 3.915 16.4343C3.732 16.3114 3.444 16.0956 3.27 15.9517C3.096 15.8108 2.799 15.538 2.61 15.3492C2.421 15.1603 2.145 14.8546 2.001 14.6747C1.854 14.4919 1.617 14.1682 1.476 13.9553C1.332 13.7395 1.119 13.3768 0.999 13.146C0.882 12.9152 0.735 12.6035 0.672 12.4566C0.612 12.3097 0.522 12.0729 0.474 11.932C0.426 11.7911 0.354 11.5633 0.315 11.4224C0.276 11.2816 0.21 10.9998 0.168 10.793C0.126 10.5861 0.072 10.2414 0.045 10.0286C0.018 9.7978 0 9.38415 0 9.00946C0 8.63777 0.018 8.22111 0.045 7.99031C0.072 7.77748 0.132 7.40579 0.18 7.16599C0.228 6.92619 0.324 6.5575 0.393 6.34168C0.462 6.12586 0.57 5.81712 0.636 5.65225C0.702 5.48739 0.858 5.15167 0.984 4.90288C1.11 4.65708 1.335 4.2704 1.485 4.04859C1.632 3.82677 1.863 3.50904 1.995 3.34418C2.127 3.17931 2.409 2.87057 2.625 2.65475C2.841 2.43893 3.165 2.14517 3.345 2.00129C3.525 1.85442 3.822 1.6386 4.005 1.5157C4.188 1.3958 4.497 1.20695 4.695 1.09904C4.893 0.991135 5.223 0.829269 5.43 0.739344C5.637 0.652417 5.994 0.517529 6.225 0.442591C6.456 0.370651 6.801 0.274731 6.99 0.229769C7.179 0.187803 7.47 0.133848 7.635 0.106871Z"-->
+<!--                                                  fill="#9E007E"/>-->
+<!--                                            <path d="M6.45627 2.92562C6.54327 2.86867 6.69027 2.80272 6.78027 2.77874C6.87027 2.75476 6.97527 2.73378 7.01427 2.73378C7.05027 2.73078 7.15227 2.74577 7.23927 2.76376C7.32327 2.78174 7.44627 2.82371 7.50927 2.85368C7.56927 2.88666 7.66827 2.9556 7.73127 3.00656C7.79127 3.06051 7.87227 3.15643 7.91127 3.21638C7.94727 3.27933 8.00127 3.40822 8.02527 3.50114C8.06427 3.65102 8.07027 4.1576 8.07027 7.22704C8.07027 10.7551 8.07027 10.7791 8.13327 10.9889C8.16627 11.1058 8.24427 11.2857 8.30427 11.3936C8.36127 11.5015 8.50527 11.6843 8.62227 11.8012C8.73927 11.9181 8.92227 12.062 9.03027 12.122C9.13827 12.1789 9.32727 12.2599 9.45027 12.2958C9.62127 12.3468 9.74727 12.3648 9.97527 12.3648C10.1583 12.3618 10.3473 12.3438 10.4643 12.3138C10.5663 12.2838 10.7343 12.2209 10.8393 12.1699C10.9413 12.116 11.1003 12.0171 11.1903 11.9481C11.2803 11.8792 11.4213 11.7353 11.5023 11.6304C11.5803 11.5255 11.6823 11.3696 11.7213 11.2887C11.7633 11.2047 11.8233 11.0369 11.8533 10.914C11.8893 10.7791 11.9103 10.5872 11.9103 10.4344C11.9103 10.2935 11.8893 10.0927 11.8623 9.98475C11.8383 9.87684 11.7603 9.682 11.6913 9.55011C11.6043 9.37925 11.5023 9.24436 11.3433 9.0825C11.1813 8.92363 11.0463 8.82171 10.8753 8.73479C10.7433 8.66584 10.5483 8.58791 10.4403 8.56393C10.3323 8.53695 10.1643 8.51597 10.0653 8.51597C9.96627 8.51597 9.79827 8.49199 9.69027 8.45902C9.58227 8.42604 9.43527 8.3541 9.36027 8.29715C9.28527 8.2432 9.18327 8.12929 9.13227 8.04836C9.07827 7.96743 9.01827 7.84753 8.99727 7.78158C8.97627 7.71563 8.95827 7.57475 8.96127 7.46684C8.96127 7.34394 8.98527 7.21205 9.02427 7.10714C9.06027 7.01722 9.14427 6.87633 9.21627 6.7954C9.29727 6.70548 9.41727 6.61555 9.54027 6.5556C9.70527 6.47767 9.77427 6.46268 10.0053 6.45369C10.1523 6.44769 10.4103 6.46268 10.5753 6.48966C10.7403 6.51364 10.9983 6.57059 11.1453 6.61255C11.2923 6.65452 11.5503 6.75643 11.7153 6.83437C11.8803 6.9123 12.1173 7.04419 12.2403 7.12812C12.3633 7.21205 12.5463 7.35294 12.6453 7.43986C12.7443 7.52979 12.8883 7.67067 12.9633 7.75161C13.0413 7.83554 13.1733 7.9944 13.2573 8.11131C13.3443 8.22821 13.4793 8.45002 13.5603 8.60589C13.6413 8.76176 13.7523 9.03154 13.8123 9.20539C13.8693 9.37925 13.9383 9.676 13.9653 9.86485C14.0043 10.1256 14.0133 10.3085 14.0013 10.6142C13.9893 10.839 13.9563 11.1298 13.9233 11.2737C13.8933 11.4146 13.8363 11.6154 13.8003 11.7233C13.7613 11.8312 13.6863 12.0201 13.6293 12.1429C13.5723 12.2658 13.4403 12.4967 13.3353 12.6525C13.2303 12.8084 13.0473 13.0452 12.9243 13.1741C12.8043 13.303 12.5763 13.5068 12.4203 13.6237C12.2643 13.7406 12.0123 13.8995 11.8653 13.9774C11.7183 14.0554 11.4543 14.1633 11.2803 14.2232C11.1063 14.2802 10.8423 14.3491 10.6953 14.3761C10.5423 14.4031 10.2513 14.4211 10.0203 14.4211C9.79527 14.4211 9.49827 14.4031 9.35427 14.3761C9.20727 14.3521 8.95827 14.2892 8.79927 14.2382C8.63727 14.1872 8.38227 14.0853 8.23527 14.0104C8.08827 13.9355 7.86627 13.8066 7.74327 13.7196C7.62027 13.6357 7.40427 13.4589 7.26627 13.327C7.12527 13.1951 6.92727 12.9733 6.81927 12.8324C6.71427 12.6915 6.55527 12.4367 6.46827 12.2628C6.37827 12.089 6.26427 11.8162 6.21327 11.6544C6.16227 11.4955 6.09927 11.2377 6.07527 11.0878C6.03627 10.851 6.03027 10.2545 6.03027 7.18208C6.03027 3.93278 6.03327 3.54011 6.07827 3.42021C6.10227 3.34527 6.16527 3.22837 6.21327 3.15943C6.26127 3.08749 6.37227 2.98258 6.45627 2.92562Z"-->
+<!--                                                  fill="#FBFBFB"/>-->
+<!--                                            <path d="M3.63327 6.64253C3.70527 6.59157 3.83127 6.52862 3.91227 6.49865C4.02027 6.46268 4.12827 6.45069 4.27527 6.45668C4.41927 6.46568 4.53627 6.49265 4.65027 6.54661C4.74327 6.58857 4.87227 6.68449 4.94727 6.76842C5.02227 6.84636 5.10927 6.97225 5.14227 7.04719C5.19027 7.1521 5.20527 7.24503 5.20527 7.45185C5.20527 7.65868 5.19027 7.75161 5.14227 7.85652C5.10927 7.93146 5.02227 8.05735 4.94727 8.13529C4.87527 8.21622 4.74027 8.31514 4.65027 8.3601C4.51227 8.42604 4.44327 8.43803 4.23027 8.44103C4.01727 8.44103 3.94827 8.42904 3.81027 8.36609C3.72027 8.32113 3.58527 8.22821 3.51027 8.15627C3.43827 8.08133 3.34527 7.94644 3.30327 7.85652C3.24027 7.72463 3.22827 7.64669 3.22827 7.45185C3.22827 7.278 3.24327 7.17608 3.28827 7.07717C3.32127 7.00223 3.38427 6.89432 3.42627 6.83737C3.46827 6.78041 3.56127 6.69349 3.63327 6.64253Z"-->
+<!--                                                  fill="#FBFBFB"/>-->
+<!--                                        </svg>-->
+<!--                                        &nbsp;&nbsp;&nbsp;<span-->
+<!--                                            style="color: #422055; font-weight: 300;">Benevity ID</span>-->
+<!--                                    </button>-->
+<!--                                </h2>-->
+<!--                                <div id="collapseDevice_0_0" class="accordion-collapse collapse show"-->
+<!--                                     data-bs-parent="#accordion-benevity-details-section"-->
+<!--                                     style="background-color: rgb(251, 251, 251);">-->
+<!--                                    <div class="accordion-body">-->
+
+<!--                                        <div class="mb-3">-->
+<!--                                            <div id="benevity-content-container" class="d-flex align-items-center">-->
+<!--                                                <div id="cause-logo"></div>-->
+<!--                                                <div>-->
+<!--                                                    <div id="cause-name" class="fw-bold"></div>-->
+<!--                                                    <div id="cause-id" class="text-muted"></div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+
+<!--                                    </div>-->
+
+<!--                                </div>-->
+
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+                    <div class="card mb-4 accordion" id="accordion-organizational-details-section"
+                         style="background-color: rgb(251, 251, 251);">
+                        <div class="card-body">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header text-center">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseDevice_0" aria-expanded="true"
+                                            aria-controls="collapseDevice_0"
+                                            style="color: black; font-weight: bold; background-color: rgb(251, 251, 251);">
+                                        <svg width="16" height="17" viewBox="0 0 16 17" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <g clip-path="url(#clip0_431_1880)">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                      d="M4.8 0.5H14.4C15.28 0.5 16 1.22 16 2.1V11.7C16 12.58 15.28 13.3 14.4 13.3H4.8C3.92 13.3 3.2 12.58 3.2 11.7V2.1C3.2 1.22 3.92 0.5 4.8 0.5ZM0 4.5C0 4.06 0.36 3.7 0.8 3.7C1.24 3.7 1.6 4.06 1.6 4.5V14.1C1.6 14.54 1.96 14.9 2.4 14.9H12C12.44 14.9 12.8 15.26 12.8 15.7C12.8 16.14 12.44 16.5 12 16.5H1.6C0.72 16.5 0 15.78 0 14.9V4.5Z"
+                                                      fill="#9E007E"></path>
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_431_1880">
+                                                    <rect width="16" height="16" fill="white"
+                                                          transform="translate(0 0.5)"></rect>
+                                                </clipPath>
+                                            </defs>
+                                        </svg>&nbsp;&nbsp;&nbsp;<span style="color: #422055; font-weight: 300;">1. Benevity Organizational Details</span>
+                                    </button>
+                                </h2>
+                                <div id="collapseDevice_0" class="accordion-collapse collapse show"
+                                     data-bs-parent="#accordion-organizational-details-section"
+                                     style="background-color: rgb(251, 251, 251);">
+                                    <div class="accordion-body">
+
+                                        <div class="row">
+
+                                            <div class="col-sm-10 mb-3">
+                                                <div id="benevity-content-container" class="d-flex align-content-center">
+                                                    <div id="cause-logo"></div>
+                                                    <div>
+                                                        <div id="cause-name" class="fw-bold"></div>
+                                                        <div id="cause-id" class="text-muted"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-2 mb-3 d-flex align-items-center">
+                                                <div class="change-button">
+                                                    <a href="/benevity/education/order/checkout/organization-details"
+                                                       class="text-decoration-none"
+                                                       style="color: #9e017e">
+                                                        Change
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="mb-3" hidden>
+                                            <label for="organizationNameInput" class="form-label">Organization
+                                                name</label>
+                                            <input type="text" class="form-control" name="organizationName"
+                                                   id="organizationNameInput" maxlength="250" required>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-sm-6">
+                                                <label for="phoneInput" class="form-label">Phone</label>
+                                                <input type="tel" class="form-control" name="phone" id="phoneInput"
+                                                       oninput="formatPhoneNumber(this)" maxlength="14" required>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <label for="emailInput" class="form-label">Email address</label>
+                                                <input type="email" class="form-control" name="email" id="emailInput"
+                                                       maxlength="250"
+                                                       required>
+                                                <small id="invalidInputMessage" style="color: red; display: none;"></small>
+                                            </div>
+                                            <div class="row mb-3" style="padding-top: 10px;">
+                                                <div class="col-sm-6">
+                                                    <label for="campaignStartDateInput" class="form-label">Program Start
+                                                        Date</label>
+                                                    <input type="date" class="form-control" name="campaignStartDate"
+                                                           id="campaignStartDateInput"
+                                                           required>
+                                                    <div id="campaign-start-date-helper-default" class="form-text"
+                                                         style="display: block">
+                                                        Note: Please select a program start date that is 4 weeks from now to
+                                                        ensure enough time for setup, onboarding, and shipping of your order
+                                                    </div>
+                                                    <div id="campaign-start-date-helper-invalid"
+                                                         class="form-text ttp-color-invalid" style="display: none">
+                                                        Note: You’ve selected <span class="daysDiff"></span> days, which is
+                                                        less than the required 4 weeks needed to guarantee delivery. We
+                                                        cannot ensure your order will be ready and shipping in time for
+                                                        your desired delivery date. To view your shipping options, click on
+                                                        <button type="button" onclick="showInformationModal()"
+                                                                style="background-color: transparent; color: #0a53be; font-weight: bold; border: none">
+                                                            more info
+                                                        </button>
+                                                    </div>
+                                                    <div id="campaign-start-date-helper-valid"
+                                                         class="form-text ttp-color-valid" style="display: none">
+                                                        Thank you! You’ve selected <span class="daysDiff"></span> days,
+                                                        which provides sufficient time for preparation, shipping, and
+                                                        onboarding.
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4 accordion" id="accordion-shipping-section"
+                         style="background-color: rgb(251, 251, 251);">
+                        <div class="card-body">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header text-center">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseDevice_accordion-shipping-section"
+                                            aria-expanded="true"
+                                            aria-controls="collapseDevice_accordion-shipping-section"
+                                            style="color: black; font-weight: bold; background-color: rgb(251, 251, 251);">
+                                        <svg width="24" height="20" viewBox="0 0 24 20" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M16.8661 1.925H2V14.5387H16.8661V1.925Z" stroke="#9E007E"
+                                                  stroke-width="2.25244" stroke-linecap="round"
+                                                  stroke-linejoin="round"/>
+                                            <path d="M16.8657 6.88037H19.3434C20.12 6.88037 20.8648 7.18888 21.4139 7.73801C21.9631 8.28715 22.2716 9.03194 22.2716 9.80854V14.5387H16.8657V6.88037Z"
+                                                  stroke="#9E007E" stroke-width="2.25244" stroke-linecap="round"
+                                                  stroke-linejoin="round"/>
+                                            <path d="M7.13986 18.075C7.73947 18.075 8.22555 17.5889 8.22555 16.9893C8.22555 16.3897 7.73947 15.9036 7.13986 15.9036C6.54026 15.9036 6.0542 16.3897 6.0542 16.9893C6.0542 17.5889 6.54026 18.075 7.13986 18.075Z"
+                                                  stroke="#9E007E" stroke-width="2.25244" stroke-linecap="round"
+                                                  stroke-linejoin="round"/>
+                                            <path d="M16.4558 18.075C17.0554 18.075 17.5415 17.5889 17.5415 16.9893C17.5415 16.3897 17.0554 15.9036 16.4558 15.9036C15.8562 15.9036 15.3701 16.3897 15.3701 16.9893C15.3701 17.5889 15.8562 18.075 16.4558 18.075Z"
+                                                  stroke="#9E007E" stroke-width="2.25244" stroke-linecap="round"
+                                                  stroke-linejoin="round"/>
+                                            <path d="M2.4502 6.97497H7.85605" stroke="#9E007E" stroke-width="2.25244"
+                                                  stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>&nbsp;&nbsp;&nbsp;<span style="color: #422055; font-weight: 300;">2. Shipping Information</span>
+                                    </button>
+                                </h2>
+                                <div id="collapseDevice_accordion-shipping-section"
+                                     class="accordion-collapse collapse show"
+                                     data-bs-parent="#accordion-shipping-section"
+                                     style="background-color: rgb(251, 251, 251);">
+                                    <div class="accordion-body">
+
+                                        <div class="mb-3">
+                                            <label for="shippingFullNameInput" class="form-label">Full name</label>
+                                            <input type="text" class="form-control" name="shippingFullName"
+                                                   id="shippingFullNameInput" maxlength="250" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="shippingAddressLine1Input" class="form-label">Address line
+                                                1</label>
+                                            <input type="text" class="form-control" name="shippingAddressLine1"
+                                                   id="shippingAddressLine1Input" maxlength="400" required>
+                                            <small id="shippingAddressLine1InputAlert" class="mx-2"
+                                                   style="display: block; font-size: 12px;">PO Boxes and Lock Boxes are not
+                                                allowed</small>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="shippingAddressLine2Input" class="form-label">Address line 2
+                                                (Optional)</label>
+                                            <input type="text" class="form-control" name="shippingAddressLine2"
+                                                   id="shippingAddressLine2Input" maxlength="400">
+                                        </div>
+
+
+                                        <div class="row mb-3">
+
+                                            <div class="col-sm-6">
+                                                <label for="shippingCountryInput" class="form-label">Country</label>
+                                                <select class="form-select" aria-label="Default select example"
+                                                        name="shippingCountry" id="shippingCountryInput" required
+                                                        onchange="updatePostalCodePattern('shipping')">
+                                                    <option selected hidden></option>
+                                                    <option value="Canada">Canada</option>
+                                                    <option value="United States">United States</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <label for="shippingStateInput"
+                                                       class="form-label">Province/State</label>
+                                                <select class="form-select" name="shippingState" id="shippingStateInput"
+                                                        required>
+                                                    <option selected hidden></option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="row mb-3">
+
+                                            <div class="col-sm-6">
+                                                <label for="shippingCityInput" class="form-label">City</label>
+                                                <input type="text" class="form-control" name="shippingCity"
+                                                       id="shippingCityInput" maxlength="250" required>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <label for="shippingZipCodeInput" class="form-label">Postal/Zip
+                                                    code</label>
+                                                <input type="text" class="form-control" name="shippingZipCode"
+                                                       id="shippingZipCodeInput" required>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-sm-6">
+                                                <label for="shippingPhoneInput" class="form-label">Phone</label>
+                                                <input type="tel" class="form-control" name="shippingPhone"
+                                                       id="shippingPhoneInput"
+                                                       oninput="formatPhoneNumber(this)" maxlength="14" required>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4 accordion" id="accordion-billing-section"
+                         style="background-color: rgb(251, 251, 251);">
+                        <div class="card-body">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header text-center">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseDevice_accordion-billing-section"
+                                            aria-expanded="true"
+                                            aria-controls="collapseDevice_accordion-billing-section"
+                                            style="color: black; font-weight: bold; background-color: rgb(251, 251, 251);">
+                                        <svg width="20" height="24" viewBox="0 0 20 24" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M9.17157 3H5C3.11438 3 2.17157 3 1.58579 3.58579C1 4.17157 1 5.11438 1 7V17C1 18.8856 1 19.8284 1.58579 20.4142C2.17157 21 3.11438 21 5 21H11C12.8856 21 13.8284 21 14.4142 20.4142C15 19.8284 15 18.8856 15 17V8.82843C15 8.41968 15 8.2153 14.9239 8.03153C14.8478 7.84776 14.7032 7.70324 14.4142 7.41421L10.5858 3.58579C10.2968 3.29676 10.1522 3.15224 9.96847 3.07612C9.7847 3 9.58032 3 9.17157 3Z"
+                                                  stroke="#9E007E" stroke-width="2"/>
+                                            <path d="M5 13L11 13" stroke="#9E007E" stroke-width="2"
+                                                  stroke-linecap="round"/>
+                                            <path d="M5 17L9 17" stroke="#9E007E" stroke-width="2"
+                                                  stroke-linecap="round"/>
+                                            <path d="M9 3V7C9 7.94281 9 8.41421 9.29289 8.70711C9.58579 9 10.0572 9 11 9H15"
+                                                  stroke="#9E007E" stroke-width="2"/>
+                                        </svg>&nbsp;&nbsp;&nbsp;<span style="color: #422055; font-weight: 300;">3. Billing Information</span>
+                                    </button>
+                                </h2>
+                                <div id="collapseDevice_accordion-billing-section"
+                                     class="accordion-collapse collapse show"
+                                     data-bs-parent="#accordion-billing-section"
+                                     style="background-color: rgb(251, 251, 251);">
+                                    <div class="accordion-body">
+
+                                        <div class="mb-3 form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                   id="checkboxToUseShippingAddressInput"
+                                                   name="checkboxToUseShippingAddress" checked>
+                                            <label class="form-check-label" for="checkboxToUseShippingAddressInput">
+                                                Use shipping information
+                                            </label>
+                                        </div>
+
+                                        <div class="billing-address-section" style="display: none;">
+
+                                            <div class="mb-3">
+                                                <label for="billingFullNameInput" class="form-label">Full name</label>
+                                                <input type="text" class="form-control" name="billingFullName"
+                                                       id="billingFullNameInput" maxlength="250">
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="billingAddressLine1Input" class="form-label">Address line
+                                                    1</label>
+                                                <input type="text" class="form-control" name="billingAddressLine1"
+                                                       id="billingAddressLine1Input" maxlength="400">
+                                                <small id="billingAddressLine1InputAlert" class="mx-2"
+                                                       style="display: block; font-size: 12px">PO Boxes and Lock Boxes are not
+                                                    allowed</small>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="billingAddressLine2Input" class="form-label">Address line 2
+                                                    (Optional)</label>
+                                                <input type="text" class="form-control" name="billingAddressLine2"
+                                                       id="billingAddressLine2Input" maxlength="400">
+                                            </div>
+
+                                            <div class="row mb-3">
+
+                                                <div class="col-sm-6">
+                                                    <label for="billingCountryInput" class="form-label">Country</label>
+                                                    <select class="form-select" aria-label="Default select example"
+                                                            name="billingCountry" id="billingCountryInput" required
+                                                            onchange="updatePostalCodePattern('billing')">
+                                                        <option selected hidden></option>
+                                                        <option value="Canada">Canada</option>
+                                                        <option value="United States">United States</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <label for="billingStateInput"
+                                                           class="form-label">Province/State</label>
+                                                    <select class="form-select" name="billingState"
+                                                            id="billingStateInput" required>
+                                                        <option selected hidden></option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row mb-3">
+
+                                                <div class="col-sm-6">
+                                                    <label for="billingCityInput" class="form-label">City</label>
+                                                    <input type="text" class="form-control" name="billingCity"
+                                                           id="billingCityInput" maxlength="250">
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <label for="billingZipCodeInput" class="form-label">Postal/Zip
+                                                        code</label>
+                                                    <input type="text" class="form-control" name="billingZipCode"
+                                                           id="billingZipCodeInput" required>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <div class="col-sm-6">
+                                                    <label for="billingPhoneInput" class="form-label">Phone</label>
+                                                    <input type="tel" class="form-control" name="billingPhone"
+                                                           id="billingPhoneInput"
+                                                           oninput="formatPhoneNumber(this)" maxlength="14" required>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-2 mb-5 mx-1 d-flex justify-content-between">
+                        <div class="">
+                            <button type="button" class="btn ttp-btn-secondary btn-sm w-100" onclick="onPrevious()"
+                                    style="border-radius: 10px; padding: 5px 30px">Back
+                            </button>
+                        </div>
+
+                        <div class="">
+                            <button type="submit" class="btn ttp-btn-primary btn-sm w-100 mb-2"
+                                    style="border-radius: 10px; padding: 5px 30px">Continue to Payment
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center">
+                        <div class="spinner-border" role="status"></div>
+                        <div class="mt-2">
+                            <div class="ttp-color-fuchsia fw-bold h5">Calculating shipping and fees...</div>
+                            <div class="ttp-text-gray fw-bold small">Please wait a moment</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Information Modal -->
+    <div class="modal fade" id="informationModal" tabindex="-1" aria-labelledby="informationModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="">
+                        <div class="mt-2">
+                            <div class="container mt-3 mb-3">
+                                <h5 class="mb-4">Shipping Methods</h5>
+
+                                <!-- Card 1 -->
+                                <div class="shipping-card">
+                                    <div class="row">
+                                        <!-- Left Section -->
+                                        <div class="col-12 col-md-6 d-flex align-items-center">
+                                            <svg th:replace="~{fragments/bundles/svg_fragments :: ups-logo}"></svg>
+                                            <span class="ms-2 fw-bold">Standard</span>&nbsp;&nbsp;
+                                            <span class="badge text-bg-tiptap">Default</span>
+                                        </div>
+
+                                        <!-- Right Section -->
+                                        <div class="col-12 col-md-6 text-md-end text-start mt-2 mt-md-0">
+                                            <span class="text-muted">1 to 5 Business Days</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card 2 -->
+                                <div class="shipping-card">
+                                    <div class="row">
+                                        <!-- Left Section -->
+                                        <div class="col-12 col-md-5 d-flex align-items-center">
+                                            <svg th:replace="~{fragments/bundles/svg_fragments :: ups-logo}"></svg>
+                                            <span class="ms-2 fw-bold">Express</span>
+                                        </div>
+
+                                        <!-- Right Section -->
+                                        <div class="col-12 col-md-7 text-md-end text-start mt-2 mt-md-0">
+                                            <span class="text-muted">Next Day to 3 Business Days</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card 3 -->
+                                <div class="shipping-card">
+                                    <div class="row">
+                                        <!-- Left Section -->
+                                        <div class="col-12 col-md-5 d-flex align-items-center">
+                                            <svg th:replace="~{fragments/bundles/svg_fragments :: ups-logo}"></svg>
+                                            <span class="ms-2 fw-bold">Expedited</span>
+                                        </div>
+
+                                        <!-- Right Section -->
+                                        <div class="col-12 col-md-7 text-md-end text-start mt-2 mt-md-0">
+                                            <span class="text-muted">3 to 5 Business Days</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4">
+                                    <span th:if="${salesRepContactEmail != null}">
+                                        To change your shipping method please
+                                        <a target="_blank"
+                                           th:href="'mailto:' + ${salesRepContactEmail}"
+                                           style="text-decoration: none; color: #9d2285">
+                                           contact your sales rep
+                                        </a>
+                                    </span>
+                                    <span th:if="${salesRepContactEmail == null}">
+                                        To change your shipping method please
+                                        <a target="_blank"
+                                           href="https://share.hsforms.com/1lwl-CRvqTveeobrXKW1gfg3144o"
+                                           style="text-decoration: none; color: #9d2285">
+                                           contact sales
+                                        </a>
+                                    </span>
+                                </div>
+
+                                <div class="mt-4">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn ttp-btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center">
+                        <div class="spinner-grow" role="status"></div>
+                        <div class="mt-2">
+                            <div class="ttp-color-fuchsia fw-bold h5">Oops!</div>
+                            <div class="ttp-text-gray fw-bold small" id="error-modal-text"
+                                 th:text="${errorMessage == null ? '' : errorMessage}"></div>
+                            <div id="error-code" class="ttp-text-gray fw-bold small mt-3" style="font-size: 9px"
+                                 th:text="${errorCode == null ? 'ERROR 000' : 'ERROR ' + errorCode}"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn ttp-btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 200px">
+        <div th:replace="~{fragments/bundles/footer :: footer}"></div>
+    </div>
+
+</div>
+
+<div class="container" id="calculation-container" style="display: none">
+    <div class="text-center mt-5">
+        <div class="spinner-border" role="status"></div>
+        <div class="mt-2">
+            <div class="ttp-color-fuchsia fw-bold h5">Calculating shipping and fees...</div>
+            <div class="ttp-text-gray fw-bold small">Please wait a moment</div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="error-container" style="display: none">
+    <div class="text-center mt-5">
+        <div class="spinner-grow" role="status"></div>
+        <div class="mt-2">
+            <div class="ttp-color-fuchsia fw-bold h5">Oops!</div>
+            <div class="ttp-text-gray fw-bold small" id="error-modal-text-sm"
+                 th:text="${errorMessage == null ? '' : errorMessage}"></div>
+            <div id="error-code-sm" class="ttp-text-gray fw-bold small mt-3" style="font-size: 9px"
+                 th:text="${errorCode == null ? 'ERROR 000' : 'ERROR ' + errorCode}"></div>
+        </div>
+
+        <div class="mt-5">
+            <button type="button" class="btn ttp-btn-primary" onclick="switchContainers(true, false, false)">OK</button>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/bundles/js/bootstrap.bundle.min.js}"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+        document.getElementById('campaignStartDateInput').setAttribute('min', today);
+    });
+</script>
+<script>
+    const STORE_INITIAL = '_edu';
+</script>
+<script th:src="@{/js/common/email.js}"></script>
+<script th:src="@{/js/benevity/education/js/custom/page4.js}"></script>
+</body>
+</html>

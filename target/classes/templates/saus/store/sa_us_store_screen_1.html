@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:insert="~{fragments/store/header :: head}"></head>
+
+<body class="ttp-bg-white">
+
+<div id="content-wrapper" class="content-wrapper-cls">
+
+    <nav th:replace="~{fragments/store/navbar :: navbar-with-bag}"></nav>
+
+    <div id="landing-hero" class="row justify-content-around align-items-center ttp-bg-color-light-shade-grey p-5"
+         style="margin-top: 65px">
+        <div class="p-2">
+
+            <h2 class="ttp-color-purple mb-2">2025 Kettle Campaign</h2>
+
+            <div class="ttp-body-lead">
+                Welcome! In a few easy steps, you will be able to order what you need for the 2025 Kettle Campaign.
+            </div>
+            <div>
+
+                <div style="padding-top: 50px;">
+                    <svg th:replace="~{fragments/svg_fragments :: svg-number-1-active}"></svg>
+                    <span class="ttp-color-dark-grey padding-left-30px">Select your display quantity</span>
+                </div>
+
+                <div style="padding-top: 20px;">
+                    <svg th:replace="~{fragments/svg_fragments :: svg-number-2-active}"></svg>
+                    <span class="ttp-color-dark-grey padding-left-30px">Enter your shipping and billing information</span>
+                </div>
+
+                <div style="padding-top: 20px;">
+                    <svg th:replace="~{fragments/svg_fragments :: svg-number-3-active}"></svg>
+                    <span class="ttp-color-dark-grey padding-left-30px">Confirm & Submit</span>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="p-2">
+            <img th:src="@{'/images/kettle_display.png'}" alt="Kettle Display Image"
+                 style="width: 350px; height: 466px">
+        </div>
+    </div>
+
+    <div class="text-center" style="margin-top: -20px">
+        <svg th:insert="~{fragments/svg_fragments :: scroll-down-indicator}" height="45px" width="30px"></svg>
+    </div>
+
+    <div class="container">
+
+        <form method="POST" id="order-form" th:object="${storeShoppingBag}">
+
+            <div th:replace="~{fragments/store/stepper :: stepper}"></div>
+            <div th:replace="~{fragments/store/stepper :: stepper-sm}"></div>
+
+            <div hidden>
+                <input id="oneTimeFeeInCentsInput" th:field="*{oneTimeFeeInCents}"
+                       th:value="${storeShoppingBag.getOneTimeFeeInCents()}">
+                <input id="rentalFeeInCentsInput" th:field="*{rentalFeeInCents}"
+                       th:value="${storeShoppingBag.getRentalFeeInCents()}">
+                <input id="kettleDisplayQtyInput" th:field="*{kettleDisplayQty}"
+                       th:value="${storeShoppingBag.getKettleDisplayQty()}">
+                <input id="device5DollarQtyInput" th:field="*{device5DollarQty}"
+                       th:value="${storeShoppingBag.getDevice5DollarQty()}">
+                <input id="device10DollarQtyInput" th:field="*{device10DollarQty}"
+                       th:value="${storeShoppingBag.getDevice10DollarQty()}">
+                <input id="device20DollarQtyInput" th:field="*{device20DollarQty}"
+                       th:value="${storeShoppingBag.getDevice20DollarQty()}">
+
+                <input id="totalOneTimeFeeFormatted" th:value="${storeShoppingBag.totalOneTimeFeeFormatted()}">
+                <input id="totalRentalFeeFormatted" th:value="${storeShoppingBag.totalRentalFeeFormatted()}">
+                <input id="totalAmountFormatted" th:value="${storeShoppingBag.totalAmountFormatted()}">
+                <input id="totalProducts" type="number" th:value="${storeShoppingBag.totalNumberOfProducts()}">
+            </div>
+
+
+            <div class="row ">
+                <div class="row"
+                     style="padding-top: 50px">
+                    <div class="card mb-3 ttp-bg-color-light-shade-grey" style="width: 800px; margin-right: 30px; margin-left: 50px; height: 402px;border: none;border-radius: 10px;">
+                    <div class="row g-0">
+                            <!-- Image Column -->
+                            <div class="col-md-4 d-flex align-items-center justify-content-center">
+                                <img src="/images/kettle_display.png" alt="kettle display" style="width: 175px; height: 233px; margin-left: 50px;">
+                            </div>
+
+                            <!-- Device Info Column -->
+                            <div class="col-md-5">
+                                <div class="card-body">
+                                    <h5 class="card-title fs-2 fw-bold text-purple">Kettle Display Kit</h5>
+                                    <p>for use on Kettle stand (Kettle stand not included)</p>
+                                    <p class="mb-1 fw-bold fs-6 text-purple">Includes:</p>
+                                    <ul>
+                                        <li>3 Devices ($5, $10 and $20)</li>
+                                        <li>Two high capacity batteries</li>
+                                        <li>Power cables and wall plugs</li>
+                                        <li>Signage</li>
+                                    </ul>
+
+                                    <p class="mb-1 fs-6 text-grey">Signage Dimensions:</p>
+                                    <p class="fs-6 text-grey">23¼”H x 11” W</p>
+
+                                    <p class="fs-6 mt-3 text-grey fw-bold">Kit Total: $260</p>
+                                </div>
+                            </div>
+
+                            <!-- Quantity Inputs Column -->
+                            <div class="col-md-3 d-flex flex-column justify-content-center align-items-end pe-4">
+                                <div class="card-body">
+                                    <label class="ttp-color-purple m-0">
+                                        Display Quantity
+                                    </label>
+                                    <div class="mb-4 mt-1">
+                                        <label>
+                                            <select style="width: 170px; background-color: white"
+                                                    class="custom-select form-item"
+                                                    onchange="changeQuantity(this.getAttribute('id'))"
+                                                    th:id="${products.get(0).getId()}"
+                                                    th:name="${products.get(0).getId()}">
+                                                <option value="" hidden></option>
+                                                <option th:each="number : ${#numbers.sequence(0, 200)}"
+                                                        th:value="${number}"
+                                                        th:selected="${number == storeShoppingBag.getKettleDisplayQty()}"
+                                                        th:text="${number}"></option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="your-orders-section" class="" style="">
+
+                        <div id="your-orders-section-body" class="text-center mx-3"
+                             style="min-width: 230px; max-width: 230px">
+
+                            <div id="your-orders-section-content-body"
+                                 class="ttp-bg-color-light-shade-grey ttp-border-radius-10px pb-2">
+
+                                <div class="ttp-card-header ttp-color-purple pt-4">
+                                    fees & totals
+                                </div>
+
+                                <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                    Kettle display purchase
+                                </div>
+                                <div class="ttp-card-info ttp-color-dark-grey">
+                                    ( signage, power cables, plugs )
+                                </div>
+                                <div class="ttp-color-dark-grey">
+                                    $<span class="kettleDisplayOneTimeFeeTotal"></span>
+                                </div>
+
+                                <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                    Rental (2 months)
+                                </div>
+                                <div class="ttp-card-info ttp-color-dark-grey">
+                                    ( devices & batteries )
+                                </div>
+                                <div class="ttp-color-dark-grey">
+                                    $<span class="devicesRentalFeeTotal"></span>
+                                </div>
+
+                                <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                    Total
+                                </div>
+                                <div class="ttp-fs-24px ttp-fw-700 ttp-color-purple">
+                                    $<span class="overallTotal"></span>
+                                </div>
+
+                            </div>
+
+                            <div id="your-orders-section-content-footer" class="mt-4">
+                                <button type="submit" style="width: 200px;width: 200px;margin-top: 7px;" class="ttp-button-primary">
+                                    continue
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+
+
+        <div id="ttp-toast" role="alert" aria-live="assertive" aria-atomic="true" class="toast ttp-toast">
+            <div class="toast-header">
+
+                <svg id="ttp-toast-indicator-success" style=""
+                     th:insert="~{fragments/svg_fragments :: green-checked-data-svg}" height="40px"
+                     width="40px"></svg>
+                <svg id="ttp-toast-indicator-error" style=""
+                     th:insert="~{fragments/svg_fragments :: status-failed-svg}" height="40px" width="40px"></svg>
+                &nbsp;&nbsp;
+
+                <strong class="mr-auto"><span id="ttp-toast-title"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                <button type="button" onclick="toastSwitcher('ttp-toast', false, 0)" class="ml-2 mb-1 close"
+                        data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="ttp-toast-message" class="toast-body"></div>
+        </div>
+
+
+        <div class="text-center pt-5" style="margin-top: 250px">
+            <div
+                    style="font-family: Mulish, sans-serif; opacity: 1; color: #901F7A; font-size: 12px; font-weight: 400; padding: 0 0 25px 0;">
+                order&nbsp;&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;&nbsp;contact &
+                shipping&nbsp;&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;&nbsp;review&nbsp;&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;&nbsp;payment
+            </div>
+        </div>
+        <hr class="custom-hr-grey">
+
+        <div th:insert="~{fragments/store/footer :: footer}"></div>
+
+    </div>
+
+
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+    const bagBadge = document.getElementById('shopping-bag-device-number');
+    const totalOneTimeFeeFormatted = document.getElementById('totalOneTimeFeeFormatted');
+    const totalRentalFeeFormatted = document.getElementById('totalRentalFeeFormatted');
+    const totalAmountFormatted = document.getElementById('totalAmountFormatted');
+    const totalProducts = document.getElementById('totalProducts');
+
+    const elementsKettleDisplayOneTimeFeeTotal = document.querySelectorAll('.kettleDisplayOneTimeFeeTotal');
+    const elementsDevicesRentalFeeTotal = document.querySelectorAll('.devicesRentalFeeTotal');
+    const elementsOverallTotal = document.querySelectorAll('.overallTotal');
+    document.getElementById('order-form').addEventListener('submit', function (e) {
+        const kettleSelect = document.getElementById('kettleDisplay');
+
+        if (!kettleSelect || !kettleSelect.value || parseInt(kettleSelect.value) === 0) {
+            e.preventDefault(); // Prevent form submission
+            showToastWithMessage('ttp-toast', 'Missing Selection', 'Please select a display quantity before continuing.', 'error', 3000);
+        }
+    });
+
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+
+    document.addEventListener('DOMContentLoaded', function () {
+        updateCardTexts(totalOneTimeFeeFormatted.value, totalRentalFeeFormatted.value, totalAmountFormatted.value);
+
+        updateBagBadgeNumber(totalProducts.value << 0);
+    });
+
+    function updateCardTexts(oneTimeFeeAmount, rentalFeeAmount, totalAmount) {
+        elementsKettleDisplayOneTimeFeeTotal.forEach(function (element) {
+            element.textContent = oneTimeFeeAmount;
+        });
+
+        elementsDevicesRentalFeeTotal.forEach(function (element) {
+            element.textContent = rentalFeeAmount;
+        });
+
+        elementsOverallTotal.forEach(function (element) {
+            element.textContent = totalAmount;
+        });
+    }
+
+    function updateCardOptions( id, kettleDisplayQty, device5DollarQty, device10DollarQty, device20DollarQty) {
+        const elem = document.getElementById(id);
+        switch (id){
+            case 'kettleDisplay':
+                elem.value = kettleDisplayQty
+                return;
+            case 'device5Dollar':
+                elem.value = device5DollarQty
+                return;
+            case 'device10Dollar':
+                elem.value = device10DollarQty
+                return;
+            case 'device20Dollar':
+                elem.value = device20DollarQty
+                return;
+        }
+    }
+
+    function updateBagBadgeNumber(num) {
+        if (num === 0) {
+            bagBadge.textContent = '';
+        } else {
+            bagBadge.textContent = num;
+        }
+    }
+
+    async function updateBag(formData, itemId) {
+        let response;
+        try {
+            response = await fetch('/salvation-army-us/shopping-bag/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+        } catch (error) {
+            showToastWithMessage('ttp-toast', 'Error', error.message, 'error', 2000);
+        }
+
+        if (!response.ok) {
+            showToastWithMessage('ttp-toast', 'Network Issue', 'Please try again later', 'error', 2000);
+        }
+
+        const responseData = await response.json();
+
+        if (responseData.success) {
+            const {
+                kettleDisplayQty,
+                device5DollarQty,
+                device10DollarQty,
+                device20DollarQty,
+                batteryForKettleDisplayQty,
+                totalProducts,
+                totalOneTimeFeeAmount,
+                totalRentalFeeAmount,
+                totalAmount
+            } = responseData;
+
+            updateBagBadgeNumber(totalProducts);
+            updateCardTexts(totalOneTimeFeeAmount, totalRentalFeeAmount, totalAmount);
+            updateCardOptions(itemId, kettleDisplayQty, device5DollarQty, device10DollarQty, device20DollarQty);
+            showToastWithMessage('ttp-toast', 'Bag Updated', 'Successfully updated', 'success', 1000);
+        }
+    }
+
+    function toastSwitcher(toastId, isShow, howLong) {
+        const toastElement = document.getElementById(toastId);
+        if (isShow) {
+            toastElement.classList.add('show');
+            setTimeout(function () {
+                toastElement.classList.remove('show');
+            }, (howLong << 0));
+        } else {
+            toastElement.classList.remove('show');
+        }
+    }
+
+    function showToastWithMessage(toastId, title, message, type, duration) {
+        const messageElement = document.getElementById(toastId + '-message');
+        const indicatorElementIdInitial = toastId + '-indicator-'
+        const titleElement = document.getElementById(toastId + '-title');
+
+        if (type === 'success') {
+            changeVisibility(indicatorElementIdInitial + "success", true);
+            changeVisibility(indicatorElementIdInitial + "error", false);
+        }
+
+        if (type === 'error') {
+            changeVisibility(indicatorElementIdInitial + "success", false);
+            changeVisibility(indicatorElementIdInitial + "error", true);
+        }
+
+        titleElement.textContent = title;
+        messageElement.textContent = message;
+
+        toastSwitcher(toastId, true, (duration << 0));
+    }
+
+    function changeVisibility(elementId, isVisible) {
+        const element = document.getElementById(elementId);
+        if (isVisible) {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+    }
+
+    function changeQuantity(itemId) {
+        const qty = document.getElementById(itemId).value;
+
+        const formData = [
+            {
+                id: itemId,
+                quantity: (qty << 0)
+            }
+        ];
+
+        // Update the hidden input manually
+        if (itemId === 'kettleDisplay') {
+            const kettleDisplayQtyInput = document.getElementById('kettleDisplayQtyInput');
+            if (kettleDisplayQtyInput) {
+                kettleDisplayQtyInput.value = qty;
+            }
+        }
+
+        updateBag(formData, itemId);
+    }
+
+
+
+</script>
+
+
+</body>
+
+</html>

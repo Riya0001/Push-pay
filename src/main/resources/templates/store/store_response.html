@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en"
+>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.css">
+    <link rel="icon" type="image/x" href="/favicon.ico">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <title>tiptap</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/app.css"/>
+
+    <meta charset="UTF-8" content="MBoyQBsQODEBNHceP31SFiBYDEkgOgcdGyaryiAu6VAXi5kLp3yxUXKn" csrf-param="_csrf_token" method-param="_method" name="csrf-token">
+</head>
+
+<body style="background-color: #fcfcfc">
+
+<div id="content-wrapper" class="">
+
+    <nav th:replace="~{fragments/navbar :: navbar-no-bag}"></nav>
+
+    <div class="container d-flex mt-5">
+
+        <main
+                id=""
+                class="bg-lightgrey flex-grow-6 flex-shrink-1 px-4 py-5 w-100"
+                role="main"
+        >
+
+            <br/>
+
+            <div class="container">
+
+                <div class="text-center mt-5">
+
+                    <div th:if="${orderResponse.isSuccess() == true}">
+
+                        <div class="text-fuscia">
+                            <div class="mb-3">
+                                <svg th:insert="~{fragments/svg_fragments :: green-checked-data-svg}" height="80px" width="80px"></svg>
+                            </div>
+                            <span>Thanks for your order!</span>
+                        </div>
+
+                        <div class="mt-3"></div>
+
+                        <div class="text-black">
+                            <span>Payment was successful. Please check your email.</span>
+                        </div>
+
+                        <div class="text-black">
+                            <span>If you have any questions, please reach out to <a class="ttp-mail-to" href="mailto:sales@tiptappay.com">sales@tiptappay.com</a></span>
+                        </div>
+
+
+                        <div class="mt-3"></div>
+
+                        <div class="d-flex flex-row justify-content-center align-items-center mt-5">
+                            <div>
+                                <a class="btn btn-outline-primary btn-small position-relative d-flex align-items-center" href="/">
+                                    Go Home
+                                </a>
+                            </div>
+                            <div>
+                                <a class="btn btn-outline-primary btn-small position-relative d-flex align-items-center ml-3" href="/store">
+                                    Place New Order
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div th:unless="${orderResponse.isSuccess() == true}">
+
+                        <div class="text-fuscia">
+                            <div class="mb-3">
+                                <svg th:insert="~{fragments/svg_fragments :: status-failed-svg}" width="80px" height="80px"></svg>
+                            </div>
+                            <span>Oops! It looks like there was an issue processing your order.</span>
+                        </div>
+
+                        <div class="mt-3"></div>
+
+                        <div class="text-black">
+                            <span>Please try again. If the problem persists, reach out to us at <a class="ttp-mail-to" href="mailto:sales@tiptappay.com">sales@tiptappay.com</a> for assistance.</span>
+                        </div>
+
+                        <div class="text-black">
+                            <span>Apologies for any inconvenience caused.</span>
+                        </div>
+
+                        <div class="mt-3"></div>
+
+                        <div class="d-flex flex-row justify-content-center align-items-center mt-5">
+                            <div>
+                                <a class="btn btn-outline-primary btn-small position-relative d-flex align-items-center" href="/">
+                                    Go Home
+                                </a>
+                            </div>
+                            <div>
+                                <a class="btn btn-outline-primary btn-small position-relative d-flex align-items-center ml-3" href="/store">
+                                    Place New Order
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </main>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/app.js"></script>
+
+</body>
+</html>

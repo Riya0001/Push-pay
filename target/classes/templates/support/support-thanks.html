@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>tiptap • Thanks</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            /* brand + colors */
+            --ink:#1f2430; --muted:#6b7280; --bg:#f5f6fa; --page:#fff;
+            --grad-top:#2B0C4A; --grad-mid:#3A0D5B; --grad-bot:#7A0C7A;
+            --btn:#3b2453; --btn-hover:#2f1c43; --ring:#ece8fb; --field:#fff;
+            --shadow:rgba(20,20,40,.08);
+
+            /* compact sizing */
+            --fs-base:14px; --fs-sm:12.5px; --fs-label:12.5px;
+            --fs-h1: clamp(22px, 1.6vw + 4px, 26px);
+            --radius:10px; --pad:10px 12px;
+            --right-pad:36px; --form-max:880px;
+
+            /* left column */
+            --brand-max:560px; --logo-h:72px; --hero-maxvh:38vh;
+            --why-h: clamp(20px,2.2vw,28px); --res-h: clamp(18px,2vw,24px);
+        }
+        *{box-sizing:border-box}
+        html,body{height:100%}
+        body{
+            margin:0; background:var(--bg); color:var(--ink);
+            font:400 var(--fs-base)/1.45 Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+        }
+        @media (min-width:1024px){ html,body{overflow:hidden} }
+
+        .page{
+            display:grid; grid-template-columns:.82fr 1.18fr;
+            height:100vh; background:var(--page);
+        }
+        @media (max-width:1024px){ .page{grid-template-columns:1fr; height:auto} }
+        @media (max-width:1024px){ .right{padding:22px 18px} }
+        .topbar{position:absolute; right:var(--right-pad); top:16px}
+        @media (max-width:1024px){ .topbar{position:static; text-align:right; margin-bottom:8px} }
+        .login-btn{
+            display:inline-flex; align-items:center; gap:8px; padding:7px 14px; border-radius:999px;
+            background:#f0eafe; border:1px solid #e2d8ff; color:#3a2f72; text-decoration:none; font-weight:700;
+            box-shadow:0 6px 16px var(--shadow); font-size:12.5px;
+        }
+        /* LEFT (unchanged) */
+        .left{
+            color:#fff;
+            background:linear-gradient(180deg,var(--grad-top) 0%, var(--grad-mid) 45%, var(--grad-bot) 100%);
+            padding:24px; display:flex; align-items:center; justify-content:center;
+        }
+        .brand{
+            width:100%; max-width:var(--brand-max); text-align:center;
+            display:flex; flex-direction:column; gap:16px; align-items:center;
+        }
+        .logo img{height:var(--logo-h); display:block}
+        .hero{
+            width:100%; max-width:calc(var(--brand-max) + 80px);
+            max-height:var(--hero-maxvh); object-fit:contain; opacity:.95;
+        }
+        .why{width:100%}
+        .why .title{font-weight:800; font-size:var(--why-h); margin:18px 0 8px}
+        .points{display:grid; gap:12px; text-align:left}
+        .point{display:grid; grid-template-columns:28px 1fr; gap:10px}
+        .point svg{width:18px; height:18px; margin-top:2px}
+        .point p{margin:0}
+        .resources{margin-top:14px}
+        .resources .hd{font-weight:700; font-size:var(--res-h); margin:0 0 8px}
+        .resources a{color:#fff; text-decoration:none; border-bottom:1px solid rgba(255,255,255,.6)}
+        .resources a:hover{border-bottom-color:#fff}
+
+        /* RIGHT */
+        .right{position:relative; padding:26px var(--right-pad)}
+        @media (max-width:1024px){ .right{padding:22px 18px} }
+
+        /* login tip (top-right) */
+        .top-help{
+            position:absolute; right:var(--right-pad); top:16px;
+            font-size:12.5px; color:var(--muted)
+        }
+        .top-help a{color:#7c3aed; font-weight:700; text-decoration:none}
+        .top-help a:hover{text-decoration:underline}
+        @media (max-width:1024px){
+            .top-help{position:static; text-align:right; margin-bottom:8px}
+        }
+
+        /* success card */
+        .card{
+            background:#fff; border-radius:18px; padding:22px;
+            box-shadow:0 12px 26px var(--shadow), inset 0 0 0 1px var(--ring);
+            display:grid; grid-template-columns:240px 1fr; gap:20px;
+            width:100%; max-width:var(--form-max);
+        }
+        @media (max-width:760px){ .card{grid-template-columns:1fr} }
+
+        .tile{
+            border-radius:14px; min-height:180px;
+            background:radial-gradient(100% 120% at 16% 8%, #6C0A8E 0%, #4B0E6B 50%, #2e0c4d 100%);
+            display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:22px;
+        }
+
+        .card h1{
+            margin:0 0 6px; font-size:clamp(28px, 2.2vw + 8px, 40px);
+            line-height:1.15; letter-spacing:-.01em; font-weight:800;
+        }
+        .ok{
+            display:inline-flex; align-items:center; justify-content:center;
+            width:36px; height:36px; border-radius:999px; background:#e8f9ec; margin:10px 0 10px;
+        }
+        .ok svg{width:22px; height:22px}
+        .lead{font-weight:800; margin:0 0 6px}
+        .sub{color:var(--muted); margin:0 0 18px}
+
+        .actions{display:flex; gap:10px; flex-wrap:wrap}
+        .btn{
+            display:inline-flex; align-items:center; justify-content:center; gap:8px;
+            padding:9px 14px; border-radius:12px; background:var(--btn); color:#fff; border:none;
+            font-weight:700; font-size:13px; cursor:pointer; text-decoration:none;
+            box-shadow:0 8px 18px rgba(59,36,83,.28);
+            transition:transform .06s, background .2s, box-shadow .2s;
+        }
+        .btn:hover{background:var(--btn-hover)}
+        .btn.secondary{background:#eef2ff; color:#312e81; box-shadow:none; border:1px solid #e5e7eb}
+        .btn.secondary:hover{background:#e3e8ff}
+    </style>
+</head>
+<body>
+<div class="page">
+    <!-- LEFT -->
+    <section class="left" aria-label="Brand">
+        <div class="brand">
+            <div class="logo">
+                <img src="/images/tiptap_Logo_WhiteText_RGB.png" style="margin-bottom: 300px;" alt="tiptap">
+            </div>
+            <img class="hero" src="/images/Seepay%201.png" alt="Payment illustration"/>
+            <!--            <div class="why">-->
+            <!--                <div class="title">Why Contact Us?</div>-->
+            <!--                <div class="points">-->
+            <!--                    <div class="point">-->
+            <!--                        <svg viewBox="0 0 24 24" fill="#FF8A00" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3 7h7l-5.5 4.1L18 21l-6-4-6 4 1.5-7.9L2 9h7z"/></svg>-->
+            <!--                        <p><strong>Expert Assistance:</strong> Our support team is knowledgeable and ready to help with any issues or questions you may have.</p>-->
+            <!--                    </div>-->
+            <!--                    <div class="point">-->
+            <!--                        <svg viewBox="0 0 24 24" fill="#FF8A00" xmlns="http://www.w3.org/2000/svg"><path d="M12 8V4m0 0l-2 2m2-2l2 2M6 12H4m0 0l2-2m-2 2l2 2m14 0h-2m0 0l2-2m-2 2l2 2M12 20v-4m0 0l2 2m-2-2l-2 2"/></svg>-->
+            <!--                        <p><strong>Fast Response:</strong> We strive to respond to all inquiries within 24 hours.</p>-->
+            <!--                    </div>-->
+            <!--                    <div class="point">-->
+            <!--                        <svg viewBox="0 0 24 24" fill="#FF8A00" xmlns="http://www.w3.org/2000/svg"><path d="M4 7h16v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7zm3-4h10v4H7V3z"/></svg>-->
+            <!--                        <p><strong>Comprehensive Solutions:</strong> We aim to resolve your issues thoroughly and efficiently.</p>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!--            <div class="resources">-->
+            <!--                <div class="hd">Additional Resources</div>-->
+            <!--                <a href="#">Visit resource center</a>-->
+            <!--            </div>-->
+        </div>
+    </section>
+
+    <!-- RIGHT (replaced with thank-you) -->
+    <section class="right" aria-label="Thanks">
+        <div style="margin:200px auto 0; text-align:center; width:fit-content;">
+            <h1>Your CASE# is <span th:text="${caseNumber}">—</span></h1>
+
+            <div class="ok" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" fill="#2bbd0e" opacity=".1"/>
+                    <path d="M7 12.5l3.2 3.2L17 9" stroke="#2bbd0e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <p class="sub">Our team received your request and will get back to you within 24 hours.</p>
+
+            <!-- Center the buttons -->
+            <div class="actions"
+                 style="margin-top:18px; display:flex; justify-content:center; align-items:center; gap:16px; flex-wrap:wrap;">
+                <a class="btn" href="/support/new"
+                   style="display:inline-flex; align-items:center; justify-content:center;">
+                    Submit another request
+                </a>
+                <a class="btn" href="https://www.tiptappay.com"
+                   style="display:inline-flex; align-items:center; justify-content:center;">
+                    Go back to Tiptap Home
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

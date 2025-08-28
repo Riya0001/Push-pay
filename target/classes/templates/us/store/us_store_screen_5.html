@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:insert="~{fragments/store/header :: head}"></head>
+
+<body class="ttp-bg-white">
+
+<div id="content-wrapper" class="content-wrapper-cls">
+
+    <nav th:replace="~{fragments/store/navbar :: navbar-with-bag}"></nav>
+
+    <div class="container" style="margin-top: 100px">
+
+        <div id="user-facing-screen-1">
+
+            <div th:replace="~{fragments/store/stepper :: stepper}"></div>
+            <div th:replace="~{fragments/store/stepper :: stepper-sm}"></div>
+
+            <div hidden>
+                <input id="oneTimeFeeInCentsInput" th:value="${storeShoppingBag.getOneTimeFeeInCents()}">
+                <input id="rentalFeeInCentsInput" th:value="${storeShoppingBag.getRentalFeeInCents()}">
+                <input id="miniClipKitQtyInput" th:value="${storeShoppingBag.getMiniClipKitQty()}">
+                <input id="device5DollarQtyInput" th:value="${storeShoppingBag.getDevice5DollarQty()}">
+                <input id="device10DollarQtyInput" th:value="${storeShoppingBag.getDevice10DollarQty()}">
+                <input id="device20DollarQtyInput" th:value="${storeShoppingBag.getDevice20DollarQty()}">
+
+                <input id="totalOneTimeFeeFormatted" th:value="${storeShoppingBag.totalOneTimeFeeFormatted()}">
+                <input id="totalRentalFeeFormatted" th:value="${storeShoppingBag.totalRentalFeeFormatted()}">
+                <input id="totalAmountFormatted" th:value="${storeShoppingBag.totalAmountFormatted()}">
+                <input id="totalProducts" type="number" th:value="${storeShoppingBag.totalNumberOfProducts()}">
+                <input id="taxAmountInCentsFormatted" th:value="${storeShoppingBag.taxAmountInCentsFormatted()}">
+                <input id="shippingAmountInCentsFormatted"
+                       th:value="${storeShoppingBag.shippingAmountInCentsFormatted()}">
+
+
+                <input id="shippingAddr1" th:value="${contactAndShipping.getShippingAddr1()}">
+                <input id="shippingAddr2" th:value="${contactAndShipping.getShippingAddr2()}">
+                <input id="shippingCountry" th:value="${contactAndShipping.getShippingCountry()}">
+                <input id="shippingState" th:value="${contactAndShipping.getShippingState()}">
+                <input id="shippingProvince" th:value="${contactAndShipping.getShippingProvince()}">
+                <input id="shippingCity" th:value="${contactAndShipping.getShippingCity()}">
+                <input id="shippingPostalCode" th:value="${contactAndShipping.getShippingPostalCode()}">
+                <input id="shippingZip" th:value="${contactAndShipping.getShippingZip()}">
+            </div>
+
+
+            <div id="form-section" class="mt-5" style="padding-bottom: 400px;">
+
+                <form id="order-form" th:object="${payment}" method="POST">
+
+                    <div class="row justify-content-between align-items-start">
+
+                        <div class="col-sm-8">
+
+                            <h2 class="ttp-color-purple">payment</h2>
+
+                            <div id="form-sub-section-payment-information" class="mb-4">
+
+                                <div id="form-sub-section-payment-information-header">
+
+                                    <h4 class="ttp-color-purple">credit card information</h4>
+                                    <hr class="ttp-bg-color-light-grey mt-0">
+
+                                </div>
+
+                                <div id="form-sub-section-payment-information-body" class="row">
+
+                                    <div class="col-12 col-md-12">
+                                        <svg th:insert="~{fragments/svg_fragments :: card-networks-group}" width="210" height="30"></svg>
+                                    </div>
+
+                                    <div class="col-12 col-md-12 mt-3">
+                                        <label for="nameOnCard" class="form-label ttp-color-purple">Name on
+                                            Card</label>
+                                        <input type="text" class="form-control form-item" id="nameOnCard"
+                                               name="nameOnCard" placeholder="Name on Card" maxlength="100"
+                                               th:field="*{nameOnCard}" required>
+                                    </div>
+
+                                    <div class="col-12 col-md-12 mt-3">
+                                        <label for="cardNumber" class="form-label ttp-color-purple">Card
+                                            Number</label>
+                                        <input type="text" class="form-control form-item" id="cardNumber"
+                                               name="cardNumber" placeholder="0000000000000000" minlength="16" maxlength="19"
+                                               th:field="*{cardNumber}" required>
+                                    </div>
+
+                                    <div class="col-12 col-md-3 mt-3">
+                                        <label for="expirationMonth" class="form-label ttp-color-purple">Expiration
+                                            Month</label>
+                                        <select class="custom-select form-item bg-white" id="expirationMonth"
+                                                name="expirationMonth" th:field="*{cardExpiryMonth}" required>
+                                            <option value="" hidden></option>
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-12 col-md-3 mt-3">
+                                        <label for="expirationYear" class="form-label ttp-color-purple">Expiration
+                                            Year</label>
+                                        <select class="custom-select form-item bg-white" id="expirationYear"
+                                                name="expirationYear" th:field="*{cardExpiryYear}" required>
+                                            <option value="" hidden></option>
+                                            <option
+                                                    th:each="number : ${#numbers.sequence((T(java.time.LocalDate).now().getYear()) % 100, ((T(java.time.LocalDate).now().getYear()) % 100) + 20)}"
+                                                    th:value="${number}" th:text="${number}"></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mt-3">
+                                        <label for="securityCode" class="form-label ttp-color-purple">Security
+                                            Code</label>
+                                        <input type="text" class="form-control form-item" id="securityCode"
+                                               name="securityCode" placeholder="000" maxlength="4"
+                                               th:field="*{cardCVV}" required>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div id="form-sub-section-billing-information" class="mb-4">
+
+                                <div id="form-sub-section-billing-information-header">
+
+                                    <h4 class="ttp-color-purple">billing information</h4>
+                                    <hr class="ttp-bg-color-light-grey mt-0">
+
+                                </div>
+
+                                <div id="form-sub-section-billing-information-body" class="row">
+
+                                    <div class="col-12 col-md-6 mt-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                   id="flexCheckDefault">
+                                            <label class="form-check-label ttp-color-purple" for="flexCheckDefault">
+                                                use shipping information
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 mt-3">
+                                        <label for="billingAddr1" class="form-label ttp-color-purple">Address Line 1
+                                            (PO
+                                            Boxes not
+                                            accepted)</label>
+                                        <input type="text" class="form-control form-item" id="billingAddr1"
+                                               name="billingAddr1" placeholder="Address Line 1" maxlength="200"
+                                               th:value="${payment.getBillingAddr1()}" th:field="*{billingAddr1}"
+                                               required>
+                                    </div>
+
+                                    <div class="col-12 mt-3">
+                                        <label for="billingAddr2" class="form-label ttp-color-purple">Address Line 2
+                                            (Optional)</label>
+                                        <input type="text" class="form-control form-item" id="billingAddr2"
+                                               name="billingAddr2" placeholder="Address Line 2 (Optional)"
+                                               th:value="${payment.getBillingAddr2()}" th:field="*{billingAddr2}"
+                                               maxlength="200">
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mt-3">
+                                        <label for="billingCity" class="form-label ttp-color-purple">City</label>
+                                        <input type="text" class="form-control form-item" id="billingCity"
+                                               name="billingCity" placeholder="City" maxlength="100"
+                                               th:value="${payment.getBillingCity()}" th:field="*{billingCity}"
+                                               required>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mt-3" id="billing-state-ca-field">
+                                        <label for="billingProvince"
+                                               class="form-label ttp-color-purple">Province</label>
+                                        <select class="custom-select form-item bg-white" id="billingProvince"
+                                                name="billingProvince" th:value="${payment.getBillingProvince()}"
+                                                th:field="*{billingProvince}" required>
+                                            <option value="Alberta">Alberta</option>
+                                            <option value="British Columbia">British Columbia</option>
+                                            <option value="Manitoba">Manitoba</option>
+                                            <option value="New Brunswick">New Brunswick</option>
+                                            <option value="Newfoundland and Labrador">Newfoundland and Labrador
+                                            </option>
+                                            <option value="Nova Scotia">Nova Scotia</option>
+                                            <option value="Northwest Territories">Northwest Territories</option>
+                                            <option value="Nunavut">Nunavut</option>
+                                            <option value="Ontario">Ontario</option>
+                                            <option value="Prince Edward Island">Prince Edward Island</option>
+                                            <option value="Quebec">Quebec</option>
+                                            <option value="Saskatchewan">Saskatchewan</option>
+                                            <option value="Yukon">Yukon</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mt-3" id="billing-state-us-field">
+                                        <label for="billingState" class="form-label ttp-color-purple">State</label>
+                                        <select class="custom-select form-item bg-white" id="billingState"
+                                                name="billingState" th:value="${payment.getBillingState()}"
+                                                th:field="*{billingState}" required>
+                                            <option value="Alabama">Alabama</option>
+                                            <option value="Alaska">Alaska</option>
+                                            <option value="Arizona">Arizona</option>
+                                            <option value="Arkansas">Arkansas</option>
+                                            <option value="California">California</option>
+                                            <option value="Colorado">Colorado</option>
+                                            <option value="Connecticut">Connecticut</option>
+                                            <option value="Delaware">Delaware</option>
+                                            <option value="District Of Columbia">District Of Columbia</option>
+                                            <option value="Florida">Florida</option>
+                                            <option value="Georgia">Georgia</option>
+                                            <option value="Hawaii">Hawaii</option>
+                                            <option value="Idaho">Idaho</option>
+                                            <option value="Illinois">Illinois</option>
+                                            <option value="Indiana">Indiana</option>
+                                            <option value="Iowa">Iowa</option>
+                                            <option value="Kansas">Kansas</option>
+                                            <option value="Kentucky">Kentucky</option>
+                                            <option value="Louisiana">Louisiana</option>
+                                            <option value="Maine">Maine</option>
+                                            <option value="Maryland">Maryland</option>
+                                            <option value="Massachusetts">Massachusetts</option>
+                                            <option value="Michigan">Michigan</option>
+                                            <option value="Minnesota">Minnesota</option>
+                                            <option value="Mississippi">Mississippi</option>
+                                            <option value="Missouri">Missouri</option>
+                                            <option value="Montana">Montana</option>
+                                            <option value="Nebraska">Nebraska</option>
+                                            <option value="Nevada">Nevada</option>
+                                            <option value="New Hampshire">New Hampshire</option>
+                                            <option value="New Jersey">New Jersey</option>
+                                            <option value="New Mexico">New Mexico</option>
+                                            <option value="New York">New York</option>
+                                            <option value="North Carolina">North Carolina</option>
+                                            <option value="North Dakota">North Dakota</option>
+                                            <option value="Ohio">Ohio</option>
+                                            <option value="Oklahoma">Oklahoma</option>
+                                            <option value="Oregon">Oregon</option>
+                                            <option value="Pennsylvania">Pennsylvania</option>
+                                            <option value="Rhode Island">Rhode Island</option>
+                                            <option value="South Carolina">South Carolina</option>
+                                            <option value="South Dakota">South Dakota</option>
+                                            <option value="Tennessee">Tennessee</option>
+                                            <option value="Texas">Texas</option>
+                                            <option value="Utah">Utah</option>
+                                            <option value="Vermont">Vermont</option>
+                                            <option value="Virginia">Virginia</option>
+                                            <option value="Washington">Washington</option>
+                                            <option value="West Virginia">West Virginia</option>
+                                            <option value="Wisconsin">Wisconsin</option>
+                                            <option value="Wyoming">Wyoming</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mt-3">
+                                        <label for="billingCountry"
+                                               class="form-label ttp-color-purple">Country</label>
+                                        <select class="custom-select form-item bg-white" id="billingCountry"
+                                                name="billingCountry" th:value="${payment.getBillingCountry()}"
+                                                th:field="*{billingCountry}" required>
+                                            <option value="United States">United States</option>
+                                            <option value="Canada">Canada</option>
+                                        </select>
+                                    </div>
+
+
+                                    <div class="col-12 col-md-6 mt-3" id="billing-zip-code-field">
+                                        <label for="billingZip" class="form-label ttp-color-purple">Zip Code</label>
+                                        <input type="text" class="form-control form-item" id="billingZip"
+                                               name="billingZip" placeholder="00000" maxlength="5"
+                                               title="Please enter a 5-digit ZIP Code"
+                                               th:value="${payment.getBillingZip()}" th:field="*{billingZip}">
+                                    </div>
+
+                                    <div class="col-12 col-md-6 mt-3" id="billing-postal-code-field">
+                                        <label for="billingPostalCode" class="form-label ttp-color-purple">Postal
+                                            Code</label>
+                                        <input type="text" class="form-control form-item" id="billingPostalCode"
+                                               name="billingPostalCode" placeholder="A1A 1A1" maxlength="7"
+                                               title="Please enter a postal code in the A1A 1A1 format"
+                                               th:value="${payment.getBillingPostalCode()}"
+                                               th:field="*{billingPostalCode}">
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-sm-4 d-flex justify-content-center">
+
+                            <div id="your-orders-section" class="mt-5">
+
+                                <div id="your-orders-section-body" class="text-center mx-3"
+                                     style="min-width: 300px; max-width: 300px">
+
+                                    <div id="your-orders-section-content-body"
+                                         class="ttp-bg-color-light-shade-grey ttp-border-radius-10px pb-2">
+
+                                        <div class="ttp-card-header ttp-color-purple pt-4">
+                                            fees & totals
+                                        </div>
+
+                                        <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                            mini clip purchase
+                                        </div>
+                                        <div class="ttp-card-info ttp-color-dark-grey">
+                                            ( one-time purchase )
+                                        </div>
+                                        <div class="ttp-color-dark-grey">
+                                            $<span class="miniClipKitOneTimeFeeTotal"
+                                                   th:text="${storeShoppingBag.totalOneTimeFeeFormatted()}"></span>
+                                        </div>
+
+                                        <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                            monthly rental fee
+                                        </div>
+                                        <div class="ttp-color-dark-grey">
+                                            $<span class="devicesRentalFeeTotal"
+                                                   th:text="${storeShoppingBag.totalRentalFeeFormatted()}"></span>
+                                        </div>
+
+                                        <div class="invalidated-shipping-tax-section" style="display: none">
+
+                                            <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                                taxes
+                                            </div>
+                                            <div class="ttp-card-info ttp-color-dark-grey font-italic">
+                                                calculated in next step
+                                            </div>
+
+                                            <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                                shipping
+                                            </div>
+                                            <div class="ttp-card-info ttp-color-dark-grey font-italic">
+                                                calculated in next step
+                                            </div>
+
+                                        </div>
+
+                                        <div class="original-shipping-tax-section">
+
+                                            <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                                taxes
+                                            </div>
+                                            <div class="ttp-color-dark-grey">
+                                                $<span class="taxAmountInCard"
+                                                       th:text="${storeShoppingBag.taxAmountInCentsFormatted()}"></span>
+                                            </div>
+
+                                            <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                                shipping
+                                            </div>
+                                            <div class="ttp-color-dark-grey">
+                                                $<span class="shippingAmountInCard"
+                                                       th:text="${storeShoppingBag.shippingAmountInCentsFormatted()}"></span>
+                                            </div>
+
+                                            <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                                setup fee
+                                            </div>
+                                            <div class="ttp-color-dark-grey">
+                                                $<span class="taxAmountInCard"
+                                                       th:text="${storeShoppingBag.serviceAmountInCentsFormatted()}"></span>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="ttp-card-sub-header ttp-color-fuschia mt-4">
+                                            total
+                                        </div>
+                                        <div class="ttp-fs-24px ttp-fw-700 ttp-color-purple mb-3">
+                                            $<span class="overallTotal"
+                                                   th:text="${storeShoppingBag.totalAmountFormatted()}"></span>
+                                        </div>
+
+                                    </div>
+
+                                    <div id="your-orders-section-content-footer" class="mt-4">
+                                        <button type="submit" style="width: 220px;" class="ttp-button-primary">
+                                            submit your order
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <div id="user-facing-screen-2" style="display: none">
+
+            <div th:fragment="stepper" id="stepper-section" class="mt-5 mx-3">
+                <div
+                        class="row justify-content-center align-items-center text-center ttp-bg-color-light-shade-grey ttp-border-radius-20px p-4 mt-5">
+                    <div class="col-sm">
+                        <svg th:replace="~{fragments/svg_fragments :: svg-stepper-completed-step}"></svg>
+                        <div class="ttp-card-sub-header-xs ttp-color-fuschia">Select Your Solution</div>
+                    </div>
+                    <div class="col-sm">
+                        <hr class="stepper-hr-fuchsia">
+                    </div>
+                    <div class="col-sm">
+                        <svg th:replace="~{fragments/svg_fragments :: svg-stepper-completed-step}"></svg>
+                        <div class="ttp-card-sub-header-xs ttp-color-fuschia">Contact & Shipping Info</div>
+                    </div>
+                    <div class="col-sm">
+                        <hr class="stepper-hr-fuchsia">
+                    </div>
+                    <div class="col-sm">
+                        <svg th:replace="~{fragments/svg_fragments :: svg-stepper-active-step}"></svg>
+                        <div class="ttp-card-sub-header-xs ttp-color-fuschia">Confirm & Submit</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="main-section" style="padding-bottom: 500px; padding-top: 100px;">
+
+                <h4 class="ttp-color-purple text-center">please wait, payment processing</h4><br>
+                <div class="row justify-content-center align-items-center">
+                    <div class="dot-flashing"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div id="ttp-toast" role="alert" aria-live="assertive" aria-atomic="true" class="toast ttp-toast">
+            <div class="toast-header">
+
+                <svg id="ttp-toast-indicator-success" style=""
+                     th:insert="~{fragments/svg_fragments :: green-checked-data-svg}" height="40px"
+                     width="40px"></svg>
+                <svg id="ttp-toast-indicator-error" style=""
+                     th:insert="~{fragments/svg_fragments :: status-failed-svg}" height="40px" width="40px"></svg>
+                &nbsp;&nbsp;
+
+                <strong class="mr-auto"><span id="ttp-toast-title"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                <button type="button" onclick="toastSwitcher('ttp-toast', false, 0)" class="ml-2 mb-1 close"
+                        data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="ttp-toast-message" class="toast-body"></div>
+        </div>
+
+
+        <div th:insert="~{fragments/store/footer :: footer}" style="padding-top: 250px"></div>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+    const bagBadge = document.getElementById('shopping-bag-device-number');
+    const shoppingBagIconBadge = document.getElementById('shopping-bag-icon-and-badge');
+
+    const billingAddr1 = document.getElementById('billingAddr1');
+    const billingAddr2 = document.getElementById('billingAddr2');
+    const billingCountry = document.getElementById('billingCountry');
+    const billingState = document.getElementById('billingState');
+    const billingProvince = document.getElementById('billingProvince');
+    const billingCity = document.getElementById('billingCity');
+    const billingPostalCode = document.getElementById('billingPostalCode');
+    const billingZip = document.getElementById('billingZip');
+
+    const flexCheckDefault = document.getElementById('flexCheckDefault');
+
+    const shippingAddr1 = document.getElementById('shippingAddr1');
+    const shippingAddr2 = document.getElementById('shippingAddr2');
+    const shippingCountry = document.getElementById('shippingCountry');
+    const shippingState = document.getElementById('shippingState');
+    const shippingProvince = document.getElementById('shippingProvince');
+    const shippingCity = document.getElementById('shippingCity');
+    const shippingPostalCode = document.getElementById('shippingPostalCode');
+    const shippingZip = document.getElementById('shippingZip');
+
+    document.addEventListener('DOMContentLoaded', function () {
+        let iCase = 1;
+        if (document.getElementById('billingPostalCode').value === "" && document.getElementById('billingZip').value === "") {
+            iCase = 0;
+        }
+
+        updateBillingMask(iCase);
+
+        billingCountry.addEventListener('change', function () {
+            updateBillingMask(0);
+        });
+    });
+
+    document.getElementById('order-form').addEventListener('submit', function (event) {
+        let message = [];
+
+        if (billingCountry.value === 'Canada') {
+            if(!validatePostalCode()){
+                message.push("Invalid Postal Code");
+            }
+        }
+
+        if (billingCountry.value === 'United States') {
+            if(!validateZip()){
+                message.push("Invalid Zip");
+            }
+        }
+
+        if (message.length === 0) {
+            switchVisibility('user-facing-screen-2', 'user-facing-screen-1');
+            shoppingBagIconBadge.style.display = "none";
+            scrollToTop();
+        } else {
+            event.preventDefault();
+            showToastWithMessage('ttp-toast', "Invalid Entry", message, 'error', 2000);
+        }
+    });
+
+    flexCheckDefault.addEventListener('change', handleCheckboxChange);
+    billingZip.addEventListener('input', handleZipInput);
+    billingPostalCode.addEventListener('input', handlePostalCodeInput);
+
+
+    function useShippingInfo() {
+        if (shippingCountry.value === 'United States') {
+            billingUSCase(0);
+        } else {
+            billingCACase(0);
+        }
+
+        billingAddr1.value = shippingAddr1.value;
+        billingAddr2.value = shippingAddr2.value;
+        billingCountry.value = shippingCountry.value;
+        billingState.value = shippingState.value;
+        billingProvince.value = shippingProvince.value;
+        billingCity.value = shippingCity.value;
+        billingPostalCode.value = shippingPostalCode.value;
+        billingZip.value = shippingZip.value;
+    }
+
+    function doNotUseShippingInfo() {
+        billingAddr1.value = '';
+        billingAddr2.value = '';
+        billingCountry.value = '';
+        billingState.value = '';
+        billingProvince.value = '';
+        billingCity.value = '';
+        billingPostalCode.value = '';
+        billingZip.value = '';
+    }
+
+    function handleCheckboxChange() {
+        if (flexCheckDefault.checked) {
+            useShippingInfo()
+        } else {
+            doNotUseShippingInfo()
+        }
+    }
+
+    function updateBillingMask(iCase) {
+        if (billingCountry.value === 'United States') {
+            billingUSCase(iCase);
+        } else {
+            billingCACase(iCase);
+        }
+    }
+
+    function formatPostalCode(postalCode) {
+        const cleaned = postalCode.trim().toUpperCase();
+        const match = cleaned.match(/^([A-Za-z]\d[A-Za-z])\s?(\d[A-Za-z]\d)$/);
+        if (match) {
+            return match[1] + ' ' + match[2];
+        }
+        return null;
+    }
+    
+    function formatZip(postalCode) {
+        const cleaned = postalCode.trim();
+        const match = cleaned.match(/^\d{5}$/);
+        if (match) {
+            return match[0];
+        }
+        return null;
+    }
+
+    function handleZipInput(event) {
+        const input = event.target;
+        const value = input.value;
+        const formattedValue = formatZip(value);
+        if (formattedValue) {
+            input.value = formattedValue;
+        }
+    }
+
+    function handlePostalCodeInput(event) {
+        const input = event.target;
+        const value = input.value;
+        const formattedValue = formatPostalCode(value);
+        if (formattedValue) {
+            input.value = formattedValue;
+        }
+    }
+
+    function setPlaceHolder(id, value) {
+        document.getElementById(id).value = value;
+    }
+
+    function billingUSCase(iCase) {
+        switchVisibility('billing-state-us-field', 'billing-state-ca-field');
+        switchVisibility('billing-zip-code-field', 'billing-postal-code-field');
+        if (iCase === 0) {
+            setPlaceHolder("billingZip", "");
+        }
+    }
+
+    function billingCACase(iCase) {
+        switchVisibility('billing-state-ca-field', 'billing-state-us-field');
+        switchVisibility('billing-postal-code-field', 'billing-zip-code-field');
+        if (iCase === 0) {
+            setPlaceHolder("billingPostalCode", "")
+        }
+    }
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    function validatePostalCode() {
+        const regex = /^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$/;
+        return regex.test(billingPostalCode.value);
+    }
+
+    function validateZip() {
+        const regex = /^\d{5}$/;
+        return regex.test(billingZip.value);
+    }
+
+    function changeVisibility(elementId, isVisible) {
+        const element = document.getElementById(elementId);
+        if (isVisible) {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+    }
+
+    function switchVisibility(elementIdToShow, elementIdToHide) {
+        changeVisibility(elementIdToShow, true);
+        changeVisibility(elementIdToHide, false);
+    }
+
+    function toastSwitcher(toastId, isShow, howLong) {
+        const toastElement = document.getElementById(toastId);
+        if (isShow) {
+            toastElement.classList.add('show');
+            setTimeout(function () {
+                toastElement.classList.remove('show');
+            }, (howLong << 0));
+        } else {
+            toastElement.classList.remove('show');
+        }
+    }
+
+    function showToastWithMessage(toastId, title, message, type, duration) {
+        const messageElementId = toastId + '-message';
+        const indicatorElementIdInitial = toastId + '-indicator-'
+        const titleElement = document.getElementById(toastId + '-title');
+
+        if (type === 'success') {
+            changeVisibility(indicatorElementIdInitial + "success", true);
+            changeVisibility(indicatorElementIdInitial + "error", false);
+        }
+
+        if (type === 'error') {
+            changeVisibility(indicatorElementIdInitial + "success", false);
+            changeVisibility(indicatorElementIdInitial + "error", true);
+        }
+
+        titleElement.textContent = title;
+        revertLines(messageElementId);
+        createLines(messageElementId, message);
+
+        toastSwitcher(toastId, true, (duration << 0));
+    }
+
+
+    function createLines(elemId, lines) {
+        const outputDiv = document.getElementById(elemId);
+        lines.forEach(function(lineText) {
+            const lineElement = document.createElement("div");
+            lineElement.innerHTML = lineText;
+            outputDiv.appendChild(lineElement);
+        });
+    }
+
+    function revertLines(elemId) {
+        const outputDiv = document.getElementById(elemId);
+        while (outputDiv.firstChild) {
+            outputDiv.removeChild(outputDiv.firstChild);
+        }
+    }
+
+
+</script>
+
+</body>
+
+</html>

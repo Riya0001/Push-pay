@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <!-- Include fragment content inside head -->
+    <div th:replace="~{fragments/bundles/header :: head-page-2}"></div>
+
+    <title>.</title>
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "qtfyso1mfx");
+    </script>
+
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FDJL41MRCT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-FDJL41MRCT');
+    </script>
+</head>
+<body>
+
+<div hidden>
+    <label for="srInput"></label>
+    <input th:value="${salesRepId}" id="srInput">
+
+    <label for="cid"></label>
+    <input th:value="${cid}" id="cid">
+</div>
+
+<nav th:replace="~{fragments/benevity/fb/navbar :: navbar-done}"></nav>
+
+<div class="container">
+
+    <div class="text-center">
+        <div class="mt-5">
+            <svg width="100%" height="24" viewBox="0 0 524 24" style="max-width: 524px;" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_433_1464)">
+                    <path d="M13.1932 21.0001H2.53524C2.51968 20.9924 2.50483 20.9811 2.48821 20.9776C1.37613 20.7311 0.790563 19.9849 0.846433 18.8482C0.921396 17.322 1.01263 15.7969 1.0982 14.2711C1.19898 12.4709 1.30294 10.6708 1.40194 8.87031C1.42882 8.38013 1.66609 8.1442 2.15653 8.14349C2.91501 8.14244 3.67349 8.14349 4.43197 8.14349C4.49456 8.14349 4.55679 8.14349 4.63352 8.14349C4.63352 8.04348 4.63317 7.96813 4.63352 7.89279C4.63812 7.24872 4.6162 6.60323 4.65262 5.96128C4.75905 4.09317 6.59992 2.69271 8.44148 3.05859C10.0083 3.36988 11.0666 4.63688 11.0836 6.2282C11.0896 6.7962 11.0847 7.36421 11.0847 7.93222C11.0847 7.99522 11.0847 8.05826 11.0847 8.14349C11.1656 8.14349 11.2282 8.14349 11.2908 8.14349C12.067 8.14349 12.8431 8.14102 13.6193 8.14453C14.0256 8.14629 14.2947 8.3921 14.317 8.78404C14.4039 10.3035 14.486 11.8237 14.5712 13.3432C14.6359 14.4947 14.7034 15.6458 14.7682 16.7973C14.8099 17.5397 14.8661 18.2816 14.8838 19.0246C14.9022 19.7997 14.5479 20.3892 13.8686 20.7638C13.6628 20.8772 13.4191 20.9234 13.1932 21.0001ZM9.79083 8.1347C9.79083 7.43429 9.79756 6.75641 9.78625 6.07854C9.7834 5.91233 9.73954 5.74119 9.6844 5.58272C9.37676 4.6985 8.4694 4.1629 7.55358 4.31537C6.62677 4.46961 5.9447 5.24643 5.92703 6.18277C5.91711 6.71521 5.92455 7.24763 5.92418 7.78043C5.92418 7.89593 5.92418 8.01142 5.92418 8.1347H9.79083Z"
+                          fill="#9E007E"/>
+                </g>
+                <line x1="44.1768" y1="11.5" x2="134.177" y2="11.5" stroke="#9E007E"/>
+                <path d="M178.043 3.92499H163.177V16.5386H178.043V3.92499Z" stroke="#9E007E" stroke-width="2.25244"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M178.043 8.88034H180.521C181.297 8.88034 182.042 9.18884 182.591 9.73798C183.14 10.2871 183.449 11.0319 183.449 11.8085V16.5386H178.043V8.88034Z"
+                      stroke="#9E007E" stroke-width="2.25244" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M168.316 20.075C168.916 20.075 169.402 19.5889 169.402 18.9893C169.402 18.3897 168.916 17.9036 168.316 17.9036C167.717 17.9036 167.23 18.3897 167.23 18.9893C167.23 19.5889 167.717 20.075 168.316 20.075Z"
+                      stroke="#9E007E" stroke-width="2.25244" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M177.633 20.075C178.232 20.075 178.718 19.5889 178.718 18.9893C178.718 18.3897 178.232 17.9036 177.633 17.9036C177.033 17.9036 176.547 18.3897 176.547 18.9893C176.547 19.5889 177.033 20.075 177.633 20.075Z"
+                      stroke="#9E007E" stroke-width="2.25244" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M163.627 8.97495H169.033" stroke="#9E007E" stroke-width="2.25244" stroke-linecap="round"
+                      stroke-linejoin="round"/>
+                <line x1="212.448" y1="11.5" x2="302.448" y2="11.5" stroke="#9E007E"/>
+                <rect x="331.449" y="6" width="18" height="13" rx="2" stroke="#9E007E" stroke-width="2"/>
+                <path d="M335.449 15H335.459" stroke="#9E007E" stroke-width="2" stroke-linecap="round"/>
+                <path d="M332.449 11H349.449" stroke="#9E007E" stroke-width="2" stroke-linecap="round"/>
+                <line x1="381.449" y1="11.5" x2="471.449" y2="11.5" stroke="#9E007E"/>
+                <circle cx="512.449" cy="12" r="9" stroke="#9E007E" stroke-width="2"/>
+                <path d="M508.449 12L511.449 15L516.449 9" stroke="#9E007E" stroke-width="2"/>
+                <defs>
+                    <clipPath id="clip0_433_1464">
+                        <rect width="14.625" height="18" fill="white" transform="translate(0.551758 3)"/>
+                    </clipPath>
+                </defs>
+            </svg>
+        </div>
+
+        <div class="mt-5">
+            <h3 style="color: black; font-weight: bold">Order Placed Successfully</h3>
+        </div>
+
+    </div>
+
+    <div id="message-content" style="max-width: 700px; margin: 0 auto;">
+        <div class="mt-5 mb-2">
+            Thank you for your purchase!
+        </div>
+
+        <div class="mb-3">
+            Your order <span class="fw-bold" style="color: #222222" th:text="${responsePayment.getSoNumber()}"></span>
+            has been successfully placed.
+        </div>
+
+        <div class="mb-3 fw-bold" style="color: #222222">
+            You're almost there! Just a final step: 
+        </div>
+
+        <div class="mb-3">
+            <span class="fw-bold" style="color: #222222">1. Order Status Updates:</span> We will keep you informed about
+            your order’s progress through email. Look out for updates on when your order is on its way! 
+        </div>
+
+        <div class="mb-3">
+            <span class="fw-bold" style="color: #222222">2. Get Started Setting Up Your Account:</span> Create your
+            password and access your tiptap account to start collecting.
+        </div>
+
+        <div class="mb-3 text-center">
+
+            <button type="button" class="btn ttp-btn-primary p-2 mb-2" style="border-radius: 10px; width: 218px">
+                Start Collecting (Disabled)
+            </button>
+
+            <div class="mb-3">
+                <a href="/benevity/faith/my-account-setup-later" class="text-decoration-none"
+                   style="color: #9e017e">
+                    Skip and Set Up My Account Later
+                </a>
+            </div>
+
+        </div>
+
+        <div class="mb-3">
+            Should you have any questions or require assistance, our dedicated support team is here to help. Simply
+            reach out to us at <a style="text-decoration: none; color: #9E007E"
+                                  href="https://tiptappay.com/connect-with-us/">tiptap support</a>. Your satisfaction is
+            our priority!
+        </div>
+
+        <div class="mb-3">
+            Thank you for choosing us. We’re excited to help you make the most of tiptap!
+        </div>
+    </div>
+
+
+    <div style="margin-top: 300px">
+        <div th:replace="~{fragments/bundles/footer :: footer}"></div>
+    </div>
+
+</div>
+
+<script th:src="@{/js/bundles/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/common/common.js}"></script>
+
+<script>
+    const STORE_INITIAL = '_fbb';
+    const STORE_ENDPOINT = '/benevity/faith';
+</script>
+
+<script th:src="@{/js/common/email.js}"></script>
+<script th:src="@{/js/benevity/fb/js/custom/page6.js}"></script>
+</body>
+</html>

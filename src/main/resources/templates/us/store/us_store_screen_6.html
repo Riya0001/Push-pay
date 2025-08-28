@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:insert="~{fragments/store/header :: head}"></head>
+
+<body class="ttp-bg-white">
+
+<div id="content-wrapper" class="content-wrapper-cls">
+
+    <nav th:replace="~{fragments/store/navbar :: navbar-without-bag}"></nav>
+
+    <div class="container" style="margin-top: 100px">
+
+        <div th:replace="~{fragments/store/stepper :: stepper}"></div>
+        <div th:replace="~{fragments/store/stepper :: stepper-sm}"></div>
+
+        <div id="main-section" style="padding-bottom: 500px; padding-top: 100px;">
+
+            <div class="text-center">
+
+                <h1 class="ttp-color-purple p-0 text-center">thank you for your order!</h1><br>
+
+                <div th:if="${responsePayment != null}">
+                    <h2 class="ttp-color-fuschia text-center">Order Confirmation: <span
+                            th:text="${responsePayment.getSoNumber()}"></span></h2><br>
+                </div>
+
+                <div th:if="${responsePayment == null}">
+                    <h2 class="ttp-color-fuschia text-center">Order Confirmation: --- </h2><br>
+                </div>
+
+                <span class="ttp-body-lead">A confirmation email has been sent to you.</span>
+
+                <div class="mt-5">
+                    <a href="https://tiptappay.com/" class="ttp-card-sub-header-md fuschia-a pt-4">
+                        go to tiptap
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="ttp-bg-color-light-shade-grey ttp-border-radius-20px p-4 mt-5" th:if="${developerInsightsEnabled == true}">
+                <div class="ttp-form-value ttp-color-orange mt-3 text-center">Developer Insights</div>
+                <div class="ttp-body-lead ttp-color-orange text-center">Please find request and response details by clicking the related buttons.</div>
+                <div class="text-center mt-3 mb-3">
+                    <button type="button" id="quote-request-response-details" class="ttp-button-primary-sm" onclick="showHideDetails(this.getAttribute('id'))">NetSuite Quote - Request / Response</button>
+                </div>
+
+                <div id="quote-request-response-details-body" style="display: none">
+
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="ttp-body-lead ttp-color-orange text-center mb-3 mt-3 font-weight-bold">Request</div>
+                            <pre th:text="${prettyJsonQuoteRequest != null ? prettyJsonQuoteRequest : 'null'}"></pre>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="ttp-body-lead ttp-color-orange text-center mb-3 mt-3 font-weight-bold">Response</div>
+                            <pre th:text="${prettyJsonQuoteResponse != null ? prettyJsonQuoteResponse : 'null'}"></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-3 mb-3">
+                    <button type="button" id="payment-request-response-details" class="ttp-button-primary-sm" onclick="showHideDetails(this.getAttribute('id'))">NetSuite Payment - Request / Response</button>
+                </div>
+
+                <div id="payment-request-response-details-body" style="display: none">
+
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="ttp-body-lead ttp-color-orange text-center mb-3 mt-3 font-weight-bold">Request</div>
+                            <pre th:text="${prettyJsonPaymentRequest != null ? prettyJsonPaymentRequest : 'null'}"></pre>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="ttp-body-lead ttp-color-orange text-center mb-3 mt-3 font-weight-bold">Response</div>
+                            <pre th:text="${prettyJsonPaymentResponse != null ? prettyJsonPaymentResponse : 'null'}"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div th:insert="~{fragments/store/footer :: footer}" style="padding-top: 250px"></div>
+
+    </div>
+
+
+</div>
+
+<script>
+    function showHideDetails(id) {
+        const details = document.getElementById(id + '-body');
+        details.style.display = details.style.display === 'none' ? 'block' : 'none';
+    }
+</script>
+
+</body>
+
+</html>

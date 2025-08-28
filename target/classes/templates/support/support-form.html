@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>tiptap Support</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            /* Tuned to match the Figma */
+            --ink:#1b2430;
+            --muted:#6b7280;
+
+            /* Figma-like purple/magenta */
+            --grad-top:#2B0C4A;     /* deep plum */
+            --grad-mid:#3A0D5B;     /* indigo */
+            --grad-bot:#7A0C7A;     /* magenta bottom glow */
+
+            --illustration:#C01793; /* brighter pink stroke */
+            --card-bg:#F7EEFF;      /* soft lavender card */
+            --card-ring:rgba(124,58,237,.14);
+
+            --btn:#8B0FB6;          /* magenta-purple button */
+            --btn-hover:#780DA0;
+
+            --page:#ffffff;
+            --bg:#F3F4F7;
+        }
+
+        *{box-sizing:border-box}
+        html,body{height:100%}
+        body{
+            margin:0;
+            background:var(--bg);
+            color:var(--ink);
+            font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+        }
+
+        /* Full page split */
+        .page{
+            display:grid; grid-template-columns: 1fr 1.15fr;
+            height:100vh; width:100vw; background:var(--page);
+        }
+
+        /* LEFT */
+        .left{
+            position:relative; color:#fff;
+            background:linear-gradient(180deg,var(--grad-top) 0%, var(--grad-mid) 42%, var(--grad-bot) 100%);
+            padding:40px 36px;
+            display:flex; flex-direction:column; justify-content:space-between;
+        }
+        .logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:28px}
+        .logo-mark{
+            width:34px;height:34px;border-radius:10px;
+            background:linear-gradient(135deg,#FF4BB6,#FF8A00);
+            display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.25)
+        }
+        .logo-mark svg{width:20px;height:20px;fill:#fff}
+        .hero-ill{width:100%;max-width:560px;margin:0 auto}
+        .links{display:flex;gap:22px;flex-wrap:wrap;font-size:13px;opacity:.9}
+        .links a{color:#fff;text-decoration:none}
+        .links a:hover{text-decoration:underline}
+
+        /* RIGHT — centered per Figma */
+        .right{
+            padding:64px 32px; display:flex; flex-direction:column; justify-content:center; align-items:center;
+            text-align:center;  /* <<< center text */
+            background:#fff;
+        }
+        .eyebrow{font-size:14px;font-weight:700;color:#6E3BE7;letter-spacing:.04em;text-transform:uppercase}
+        h1{margin:.2rem 0 .6rem;font-size:44px;line-height:1.08;letter-spacing:-.02em;font-weight:800;color:#2A3140}
+        .sub{color:var(--muted);max-width:560px;margin-bottom:28px;font-size:16px}
+
+        .options{
+            display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+            gap:20px; width:100%; max-width:720px; justify-items:center;  /* centered cards */
+        }
+        .opt{
+            background:var(--card-bg);
+            border-radius:16px;
+            padding:22px;
+            width:100%; max-width:320px;
+            box-shadow:inset 0 0 0 1px var(--card-ring), 0 10px 24px rgba(60,20,100,.10);
+            text-align:left;                 /* card text stays left like Figma */
+        }
+        .opt h3{margin:4px 0 6px;font-size:18px;font-weight:800;color:#2A3140}
+        .opt p{margin:0 0 16px;color:var(--muted);font-size:14.5px}
+        .btn{
+            display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;
+            background:var(--btn); color:#fff; text-decoration:none; font-weight:700;
+            box-shadow:0 10px 22px rgba(139,15,182,.28); transition:transform .06s, background .2s, box-shadow .2s;
+        }
+        .btn:hover{background:var(--btn-hover)}
+        .btn:active{transform:translateY(1px); box-shadow:0 8px 18px rgba(139,15,182,.24)}
+        .btn svg{width:18px;height:18px;fill:#fff}
+
+        @media (max-width:900px){
+            .page{grid-template-columns:1fr}
+            .options{grid-template-columns:1fr}
+            .right{padding:40px 20px}
+            h1{font-size:34px}
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <!-- LEFT -->
+    <section class="left" aria-label="Brand panel">
+        <div class="logo" style="text-align: center;">
+    <span aria-hidden="true">
+        <img src="/images/tiptap_Logo_WhiteText_RGB.png" alt="Tiptap Logo" style="height: 80px;">
+    </span>
+        </div>
+
+        <!-- Illustration with brighter stroke -->
+        <svg class="hero-ill" viewBox="0 0 700 520" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g stroke="var(--illustration)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity=".95">
+                <rect x="70" y="120" rx="26" ry="26" width="220" height="170"></rect>
+                <path d="M125 190h110M125 225h70"></path>
+                <rect x="300" y="70" rx="20" ry="20" width="160" height="120"></rect>
+                <path d="M520 260c-40-8-70 10-120 36-26 13-61 30-88 33-40 4-84-4-104 26-10 16-8 38 7 52 19 18 53 17 88 14 55-4 140-28 186-44 26-9 46-29 54-54 5-16-3-33-18-41-1-1-3-1-5-2zM250 430c2 22 16 43 35 55 24 14 54 14 78 0 9-5 17-12 24-20"></path>
+            </g>
+        </svg>
+
+        <nav class="links" aria-label="Footer links">
+            <a href="#">Website</a>
+            <a href="#">Resource center</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+        </nav>
+    </section>
+
+    <!-- RIGHT (centered) -->
+    <section class="right" aria-label="Support options">
+        <div><h1>Need help?</h1></div>
+        <h2>We’ve got you covered.</h2>
+        <p class="sub">Whether you're new to tiptap or an existing user, our support team is here to help you get answers fast.</p>
+
+        <div class="options">
+            <article class="opt">
+                <h3>New to tiptap</h3>
+                <p>If you don't have an account, start here. We'll help you create your support ticket in just a few steps.</p>
+                <a class="btn" href="https://forms.tapitforward.ca/support/new">
+                    <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+                    Create Ticket
+                </a>
+            </article>
+
+            <article class="opt">
+                <h3>Already a tiptap user</h3>
+                <p>If you have an account, log in to your account to quickly create a support ticket with our team.</p>
+                <a class="btn" href="https://app-dev.tiptappay.ca/login">
+                    <svg viewBox="0 0 24 24"><path d="M10 7h7a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-7M14 12H4m0 0 3-3m-3 3 3 3"/></svg>
+                    Log in &amp; Create Ticket
+                </a>
+            </article>
+        </div>
+    </section>
+</div>
+</body>
+</html>
+

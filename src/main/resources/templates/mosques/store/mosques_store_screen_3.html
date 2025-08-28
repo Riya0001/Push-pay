@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tiptap</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+            rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/css/base_app.css" />
+
+    <style>
+        hr.custom-hr-grey {
+            opacity: .3;
+            background-color: #000000;
+        }
+
+        hr.stepper-hr-grey {
+            opacity: .3;
+            height: 1px;
+            background-color: #000000;
+        }
+
+        hr.stepper-hr-fuchsia {
+            opacity: 1;
+            height: 1px;
+            background-color: #901F7A;
+        }
+
+        #fees-and-totals-section {
+            display: none;
+        }
+
+        @media (max-width: 1000px) {
+            #fees-and-totals-section {
+                display: block;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            #sticky-section {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="ttp-bg-white">
+
+<div id="content-wrapper" class="content-wrapper-cls">
+
+    <nav th:replace="~{fragments/store/navbar :: navbar-with-bag}"></nav>
+
+    <div class="container" style="margin-top: 100px">
+
+        <div th:replace="~{fragments/store/stepper :: stepper}"></div>
+
+        <div id="main-section" style="padding-bottom: 500px; padding-top: 100px;">
+
+            <h4 class="ttp-color-purple text-center">calculating shipping and taxes</h4><br>
+            <div class="row justify-content-center align-items-center">
+                <div class="dot-flashing"></div>
+            </div>
+
+        </div>
+
+
+        <div id="footer" style="padding-top: 250px">
+
+            <div class="row align-items-center justify-content-center">
+                <div
+                        style="font-family: Mulish, sans-serif; opacity: 1; color: #000000; font-size: 10px; font-weight: 700; padding: 0 50px 0 0;">
+                    FAQs
+                </div>
+                <svg th:insert="~{fragments/svg_fragments :: tiptap-dark-logo-svg}" width="90" height="41"></svg>
+                <div
+                        style="font-family: Mulish, sans-serif; opacity: 1; color: #000000; font-size: 10px; font-weight: 700; padding: 0 0 0 50px;">
+                    Contact Us
+                </div>
+            </div>
+
+            <hr class="custom-hr-grey">
+
+            <div class="text-center">
+                <div
+                        style="font-family: Mulish, sans-serif; opacity: 1; color: #452056; font-size: 18px; font-weight: 200; padding: 10px 0 0 0;">
+                    tiptappay.com
+                </div>
+            </div>
+
+            <div class="text-center">
+                <div
+                        style="font-family: Mulish, sans-serif; opacity: .5; color: #000000; font-size: 10px; font-weight: 400; padding: 40px 0 30px 0;">
+                    @<span th:text="${currentYear}"></span> All rights reserved. TipTapPay Micropayments Ltd.
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+    document.getElementById('order-form').addEventListener('submit', function (event) {
+        showDialog("submitDialog");
+        this.submit()
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Prevent "Enter" key to submit form
+        window.addEventListener('keydown', function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        let iCase = 1;
+        if (document.getElementById('shippingPostalCode').value === "" && document.getElementById('shippingZip').value === "") {
+            iCase = 0;
+        }
+
+        updateShippingMask(iCase);
+
+        document.getElementById('shippingCountry').addEventListener('change', function () {
+            updateShippingMask(0);
+        });
+    });
+
+    document.getElementById('contactPhone').addEventListener('input', handlePhoneInput);
+
+    document.getElementById('shippingZip').addEventListener('input', handleZipInput);
+    document.getElementById('shippingPostalCode').addEventListener('input', handlePostalCodeInput);
+
+    function updateShippingMask(iCase) {
+        if (document.getElementById('shippingCountry').value === 'US') {
+            shippingUSCase(iCase);
+        } else {
+            shippingCACase(iCase);
+        }
+    }
+
+    function formatPhoneNumber(phoneNumber) {
+        const cleaned = ('' + phoneNumber).replace(/\D/g, '');
+        const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+        if (match) {
+            return '(' + match[1] + ') ' + match[2] + '-' + match[3];
+        }
+        return null;
+    }
+
+    function handlePhoneInput(event) {
+        const input = event.target;
+        const value = input.value;
+        const formattedValue = formatPhoneNumber(value);
+        if (formattedValue) {
+            input.value = formattedValue;
+        }
+    }
+
+    function formatPostalCode(postalCode) {
+        const cleaned = postalCode.trim().toUpperCase();
+        const match = cleaned.match(/^([A-Za-z]\d[A-Za-z])\s?(\d[A-Za-z]\d)$/);
+        if (match) {
+            return match[1] + ' ' + match[2];
+        }
+        return null;
+    }
+
+    // Function to format postal code (99999 format)
+    function formatZip(postalCode) {
+        const cleaned = postalCode.trim();
+        const match = cleaned.match(/^\d{5}$/);
+        if (match) {
+            return match[0];
+        }
+        return null;
+    }
+
+    function handleZipInput(event) {
+        const input = event.target;
+        const value = input.value;
+        const formattedValue = formatZip(value);
+        if (formattedValue) {
+            input.value = formattedValue;
+        }
+    }
+
+    function handlePostalCodeInput(event) {
+        const input = event.target;
+        const value = input.value;
+        const formattedValue = formatPostalCode(value);
+        if (formattedValue) {
+            input.value = formattedValue;
+        }
+    }
+
+    function setPlaceHolder(id, value) {
+        document.getElementById(id).value = value;
+    }
+
+    function shippingUSCase(iCase) {
+        switchVisibility('shipping-state-us-field', 'shipping-state-ca-field');
+        switchVisibility('shipping-zip-code-field', 'shipping-postal-code-field');
+        setPlaceHolder("shippingPostalCode", "A1A 1A1");
+        if (iCase === 0) {
+            setPlaceHolder("shippingZip", "");
+        }
+    }
+
+    function shippingCACase(iCase) {
+        switchVisibility('shipping-state-ca-field', 'shipping-state-us-field');
+        switchVisibility('shipping-postal-code-field', 'shipping-zip-code-field');
+        setPlaceHolder("shippingZip", "11111")
+        if (iCase === 0) {
+            setPlaceHolder("shippingPostalCode", "")
+        }
+    }
+
+    function switchVisibility(elementIdToShow, elementIdToHide) {
+        const elementToShow = document.getElementById(elementIdToShow);
+        const elementToHide = document.getElementById(elementIdToHide);
+        elementToShow.style.display = "block";
+        elementToHide.style.display = "none";
+    }
+
+    function showDialog(id) {
+        document.getElementById(id).showModal();
+    }
+</script>
+
+</body>
+
+</html>

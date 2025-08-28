@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:fragment="header">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- Most Devices -->
+    <link rel="icon" type="image/png" href="/images/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/images/favicon/favicon-32x32.png" sizes="32x32">
+
+    <!-- Android -->
+    <link rel="icon" type="image/png" href="/images/favicon/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/images/favicon/android-chrome-512x512.png" sizes="512x512">
+
+    <!-- IOS -->
+    <link rel="apple-touch-icon" type="image/png" href="/images/favicon/apple-touch-icon.png">
+
+    <!-- IE -->
+    <link rel="shortcut icon" type="image/png" href="/images/favicon/favicon.ico">
+
+    <!-- Web Manifest -->
+    <link rel="manifest" type="image/png" href="/images/favicon/site.webmanifest">
+    <title>tiptap</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+            rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+    <link rel='stylesheet' href='/webjars/bootstrap/css/bootstrap.min.css'>
+</head>
+<title>tiptap</title>
+</head>
+<style>
+    .bg-purple {
+        background-color: #452056 !important;
+    }
+    @media (min-width: 1200px) {
+        .nowrap-row {
+            flex-wrap: nowrap !important;
+        }
+    }
+
+
+    .text-white {
+        color: #ffffff !important;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        font-family: 'Mulish', 'Montserrat', sans-serif;
+    }
+
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    header {
+        width: 100%;
+        background: #402253;
+        backdrop-filter: blur(17px);
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;
+    }
+
+    header img {
+        max-height: 65px;
+        display: block;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Text Colors */
+    .text-white { color: #ffffff !important; }
+    .text-purple { color: #402253; }
+    .text-fuschia { color: #901F7A; }
+    .text-grey { color: #474747; }
+
+    /* Backgrounds */
+    .bg-white { background: #FFFFFF; }
+    .bg-purple { background-color: #452056; }
+
+    /* Buttons */
+    .ttp-btn-primary {
+        color: #FFFFFF;
+        background-color: #9E007E;
+        border-color: #9E007E;
+    }
+
+    .ttp-btn-primary:hover {
+        background-color: #9E007E;
+        border-color: #9E007E;
+    }
+    .overflow-auto::-webkit-scrollbar {
+        height: 8px;
+    }
+    .overflow-auto::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        border-radius: 10px;
+    }
+
+
+    /* Cards */
+    .order-item-card {
+        background: #FFFFFF;
+        border-radius: 8px;
+        border: 1px solid #C8C7CC;
+        padding: 20px;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    /* Typography */
+    label {
+        color: #402253;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    /* Miscellaneous */
+    .shadow-sm {
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    }
+
+    .rounded {
+        border-radius: 10px !important;
+    }
+
+    /* Snackbar Alert */
+    #snack-bar-alert-no-device-requested {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        text-align: center;
+        border-radius: 50px;
+        padding: 16px;
+        position: fixed;
+        z-index: 999;
+        left: 50%;
+        bottom: 60px;
+        font-size: 20px;
+        color: #fff;
+        background-color: rgb(187, 36, 12);
+    }
+
+    #snack-bar-alert-no-device-requested.show {
+        visibility: visible;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    @keyframes fadein {
+        from { bottom: 0; opacity: 0; }
+        to { bottom: 60px; opacity: 1; }
+    }
+
+    @keyframes fadeout {
+        from { bottom: 60px; opacity: 1; }
+        to { bottom: 0; opacity: 0; }
+    }
+
+    .text-white h4,
+    .text-white p {
+        color: #fff !important;
+    }
+    .order-banner {
+        background-color: #452056;
+        border-radius: 10px;
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 20px;
+        margin-top: 1rem;
+        text-align: center;
+    }
+
+    .order-banner h4 {
+        margin: 0;
+        font-weight: bold;
+        color: white;
+    }
+
+</style>
+<body>
+<header>
+    <a href="https://tiptappay.com">
+        <img src="/images/salvation-army-logo.png" style="height: 85px;" alt="salvation army logo" />
+    </a>
+    <a href="https://tiptappay.com">
+        <img src="/images/tiptap_Logo_WhiteText_RGB.png" style="height: 65px;" alt="tiptap logo" />
+    </a>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col my-3">
+            <h1 class="text-purple fw-bold">2025 Kettle Campaign</h1>
+            <p class=""> Welcome! In 4 easy steps, you will be able to order exactly what you need for the 2025 Kettle
+                Campaign.</p>
+            <br>
+            <div class="order-banner">
+                <h4>Order Now! Order deadline: June 24, 2025</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col">
+            <form method="POST" id="order-form" th:object="${storeShoppingBag}" th:action="@{/canada-store/shopping-bag/update}">
+                <div class="my-4 p-1">
+                    <h2 class="text-grey fw-bold">1. Select Your Order</h2>
+                    <hr>
+                    <small class="text-end" style="color: #901691; max-width: 200px;">
+                        <strong>IMPORTANT:</strong> New batteries will be provided this year!
+                        Each fully charged battery will last a minimum of 10 hours.
+                    </small>
+
+                </div>
+                <p>You are browsing from: <strong th:text="${userCountry}">Unknown</strong></p>
+
+
+                <h5 class="mb-4">Kettle Display Kit</h5>
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <!-- Image Column -->
+                        <div class="col-md-4 d-flex align-items-center justify-content-center">
+                            <img class="img-fluid"
+                                 style="max-height: 350px;"
+                                 th:src="@{/images/sa_kettle_display_en_2023.png}"
+                                 alt="Kettle Display (3 Device)">
+                        </div>
+
+                        <!-- Device Info Column -->
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                <h5 class="card-title fs-2 fw-bold text-purple">Kettle Display Kit</h5>
+                                <p>for use on Kettle stand (Kettle stand not included)</p>
+                                <p class="mb-1 fw-bold fs-6 text-purple">Includes:</p>
+                                <ul>
+                                    <li>3 Devices included ($5, $10 and $20)</li>
+                                    <li>Two high capacity batteries</li>
+                                    <li>Power cables and wall plugs</li>
+                                    <li>Signage</li>
+                                </ul>
+
+                                <p class="mb-1 fs-6 text-grey">Signage Dimensions:</p>
+                                <p class="fs-6 text-grey">23¼”H x 11” W</p>
+
+                                <p class="fs-6 mt-3 text-grey fw-bold">Kit Total: $300</p>
+                            </div>
+                        </div>
+
+                        <!-- Quantity Inputs Column -->
+                        <div class="col-md-4 d-flex flex-column justify-content-center align-items-end pe-4">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3" style="padding-left: 110px;">
+                                    <label for="threeDeviceDisplayEnglishQuantityInput" class="form-label me-2 mb-0" style="white-space: nowrap; font-size: 14px;">
+                                        English Only Signage Quantity:
+                                    </label>
+                                    <input type="number" min="0" max="50" class="form-control"
+                                           style="width: 60px;"
+                                           oninput="this.value = validateQuantity(this.value)"
+                                           id="threeDeviceDisplayEnglishQuantityInput"
+                                           th:field="*{threeDeviceDisplayEnglishQuantity}" />
+                                </div>
+
+                                <div class="d-flex align-items-center mb-3" style="padding-left: 113px;">
+                                    <label for="threeDeviceDisplayFrenchQuantityInput" class="form-label me-2 mb-0" style="white-space: nowrap; font-size: 14px;">
+                                        French Only Signage Quantity:
+                                    </label>
+                                    <input type="number" min="0" max="50" class="form-control"
+                                           style="width: 60px;"
+                                           oninput="this.value = validateQuantity(this.value)"
+                                           id="threeDeviceDisplayFrenchQuantityInput"
+                                           th:field="*{threeDeviceDisplayFrenchQuantity}" />
+                                </div>
+
+                                <div class="d-flex align-items-center mb-3" style="padding-left: 135px;">
+                                    <label for="threeDeviceDisplayBilingualQuantityInput" class="form-label me-2 mb-0" style="white-space: nowrap; font-size: 14px;">
+                                        Bilingual Signage Quantity:
+                                    </label>
+                                    <input type="number" min="0" max="50" class="form-control"
+                                           style="width: 60px;"
+                                           oninput="this.value = validateQuantity(this.value)"
+                                           id="threeDeviceDisplayBilingualQuantityInput"
+                                           th:field="*{threeDeviceDisplayBilingualQuantity}" />
+
+                                </div>
+
+                                <!-- Hidden inputs -->
+                                <input type="hidden" id="device5DollarQtyInput" th:field="*{device5DollarQty}" />
+                                <input type="hidden" id="device10DollarQtyInput" th:field="*{device10DollarQty}" />
+                                <input type="hidden" id="device20DollarQtyInput" th:field="*{device20DollarQty}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="mb-4">Countertop Display Options</h5>
+
+
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <!-- Image Column -->
+                        <div class="col-md-4 d-flex align-items-center justify-content-center">
+                            <img class="img-fluid"
+                                 style="max-height: 350px;"
+                                 th:src="@{/images/tiptap_Salvation-Army_1device_7.5x10_2021_Final-BL-5.png}"
+                                 alt="Kettle Display (3 Device)">
+                        </div>
+
+                        <!-- Device Info Column -->
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                <h5 class="card-title fs-2 fw-bold text-purple">$5 Countertop Display Kit</h5>
+
+                                <p class="mb-1 fw-bold fs-6 text-purple">Includes:</p>
+                                <ul>
+                                    <li>$5 Device included</li>
+                                    <li>One high capacity battery</li>
+                                    <li>Power cables and wall plug</li>
+                                    <li>Signage</li>
+                                </ul>
+
+                                <p class="mb-1 fs-6 text-grey">Signage Dimensions:</p>
+                                <p class="fs-6 text-grey">10.5”H x 7.5”W x 6.5”D</p>
+
+                                <p class="fs-6 mt-3 text-grey fw-bold">Kit Total: $150</p>
+                            </div>
+                        </div>
+
+                        <!-- Quantity Inputs Column -->
+                        <div class="col-md-4 d-flex flex-column justify-content-center align-items-end pe-4">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3" style="padding-left: 110px;">
+                                    <label for="singleCurve5DollarEnglishQuantityInput" class="form-label me-2 mb-0" style="white-space: nowrap; font-size: 14px;">
+                                        English Only Signage Quantity:
+                                    </label>
+                                    <input type="number" min="0" max="50" class="form-control"
+                                           style="width: 60px;"
+                                           oninput="this.value = validateQuantity(this.value)"
+                                           id="singleCurve5DollarEnglishQuantityInput"
+                                           th:field="*{singleCurve5DollarEnglishQuantity}" />
+                                </div>
+
+                                <div class="d-flex align-items-center mb-3" style="padding-left: 113px;">
+                                    <label for="singleCurve5DollarFrenchQuantityInput" class="form-label me-2 mb-0" style="white-space: nowrap; font-size: 14px;">
+                                        French Only Signage Quantity:
+                                    </label>
+                                    <input type="number" min="0" max="50" class="form-control"
+                                           style="width: 60px;"
+                                           oninput="this.value = validateQuantity(this.value)"
+                                           id="singleCurve5DollarFrenchQuantityInput"
+                                           th:field="*{singleCurve5DollarFrenchQuantity}" />
+                                </div>
+
+                                <div class="d-flex align-items-center mb-3"style="padding-left: 135px;">
+                                    <label for="singleCurve5DollarBilingualQuantityInput" class="form-label me-2 mb-0" style="white-space: nowrap; font-size: 14px;">
+                                        Bilingual Signage Quantity:
+                                    </label>
+                                    <input type="number" min="0" max="50" class="form-control"
+                                           style="width: 60px;"
+                                           oninput="this.value = validateQuantity(this.value)"
+                                           id="singleCurve5DollarBilingualQuantityInput"
+                                           th:field="*{singleCurve5DollarBilingualQuantity}" />
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <!-- Image Column -->
+                        <div class="col-md-4 d-flex align-items-center justify-content-center">
+                            <img class="img-fluid"
+                                 style="max-height: 350px;"
+                                 th:src="@{/images/tiptap_Salvation-Army_1device_7.5x10_2021_Final-BL-10.png}"
+                                 alt="Kettle Display (3 Device)">
+                        </div>
+
+                        <!-- Device Info Column -->
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                <h5 class="card-title fs-2 fw-bold text-purple">$10 Countertop Display Kit</h5>
+
+                                <p class="mb-1 fw-bold fs-6 text-purple">Includes:</p>
+                                <ul>
+                                    <li>$10 Device included</li>
+                                    <li>One high capacity battery</li>
+                                    <li>Power cables and wall plug</li>
+                                    <li>Signage</li>
+                                </ul>
+
+                                <p class="mb-1 fs-6 text-grey">Signage Dimensions:</p>
+                                <p class="fs-6 text-grey">10.5”H x 7.5”W x 6.5”D</p>
+
+
+                                <p class="fs-6 mt-3 text-grey fw-bold">Kit Total: $150</p>
+                            </div>
+                        </div>
+
+                        <!-- Quantity Inputs Column -->
+                        <div class="col-md-4 d-flex flex-column justify-content-center align-items-end pe-4">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3" style="padding-left: 110px;">
+                                    <label for="singleCurve10DollarEnglishQuantityInput" class="form-label me-2 mb-0" style="white-space: nowrap; font-size: 14px;">
+                                        English Only Signage Quantity:
+                                    </label>
+                                    <input type="number" min="0" max="50" class="form-control"
+                                           style="width: 60px;"
+                                           oninput="this.value = validateQuantity(this.value)"
+                                           id="singleCurve10DollarEnglishQuantityInput"
+                                           th:field="*{singleCurve10DollarEnglishQuantity}" />
+                                </div>
+
+                                <div class="d-flex align-items-center mb-3" style="padding-left: 113px;">
+                                    <label for="singleCurve10DollarFrenchQuantityInput" class="form-label me-2 mb-0" style="white-space: nowrap; font-size: 14px;">
+                                        French Only Signage Quantity:
+                                    </label>
+                                    <input type="number" min="0" max="50" class="form-control"
+                                           style="width: 60px;"
+                                           oninput="this.value = validateQuantity(this.value)"
+                                           id="singleCurve10DollarFrenchQuantityInput"
+                                           th:field="*{singleCurve10DollarFrenchQuantity}" />
+                                </div>
+
+                                <div class="d-flex align-items-center mb-3" style="padding-left: 135px;">
+                                    <label for="singleCurve10DollarBilingualQuantityInput" class="form-label me-2 mb-0" style="white-space: nowrap; font-size: 14px;">
+                                        Bilingual Signage Quantity:
+                                    </label>
+                                    <input type="number" min="0" max="50" class="form-control"
+                                           style="width: 60px;"
+                                           oninput="this.value = validateQuantity(this.value)"
+                                           id="singleCurve10DollarBilingualQuantityInput"
+                                           th:field="*{singleCurve10DollarBilingualQuantity}" />
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <!-- Image Column -->
+                        <div class="col-md-4 d-flex align-items-center justify-content-center">
+                            <img class="img-fluid"
+                                 style="max-height: 350px;"
+                                 th:src="@{/images/tiptap_Salvation-Army_1device_7.5x10_2021_Final-BL-20.png}"
+                                 alt="Kettle Display (3 Device)">
+                        </div>
+
+                        <!-- Device Info Column -->
+                        <div class="col-md-4">
+                            <div class="card-body">
+                                <h5 class="card-title fs-2 fw-bold text-purple">$20 Countertop Display Kit</h5>
+
+                                <p class="mb-1 fw-bold fs-6 text-purple">Includes</p>
+                                <ul>
+                                    <li>$20 Device included</li>
+                                    <li>One high capacity battery</li>
+                                    <li>Power cables and wall plug</li>
+                                    <li>Signage</li>
+                                </ul>
+
+                                <p class="mb-1 fs-6 text-grey">Signage Dimensions:</p>
+                                <p class="fs-6 text-grey">10.5”H x 7.5”W x 6.5”D</p>
+
+
+                                <p class="fs-6 mt-3 text-grey fw-bold">Kit Total: $150</p>
+                            </div>
+                        </div>
+
+                        <!-- Quantity Inputs Column -->
+                        <div class="col-md-4 d-flex flex-column justify-content-center align-items-end pe-4">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3" style="padding-left: 110px;">
+                                    <label for="singleCurve20DollarEnglishQuantityInput" class="form-label me-2 mb-0" style="white-space: nowrap; font-size: 14px;">
+                                        English Only Signage Quantity:
+                                    </label>
+                                    <input type="number" min="0" max="50" class="form-control"
+                                           style="width: 60px;"
+                                           oninput="this.value = validateQuantity(this.value)"
+                                           id="singleCurve20DollarEnglishQuantityInput"
+                                           th:field="*{singleCurve20DollarEnglishQuantity}" />
+                                </div>
+
+                                <div class="d-flex align-items-center mb-3" style="padding-left: 113px;">
+                                    <label for="singleCurve20DollarFrenchQuantityInput" class="form-label me-2 mb-0" style="white-space: nowrap; font-size: 14px;">
+                                        French Only Signage Quantity:
+                                    </label>
+                                    <input type="number" min="0" max="50" class="form-control"
+                                           style="width: 60px;"
+                                           oninput="this.value = validateQuantity(this.value)"
+                                           id="singleCurve20DollarFrenchQuantityInput"
+                                           th:field="*{singleCurve20DollarFrenchQuantity}" />
+                                </div>
+
+                                <div class="d-flex align-items-center mb-3" style="padding-left: 135px;">
+                                    <label for="singleCurve20DollarBilingualQuantityInput" class="form-label me-2 mb-0" style="white-space: nowrap; font-size: 14px;">
+                                        Bilingual Signage Quantity:
+                                    </label>
+                                    <input type="number" min="0" max="50" class="form-control"
+                                           style="width: 60px;"
+                                           oninput="this.value = validateQuantity(this.value)"
+                                           id="singleCurve20DollarBilingualQuantityInput"
+                                           th:field="*{singleCurve20DollarBilingualQuantity}" />
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <hr>
+                <p class="fs-5 my-4">
+                    If you have any questions or require assistance with your order, please contact <a
+                        class="text-fuschia" href="mailto:support@tiptappay.com">support@tiptappay.com</a>
+                </p>
+                <!--                make it smaller and move it to right-->
+                <div class="d-flex justify-content-end my-5">
+                    <button type="submit" class="btn ttp-btn-primary btn-lg">Next: Contact and Shipping Info</button>
+                </div>
+
+            </form>
+            <div class="row">
+                <div class="col">
+                    <div id="snack-bar-alert-no-device-requested" style="background-color: rgb(187, 36, 12)">
+                        &nbsp; No devices requested &nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    function validateQuantity(value) {
+        const num = parseInt(value);
+        return isNaN(num) || num < 0 ? 0 : num;
+    }
+
+    function syncDeviceQuantitiesBySingleCurve() {
+        const getVal = (id) => parseInt(document.getElementById(id)?.value || "0");
+
+        // Three-device displays
+        const threeEnglish = getVal("threeDeviceDisplayEnglishQuantityInput");
+        const threeFrench = getVal("threeDeviceDisplayFrenchQuantityInput");
+        const threeBilingual = getVal("threeDeviceDisplayBilingualQuantityInput");
+
+        // $5 single curve
+        const single5 = getVal("singleCurve5DollarEnglishQuantityInput") +
+            getVal("singleCurve5DollarFrenchQuantityInput") +
+            getVal("singleCurve5DollarBilingualQuantityInput");
+
+        // $10 single curve
+        const single10 = getVal("singleCurve10DollarEnglishQuantityInput") +
+            getVal("singleCurve10DollarFrenchQuantityInput") +
+            getVal("singleCurve10DollarBilingualQuantityInput");
+
+        // $20 single curve
+        const single20 = getVal("singleCurve20DollarEnglishQuantityInput") +
+            getVal("singleCurve20DollarFrenchQuantityInput") +
+            getVal("singleCurve20DollarBilingualQuantityInput");
+
+        // Add 3-device display counts to all device totals
+        const total5 = single5 + threeEnglish + threeFrench + threeBilingual;
+        const total10 = single10 + threeEnglish + threeFrench + threeBilingual;
+        const total20 = single20 + threeEnglish + threeFrench + threeBilingual;
+
+        document.getElementById("device5DollarQtyInput").value = total5;
+        document.getElementById("device10DollarQtyInput").value = total10;
+        document.getElementById("device20DollarQtyInput").value = total20;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("order-form");
+
+        const inputIds = [
+            "threeDeviceDisplayEnglishQuantityInput",
+            "threeDeviceDisplayFrenchQuantityInput",
+            "threeDeviceDisplayBilingualQuantityInput",
+            "singleCurve5DollarEnglishQuantityInput",
+            "singleCurve5DollarFrenchQuantityInput",
+            "singleCurve5DollarBilingualQuantityInput",
+            "singleCurve10DollarEnglishQuantityInput",
+            "singleCurve10DollarFrenchQuantityInput",
+            "singleCurve10DollarBilingualQuantityInput",
+            "singleCurve20DollarEnglishQuantityInput",
+            "singleCurve20DollarFrenchQuantityInput",
+            "singleCurve20DollarBilingualQuantityInput"
+        ];
+
+        inputIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener("input", syncDeviceQuantitiesBySingleCurve);
+        });
+
+        // Sync totals just before submitting
+        form.addEventListener("submit", function () {
+            syncDeviceQuantitiesBySingleCurve();
+        });
+    });
+</script>
